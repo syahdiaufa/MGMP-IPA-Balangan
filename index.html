@@ -350,14 +350,14 @@
         <div class="border-b border-slate-200 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <div class="inline-flex items-center space-x-2 text-xs font-black text-balangan-700 uppercase tracking-wider mb-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>Agenda Pertemuan Tatap Muka Terdekat</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" id="dotHeaderPertemuan"></span>
+              <span id="badgeHeaderPertemuanText">Agenda Pertemuan Tatap Muka Terdekat</span>
             </div>
             <h3 class="text-xl sm:text-3xl font-black text-slate-900">Pertemuan Rutin MGMP IPA Balangan</h3>
-            <p class="text-xs sm:text-sm text-slate-500">Informasi sekolah tuan rumah, lokasi peta, dan hitung mundur pelaksanaan kegiatan</p>
+            <p class="text-xs sm:text-sm text-slate-500" id="subHeaderPertemuanText">Informasi sekolah tuan rumah, lokasi peta, dan jadwal pelaksanaan kegiatan</p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="px-3.5 py-1.5 rounded-2xl bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
+            <span id="badgeStatusPertemuan" class="px-3.5 py-1.5 rounded-2xl bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
               <i class="fa-solid fa-bell mr-1.5 text-amber-600 animate-bounce"></i> Pertemuan Wajib Anggota
             </span>
           </div>
@@ -386,7 +386,7 @@
                     <i class="fa-regular fa-calendar-days"></i>
                   </div>
                   <div>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase">Tanggal Rencana</span>
+                    <span id="labelTanggalRencana" class="text-[10px] font-bold text-slate-400 uppercase">Tanggal Rencana</span>
                     <p id="nextMeetingDateDisplay" class="font-black text-slate-800 text-xs sm:text-sm">Kamis, 15 Oktober 2026</p>
                   </div>
                 </div>
@@ -403,7 +403,7 @@
               </div>
 
               <!-- HITUNG MUNDUR GAYA ELEGAN -->
-              <div class="bg-gradient-to-r from-balangan-950 via-balangan-900 to-sains-950 text-white rounded-2xl p-5 shadow-lg border border-balangan-800 space-y-3">
+              <div id="boxHitungMundurPertemuan" class="bg-gradient-to-r from-balangan-950 via-balangan-900 to-sains-950 text-white rounded-2xl p-5 shadow-lg border border-balangan-800 space-y-3 transition-all duration-300">
                 <div class="flex items-center justify-between text-xs text-emerald-200 font-bold border-b border-emerald-800/60 pb-2">
                   <span class="flex items-center"><i class="fa-solid fa-hourglass-half mr-2 text-amber-400 animate-spin"></i> HITUNG MUNDUR PERTEMUAN</span>
                   <span id="countdownTargetNotice" class="text-[11px] text-slate-300">Menuju Acara</span>
@@ -1999,13 +1999,26 @@
       return dateStr;
     }
 
-    // ================= SINKRONISASI OTOMATIS TUAN RUMAH DARI RENCANA KEGIATAN =================
+    // ================= SINKRONISASI OTOMATIS TUAN RUMAH & HITUNG MUNDUR =================
     function updateNextMeetingFromKegiatan() {
-      // Cari kegiatan terdekat yang berstatus "Rencana" atau "Sedang Berjalan", diurutkan berdasarkan tanggal
+      // 1. Cari kegiatan yang berstatus "Rencana" atau "Sedang Berjalan", urutkan tanggal terdekat
       let plannedList = appState.kegiatanList.filter(k => k.status === 'Rencana' || k.status === 'Sedang Berjalan');
-      
-      // Jika tidak ada yang rencana, ambil kegiatan terdekat apapun
-      let activeKeg = plannedList.length > 0 ? plannedList[0] : (appState.kegiatanList[0] || null);
+      plannedList.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
+      let hasUpcoming = plannedList.length > 0;
+      let activeKeg = null;
+      let isLatestFinished = false;
+
+      if (hasUpcoming) {
+        // Ada rencana kegiatan mendatang
+        activeKeg = plannedList[0];
+        isLatestFinished = false;
+      } else {
+        // TIDAK ADA rencana kegiatan: Ambil kegiatan TERAKHIR / TERBARU yang terlaksana
+        let sortedAll = [...appState.kegiatanList].filter(k => k.tanggal).sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+        activeKeg = sortedAll[0] || null;
+        isLatestFinished = true;
+      }
 
       if (activeKeg) {
         const standardSchool = standardizeSchoolName(activeKeg.tempat);
@@ -2027,29 +2040,62 @@
           waktuDisplay: "08.30 WITA - Selesai",
           targetDateTime: `${activeKeg.tanggal}T08:30:00`,
           mapEmbedUrl: `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`,
-          mapLink: `https://maps.google.com/?q=${mapQuery}`
+          mapLink: `https://maps.google.com/?q=${mapQuery}`,
+          isRencana: !isLatestFinished,
+          namaKegiatan: activeKeg.nama_kegiatan
         };
       } else {
-        // Default jika kosong
         appState.nextMeeting = {
           namaSekolah: "SMP Negeri 1 Paringin (Sekretariat)",
           alamat: "Jl. A. Yani Komp. Pendidikan Batu Piring, Paringin Selatan, Kabupaten Balangan 71618.",
-          tanggalDisplay: "Sabtu, 24 Oktober 2026",
+          tanggalDisplay: "-",
           waktuDisplay: "08.30 WITA - Selesai",
-          targetDateTime: "2026-10-24T08:30:00",
+          targetDateTime: "",
           mapEmbedUrl: "https://maps.google.com/maps?q=SMP+Negeri+1+Paringin+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed",
-          mapLink: "https://maps.google.com/?q=SMP+Negeri+1+Paringin+Balangan"
+          mapLink: "https://maps.google.com/?q=SMP+Negeri+1+Paringin+Balangan",
+          isRencana: false,
+          namaKegiatan: ""
         };
       }
 
       renderNextMeetingInfo();
       renderHostTeachers();
-      startCountdownTimer();
     }
 
     function renderNextMeetingInfo() {
       const nm = appState.nextMeeting;
       if (!nm) return;
+
+      const boxCountdown = document.getElementById("boxHitungMundurPertemuan");
+      const badgeHost = document.getElementById("nextHostBadge");
+      const labelTgl = document.getElementById("labelTanggalRencana");
+      const headerBadgeText = document.getElementById("badgeHeaderPertemuanText");
+      const subHeader = document.getElementById("subHeaderPertemuanText");
+      const badgeStatus = document.getElementById("badgeStatusPertemuan");
+      const dotHeader = document.getElementById("dotHeaderPertemuan");
+
+      if (nm.isRencana) {
+        // TAMPILKAN HITUNG MUNDUR jika ada rencana kegiatan
+        if (boxCountdown) boxCountdown.classList.remove("hidden");
+        if (badgeHost) badgeHost.textContent = "Sekolah Tuan Rumah Pelaksana";
+        if (labelTgl) labelTgl.textContent = "Tanggal Rencana";
+        if (headerBadgeText) headerBadgeText.textContent = "Agenda Pertemuan Tatap Muka Terdekat";
+        if (subHeader) subHeader.textContent = "Informasi sekolah tuan rumah, lokasi peta, dan hitung mundur pelaksanaan kegiatan";
+        if (badgeStatus) badgeStatus.innerHTML = '<i class="fa-solid fa-bell mr-1.5 text-amber-600 animate-bounce"></i> Pertemuan Wajib Anggota';
+        if (dotHeader) dotHeader.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping";
+        startCountdownTimer();
+      } else {
+        // HILANGKAN HITUNG MUNDUR jika tidak ada kegiatan rencana
+        if (boxCountdown) boxCountdown.classList.add("hidden");
+        if (badgeHost) badgeHost.textContent = "Sekolah Tuan Rumah Kegiatan Terakhir";
+        if (labelTgl) labelTgl.textContent = "Tanggal Pelaksanaan Terakhir";
+        if (headerBadgeText) headerBadgeText.textContent = "Tuan Rumah Terakhir Terlaksana";
+        if (subHeader) subHeader.textContent = "Informasi sekolah tuan rumah dan dokumentasi pada kegiatan yang baru selesai terlaksana";
+        if (badgeStatus) badgeStatus.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i> Kegiatan Terakhir Terlaksana';
+        if (dotHeader) dotHeader.className = "w-2.5 h-2.5 rounded-full bg-slate-400";
+        if (countdownInterval) clearInterval(countdownInterval);
+      }
+
       document.getElementById("nextHostTitle").textContent = nm.namaSekolah;
       document.getElementById("nextHostAddress").textContent = nm.alamat;
       document.getElementById("nextMeetingDateDisplay").textContent = nm.tanggalDisplay;
