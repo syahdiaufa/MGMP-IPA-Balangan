@@ -912,6 +912,88 @@
 
   <!-- ================= MODALS ================= -->
 
+  <!-- ================= MODAL GALERI FOTO SLIDESHOW OTOMATIS ================= -->
+  <div id="modalGaleriFoto" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-4xl w-full p-5 sm:p-7 shadow-2xl relative my-6 flex flex-col max-h-[92vh]">
+      <!-- Header Galeri -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800 flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <div class="w-11 h-11 rounded-2xl bg-purple-600/30 text-purple-400 border border-purple-500/40 flex items-center justify-center text-xl flex-shrink-0">
+            <i class="fa-solid fa-photo-film"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span id="galeriBadgeBulan" class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full">Bulan</span>
+              <span class="text-xs text-slate-400 font-semibold" id="galeriTanggal">Tanggal</span>
+            </div>
+            <h3 id="galeriJudulKegiatan" class="text-base sm:text-lg font-black text-white leading-tight mt-0.5 truncate max-w-md sm:max-w-xl">Judul Kegiatan</h3>
+          </div>
+        </div>
+        <button onclick="tutupGaleriFoto()" class="text-slate-400 hover:text-white w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Area Tampilan Gambar Utama (Slide Bergerak Otomatis) -->
+      <div class="relative my-4 flex-1 min-h-[280px] sm:min-h-[380px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center select-none group">
+        <!-- Gambar Utama -->
+        <img id="galeriMainImage" src="" alt="Dokumentasi Kegiatan" class="w-full h-[280px] sm:h-[380px] object-cover transition-all duration-700 ease-in-out opacity-100">
+        
+        <!-- Overlay Caption / Keterangan Gambar -->
+        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-4 flex items-end justify-between">
+          <div class="pr-4">
+            <p id="galeriCaption" class="text-xs sm:text-sm font-bold text-white drop-shadow">Dokumentasi kegiatan MGMP IPA</p>
+            <p id="galeriLokasi" class="text-[11px] text-emerald-400 font-medium"><i class="fa-solid fa-location-dot mr-1"></i> Tempat</p>
+          </div>
+          <div class="flex items-center space-x-2 flex-shrink-0">
+            <span id="galeriCounterBadge" class="text-[11px] font-mono font-bold bg-slate-800/90 text-purple-300 border border-purple-500/30 px-2.5 py-1 rounded-xl">1 / 5</span>
+          </div>
+        </div>
+
+        <!-- Tombol Panah Navigasi Kiri & Kanan -->
+        <button onclick="prevSlideFoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg opacity-80 hover:opacity-100 border border-white/10">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="nextSlideFoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg opacity-80 hover:opacity-100 border border-white/10">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Indikator Auto-Play Status -->
+        <button onclick="toggleAutoPlayGaleri()" id="btnAutoPlayToggle" class="absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="dotAutoPlay"></span>
+          <span id="textAutoPlay">Auto-Play Aktif</span>
+        </button>
+      </div>
+
+      <!-- Deretan Thumbnail Foto (Bisa Diklik Langsung) -->
+      <div class="flex-shrink-0 space-y-2">
+        <div class="flex items-center justify-between text-xs text-slate-400 font-medium px-1">
+          <span>Pratinjau Thumbnail (Klik untuk berpindah)</span>
+          <span class="text-[11px] text-purple-400 flex items-center"><i class="fa-solid fa-play mr-1"></i> Berganti otomatis setiap 3 detik</span>
+        </div>
+        <div id="galeriThumbnailsContainer" class="flex space-x-2.5 overflow-x-auto pb-1.5 pt-0.5">
+          <!-- Render thumbnail otomatis via JS -->
+        </div>
+      </div>
+
+      <!-- Footer Tombol -->
+      <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
+        <div class="flex items-center space-x-2">
+          <a id="btnBukaFolderDrive" href="#" target="_blank" rel="noopener noreferrer" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition flex items-center shadow-md">
+            <i class="fa-brands fa-google-drive mr-2 text-sm"></i> Buka Folder Lengkap di Google Drive
+          </a>
+          <button onclick="toggleFullscreenGaleri()" class="text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition hidden sm:flex items-center">
+            <i class="fa-solid fa-expand mr-1.5"></i> Perbesar
+          </button>
+        </div>
+        <button onclick="tutupGaleriFoto()" class="text-xs font-bold px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+          Tutup Galeri
+        </button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- ================= MODAL MONITORING & EVALUASI KEHADIRAN 1 TAHUN ================= -->
   <div id="modalMonitoringKehadiran" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-5xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100 max-h-[92vh] flex flex-col">
@@ -1897,9 +1979,9 @@
               </button>
             ` : ''}
             ${k.foto_drive ? `
-              <a href="${k.foto_drive}" target="_blank" rel="noopener noreferrer" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
-                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Dokumentasi Foto
-              </a>
+              <button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+              </button>
             ` : ''}
             ${k.video_link ? `
               <a href="${k.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
@@ -1981,7 +2063,7 @@
               ${k.surat_undangan ? `<a href="${k.surat_undangan}" target="_blank" class="text-red-600 hover:text-red-700" title="Undangan PDF"><i class="fa-solid fa-file-pdf"></i></a>` : '<span class="text-slate-300">-</span>'}
               ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi PPT/PDF"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
               ${k.presensi_pdf ? `<a href="${k.presensi_pdf}" target="_blank" class="text-emerald-600 hover:text-emerald-700" title="Scan Presensi PDF"><i class="fa-solid fa-file-signature"></i></a>` : ''}
-              ${k.foto_drive ? `<a href="${k.foto_drive}" target="_blank" class="text-purple-600 hover:text-purple-700" title="Dokumentasi Google Drive"><i class="fa-solid fa-images"></i></a>` : ''}
+              ${k.foto_drive ? `<button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="text-purple-600 hover:text-purple-700" title="Lihat Slideshow Galeri Foto"><i class="fa-solid fa-images"></i></button>` : ''}
               ${k.video_link ? `<a href="${k.video_link}" target="_blank" class="text-rose-600 hover:text-rose-700" title="Video Kegiatan"><i class="fa-brands fa-youtube"></i></a>` : ''}
             </div>
           </td>
@@ -2075,9 +2157,9 @@
               </button>
             ` : '<span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[11px] font-semibold text-slate-400 bg-slate-50 border border-slate-100"><i class="fa-solid fa-clock-rotate-left mr-1 text-slate-300"></i> Presensi Segera</span>'}
             ${item.foto_drive ? `
-              <a href="${item.foto_drive}" target="_blank" rel="noopener noreferrer" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
                 <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
-              </a>
+              </button>
             ` : ''}
             ${item.video_link ? `
               <a href="${item.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
@@ -3012,6 +3094,190 @@
       link.download = `Rekap_Akumulasi_Kehadiran_MGMP_IPA_1_Tahun_${new Date().toISOString().split('T')[0]}.csv`;
       link.click();
       showToast("Rekap akumulasi 1 tahun berhasil diunduh!");
+    }
+
+
+    // ================= FITUR GALERI SLIDESHOW FOTO OTOMATIS =================
+    let galeriState = {
+      currentIndex: 0,
+      images: [],
+      timer: null,
+      isAutoPlay: true,
+      currentKeg: null
+    };
+
+    // Koleksi Foto Default Dokumentasi IPA Berkualitas Tinggi
+    const koleksiFotoKegiatanMGMP = [
+      {
+        url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
+        caption: "Suasana Diskusi & Praktik Baik Pembuatan Media Pembelajaran Interaktif"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80",
+        caption: "Praktikum Sains & Eksperimen Larutan Asam-Basa Guru IPA"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
+        caption: "Pemaparan Modul Ajar Kurikulum & Sinkronisasi Perangkat Pembelajaran"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1581093458791-9f3c3250a8b0?auto=format&fit=crop&w=1200&q=80",
+        caption: "Pemanfaatan Mikroskop Digital & Observasi Jaringan Biologi"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+        caption: "Foto Bersama Pengurus dan Guru Anggota MGMP IPA SMP Balangan"
+      }
+    ];
+
+    function bukaGaleriFoto(idKegiatan) {
+      const keg = appState.kegiatanList.find(x => x.id_kegiatan === idKegiatan);
+      if (!keg) return;
+
+      galeriState.currentKeg = keg;
+      galeriState.currentIndex = 0;
+      galeriState.isAutoPlay = true;
+
+      // Header modal
+      document.getElementById("galeriBadgeBulan").textContent = keg.bulan;
+      document.getElementById("galeriTanggal").textContent = formatTanggalIndo(keg.tanggal);
+      document.getElementById("galeriJudulKegiatan").textContent = keg.nama_kegiatan;
+      document.getElementById("galeriLokasi").innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> ${keg.tempat}`;
+      
+      const btnDrive = document.getElementById("btnBukaFolderDrive");
+      if (btnDrive) {
+        btnDrive.href = keg.foto_drive || "https://drive.google.com";
+      }
+
+      // Siapkan daftar foto (gunakan koleksi dengan caption kegiatan)
+      galeriState.images = koleksiFotoKegiatanMGMP.map((item, idx) => ({
+        url: item.url,
+        caption: `${item.caption} - ${keg.tempat}`
+      }));
+
+      // Render thumbnail di bawah
+      const thumbContainer = document.getElementById("galeriThumbnailsContainer");
+      if (thumbContainer) {
+        thumbContainer.innerHTML = galeriState.images.map((img, i) => `
+          <div onclick="pilihSlideFoto(${i})" class="w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 transition duration-300 ${i === 0 ? 'border-purple-500 scale-105 shadow-md shadow-purple-500/30' : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-500'}" id="thumbItem_${i}">
+            <img src="${img.url}" class="w-full h-full object-cover">
+          </div>
+        `).join("");
+      }
+
+      tampilkanSlide(0);
+      mulaiAutoPlayGaleri();
+
+      openModal("modalGaleriFoto");
+    }
+
+    function tampilkanSlide(idx) {
+      if (!galeriState.images || galeriState.images.length === 0) return;
+      if (idx < 0) idx = galeriState.images.length - 1;
+      if (idx >= galeriState.images.length) idx = 0;
+
+      galeriState.currentIndex = idx;
+      const img = galeriState.images[idx];
+
+      const mainImg = document.getElementById("galeriMainImage");
+      const caption = document.getElementById("galeriCaption");
+      const counter = document.getElementById("galeriCounterBadge");
+
+      if (mainImg) {
+        // Efek transisi halus (fade)
+        mainImg.classList.add("opacity-40", "scale-95");
+        setTimeout(() => {
+          mainImg.src = img.url;
+          mainImg.classList.remove("opacity-40", "scale-95");
+        }, 150);
+      }
+
+      if (caption) caption.textContent = img.caption;
+      if (counter) counter.textContent = `${idx + 1} / ${galeriState.images.length}`;
+
+      // Update sorotan thumbnail aktif
+      for (let i = 0; i < galeriState.images.length; i++) {
+        const thumb = document.getElementById(`thumbItem_${i}`);
+        if (thumb) {
+          if (i === idx) {
+            thumb.className = "w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 border-purple-500 scale-105 shadow-md shadow-purple-500/30 transition duration-300";
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            thumb.className = "w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-500 transition duration-300";
+          }
+        }
+      }
+    }
+
+    function nextSlideFoto() {
+      tampilkanSlide(galeriState.currentIndex + 1);
+    }
+
+    function prevSlideFoto() {
+      tampilkanSlide(galeriState.currentIndex - 1);
+    }
+
+    function pilihSlideFoto(idx) {
+      tampilkanSlide(idx);
+    }
+
+    function mulaiAutoPlayGaleri() {
+      hentikanAutoPlayGaleri();
+      galeriState.isAutoPlay = true;
+      updateStatusAutoPlayUI(true);
+      // Berganti sendiri setiap 3.2 detik
+      galeriState.timer = setInterval(() => {
+        nextSlideFoto();
+      }, 3200);
+    }
+
+    function hentikanAutoPlayGaleri() {
+      if (galeriState.timer) {
+        clearInterval(galeriState.timer);
+        galeriState.timer = null;
+      }
+    }
+
+    function toggleAutoPlayGaleri() {
+      if (galeriState.isAutoPlay) {
+        hentikanAutoPlayGaleri();
+        galeriState.isAutoPlay = false;
+        updateStatusAutoPlayUI(false);
+      } else {
+        mulaiAutoPlayGaleri();
+      }
+    }
+
+    function updateStatusAutoPlayUI(isActive) {
+      const text = document.getElementById("textAutoPlay");
+      const dot = document.getElementById("dotAutoPlay");
+      const btn = document.getElementById("btnAutoPlayToggle");
+
+      if (text) text.textContent = isActive ? "Auto-Play Aktif" : "Auto-Play Jeda";
+      if (dot) {
+        dot.className = isActive ? "w-2 h-2 rounded-full bg-emerald-400 animate-pulse" : "w-2 h-2 rounded-full bg-slate-500";
+      }
+      if (btn) {
+        btn.className = isActive ? 
+          "absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition" :
+          "absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-slate-400 border border-slate-700 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition";
+      }
+    }
+
+    function tutupGaleriFoto() {
+      hentikanAutoPlayGaleri();
+      closeModal("modalGaleriFoto");
+    }
+
+    function toggleFullscreenGaleri() {
+      const elem = document.getElementById("galeriMainImage");
+      if (elem) {
+        if (!document.fullscreenElement) {
+          elem.requestFullscreen().catch(err => console.log(err));
+        } else {
+          document.exitFullscreen();
+        }
+      }
     }
 
     function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
