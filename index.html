@@ -140,7 +140,6 @@
 
           <!-- Identitas Organisasi -->
           <div class="pl-1 sm:pl-2">
-
             <h1 class="font-extrabold text-slate-900 text-base sm:text-xl leading-tight tracking-tight mt-0.5">MGMP IPA SMP</h1>
             <p class="text-[10px] sm:text-xs text-balangan-700 font-bold tracking-wider uppercase">KABUPATEN BALANGAN</p>
           </div>
@@ -242,7 +241,7 @@
         <div onclick="openModalKecamatan()" class="card-modern-glow relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-emerald-50/50 to-white hover:to-emerald-50/70 p-5 rounded-3xl border border-emerald-200/80 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
           <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-400/10 rounded-full blur-xl group-hover:scale-150 transition-all"></div>
           <div class="flex items-center space-x-3.5 relative z-10">
-            <div class="w-13 h-13 w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 text-white shadow-md shadow-emerald-600/20 group-hover:scale-110 transition-transform flex items-center justify-center text-xl flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 text-white shadow-md shadow-emerald-600/20 group-hover:scale-110 transition-transform flex items-center justify-center text-xl flex-shrink-0">
               <i class="fa-solid fa-landmark"></i>
             </div>
             <div class="min-w-0 flex-1">
@@ -292,7 +291,7 @@
           </div>
         </a>
 
-        <!-- KARTU 4: SEKRETARIAT MGMP IPA / SMP NEGERI 1 PARINGIN (INTERAKTIF MODAL) -->
+        <!-- KARTU 4: SEKRETARIAT MGMP IPA / SMP NEGERI 1 PARINGIN -->
         <div onclick="openModal('modalDetailSekretariat')" class="card-modern-glow relative overflow-hidden bg-gradient-to-br from-indigo-500/10 via-indigo-50/50 to-white hover:to-indigo-50/70 p-5 rounded-3xl border border-indigo-200/80 hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
           <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-indigo-400/10 rounded-full blur-xl group-hover:scale-150 transition-all"></div>
           <div class="flex items-center space-x-3.5 relative z-10">
@@ -310,6 +309,7 @@
           </div>
         </div>
       </div>
+
       <!-- ================= JADWAL & AGENDA BULANAN ================= -->
       <div id="sectionAgenda" class="space-y-6 pt-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
@@ -319,7 +319,7 @@
               <span>Kalender Kerja Resmi MGMP</span>
             </div>
             <h3 class="text-xl sm:text-2xl font-black text-slate-900">Rencana & Dokumentasi Kegiatan Bulanan</h3>
-            <p class="text-xs sm:text-sm text-slate-500">Pilih bulan pelaksanaan untuk melihat surat undangan dinas, materi pelatihan, dan galeri dokumentasi</p>
+            <p class="text-xs sm:text-sm text-slate-500">Pilih bulan pelaksanaan untuk melihat surat undangan dinas, materi pelatihan, dan galeri dokumentasi foto/video</p>
           </div>
 
           <div class="flex items-center space-x-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
@@ -373,9 +373,9 @@
               </div>
 
               <div>
-                <h4 id="nextHostTitle" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">SMP Negeri 2 Batumandi</h4>
+                <h4 id="nextHostTitle" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug">SMP Negeri 3 Batumandi</h4>
                 <p id="nextHostAddress" class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-                  Jl. A. Yani KM. 8, Desa Mantimin, Kecamatan Batumandi, Kabupaten Balangan, Kalimantan Selatan 71663.
+                  Kecamatan Batumandi, Kabupaten Balangan, Kalimantan Selatan.
                 </p>
               </div>
 
@@ -387,7 +387,7 @@
                   </div>
                   <div>
                     <span class="text-[10px] font-bold text-slate-400 uppercase">Tanggal Rencana</span>
-                    <p id="nextMeetingDateDisplay" class="font-black text-slate-800 text-xs sm:text-sm">Sabtu, 24 Oktober 2026</p>
+                    <p id="nextMeetingDateDisplay" class="font-black text-slate-800 text-xs sm:text-sm">Kamis, 15 Oktober 2026</p>
                   </div>
                 </div>
 
@@ -446,7 +446,7 @@
             <div class="pt-4 border-t border-slate-200/80 flex flex-wrap gap-2.5">
               <a 
                 id="nextMapDirectionLink"
-                href="https://maps.google.com/?q=SMP+Negeri+2+Batumandi+Balangan" 
+                href="https://maps.google.com/?q=SMP+Negeri+3+Batumandi+Balangan" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="flex-1 bg-gradient-to-r from-balangan-700 to-sains-700 hover:from-balangan-800 hover:to-sains-800 text-white font-black text-xs py-3 px-4 rounded-2xl shadow-md transition flex items-center justify-center"
@@ -467,7 +467,7 @@
             <iframe 
               id="nextMeetingMapIframe"
               title="Peta Lokasi Pertemuan Selanjutnya"
-              src="https://maps.google.com/maps?q=SMP+Negeri+2+Batumandi+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              src="https://maps.google.com/maps?q=SMP+Negeri+3+Batumandi+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
               class="w-full h-full border-0 absolute inset-0"
               allowfullscreen="" 
               loading="lazy" 
@@ -475,13 +475,13 @@
             </iframe>
             <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur py-2 px-3.5 rounded-2xl shadow-lg border border-slate-200/80 text-xs font-bold text-slate-800 pointer-events-none flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
-              <span id="nextMapBadgeLabel">Tuan Rumah: SMPN 2 Batumandi</span>
+              <span id="nextMapBadgeLabel">Tuan Rumah: SMPN 3 Batumandi</span>
             </div>
           </div>
         </div>
       </div>
 
-            <!-- ================= MENU COMPACT: MONITORING & EVALUASI PARTISIPASI ANGGOTA ================= -->
+      <!-- ================= MENU COMPACT: MONITORING & EVALUASI PARTISIPASI ANGGOTA ================= -->
       <div class="pt-4">
         <div onclick="openModalMonitoringKehadiran()" class="card-modern-glow bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white rounded-3xl p-5 sm:p-6 border border-emerald-800 shadow-md hover:shadow-xl transition cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group">
           <div class="flex items-center space-x-4">
@@ -624,7 +624,7 @@
 
             <div>
               <label class="block font-bold text-slate-700 mb-1.5">Catatan / Keterangan</label>
-              <input type="text" id="memberAbsenKet" placeholder="Misal: Hadir di SMPN 2 Batumandi" class="w-full border border-slate-200 rounded-2xl p-3 bg-slate-50 focus:bg-white outline-none">
+              <input type="text" id="memberAbsenKet" placeholder="Misal: Hadir di SMPN 3 Batumandi" class="w-full border border-slate-200 rounded-2xl p-3 bg-slate-50 focus:bg-white outline-none">
             </div>
 
             <button type="submit" class="w-full bg-balangan-700 hover:bg-balangan-800 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition">
@@ -715,7 +715,7 @@
                 <th class="p-4">Bulan / Jadwal</th>
                 <th class="p-4">Nama Kegiatan</th>
                 <th class="p-4">Tempat Pelaksanaan</th>
-                <th class="p-4">Tautan Berkas</th>
+                <th class="p-4">Tautan Berkas & Dokumentasi</th>
                 <th class="p-4">Status</th>
                 <th class="p-4 text-right">Aksi</th>
               </tr>
@@ -785,7 +785,7 @@
                 </div>
                 <div>
                   <label class="block font-bold text-slate-700 mb-1">Tanggal Kegiatan</label>
-                  <input type="date" id="uploadAbsenTanggalInput" value="2026-10-24" class="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 font-semibold outline-none focus:ring-2 focus:ring-sains-500">
+                  <input type="date" id="uploadAbsenTanggalInput" value="2026-10-15" class="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 font-semibold outline-none focus:ring-2 focus:ring-sains-500">
                 </div>
               </div>
 
@@ -1205,31 +1205,40 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block font-bold mb-1">Bulan</label>
-            <select id="kegBulan" required class="w-full border rounded-2xl p-2.5 bg-slate-50">
+            <select id="kegBulan" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-balangan-600">
               <option value="Januari">Januari</option><option value="Februari">Februari</option><option value="Maret">Maret</option><option value="April">April</option><option value="Mei">Mei</option><option value="Juni">Juni</option><option value="Juli">Juli</option><option value="Agustus">Agustus</option><option value="September">September</option><option value="Oktober">Oktober</option><option value="November">November</option><option value="Desember">Desember</option>
             </select>
           </div>
           <div>
             <label class="block font-bold mb-1">Tanggal</label>
-            <input type="date" id="kegTanggal" required class="w-full border rounded-2xl p-2.5 bg-slate-50">
+            <input type="date" id="kegTanggal" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-balangan-600">
           </div>
         </div>
         <div>
           <label class="block font-bold mb-1">Nama Kegiatan</label>
-          <input type="text" id="kegNama" required class="w-full border rounded-2xl p-2.5 bg-slate-50">
+          <input type="text" id="kegNama" required placeholder="Contoh: Praktik baik Pembuatan MPI" class="w-full border rounded-2xl p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-balangan-600">
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block font-bold mb-1">Tempat</label>
-            <input type="text" id="kegTempat" required class="w-full border rounded-2xl p-2.5 bg-slate-50">
+            <label class="block font-bold mb-1 flex items-center justify-between">
+              <span>Tempat (Sekolah Tuan Rumah)</span>
+              <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded-md">26 SMP Balangan</span>
+            </label>
+            <!-- Dropdown Template Pilihan Lengkap Sekolah Se-Kabupaten Balangan -->
+            <select id="kegTempat" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-balangan-600 cursor-pointer">
+              <!-- Render otomatis via populateSekolahDropdown() -->
+            </select>
           </div>
           <div>
-            <label class="block font-bold mb-1">Status</label>
-            <select id="kegStatus" class="w-full border rounded-2xl p-2.5 bg-slate-50">
-              <option value="Rencana">Rencana</option><option value="Sedang Berjalan">Sedang Berjalan</option><option value="Selesai">Selesai</option>
+            <label class="block font-bold mb-1">Status Kegiatan</label>
+            <select id="kegStatus" class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-balangan-600">
+              <option value="Rencana">Rencana (Tampil di Tuan Rumah Terdekat)</option>
+              <option value="Sedang Berjalan">Sedang Berjalan</option>
+              <option value="Selesai">Selesai</option>
             </select>
           </div>
         </div>
+
         <!-- Upload Berkas Undangan -->
         <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
           <label class="block font-bold text-slate-800"><i class="fa-solid fa-file-pdf mr-1 text-red-500"></i> Surat Undangan (.PDF)</label>
@@ -1259,13 +1268,22 @@
           <input type="text" id="kegMateri" placeholder="Atau tempel tautan Google Drive materi..." class="w-full border rounded-xl p-2 text-xs bg-white">
           <span id="labelMateriUpload" class="text-[11px] text-emerald-600 font-semibold hidden"><i class="fa-solid fa-circle-check mr-1"></i> File dipilih dari laptop</span>
         </div>
-        <div>
-          <label class="block font-bold mb-1">Tautan Folder Dokumentasi Drive</label>
-          <input type="url" id="kegFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border rounded-2xl p-2.5 bg-slate-50">
+
+        <!-- Tautan Dokumentasi Folder Google Drive (Foto) -->
+        <div class="p-3.5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-2">
+          <label class="block font-bold text-purple-900"><i class="fa-solid fa-images mr-1 text-purple-600"></i> Tautan Folder Dokumentasi Foto (Google Drive)</label>
+          <input type="url" id="kegFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-purple-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-purple-500">
         </div>
+
+        <!-- Tautan Video Dokumentasi Kegiatan (YouTube / Google Drive Video) -->
+        <div class="p-3.5 bg-rose-50/60 rounded-2xl border border-rose-200 space-y-2">
+          <label class="block font-bold text-rose-900"><i class="fa-brands fa-youtube mr-1 text-red-600"></i> Tautan Video Dokumentasi Kegiatan (YouTube / Drive Video)</label>
+          <input type="url" id="kegVideo" placeholder="https://www.youtube.com/watch?v=... atau link Drive video" class="w-full border border-rose-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-rose-500">
+        </div>
+
         <div class="flex justify-end space-x-2 pt-2">
           <button type="button" onclick="closeModal('modalKegiatan')" class="px-5 py-2.5 border rounded-2xl text-slate-600 font-bold">Batal</button>
-          <button type="submit" class="px-6 py-2.5 bg-balangan-700 text-white rounded-2xl font-extrabold">Simpan</button>
+          <button type="submit" class="px-6 py-2.5 bg-balangan-700 hover:bg-balangan-800 text-white rounded-2xl font-extrabold shadow-md transition">Simpan Kegiatan</button>
         </div>
       </form>
     </div>
@@ -1428,22 +1446,80 @@
       { id: 36, username: 'rahmawati', nama: 'Sri Rahmawati, S.Pd', nip: '-', pangkat: '-', sekolah: "SMP AL-QUR'AN IKHWANUL MUSLIMIN", role: 'anggota', password: '123456789', foto: '' }
     ];
 
-    const defaultKegiatanData = [
-      { id_kegiatan: "ACT-01", bulan: "Januari", tanggal: "2026-01-20", nama_kegiatan: "Rapat Kerja Silabus & Kalender MGMP 2026", tempat: "SMPN 1 Paringin", status: "Selesai", deskripsi: "Sinkronisasi modul ajar dan agenda semester genap.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "https://drive.google.com", foto_drive: "https://drive.google.com", video_link: "" },
-      { id_kegiatan: "ACT-02", bulan: "Februari", tanggal: "2026-02-18", nama_kegiatan: "Workshop Praktikum Asam-Basa Bahan Alami", tempat: "SMPN 2 Batumandi", status: "Selesai", deskripsi: "Pemanfaatan flora lokal Balangan untuk bahan ajar praktikum.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "https://drive.google.com", foto_drive: "https://drive.google.com", video_link: "" },
-      { id_kegiatan: "ACT-03", bulan: "Maret", tanggal: "2026-03-24", nama_kegiatan: "Penyusunan Bank Soal Asesmen Standar IPA", tempat: "SMPN 1 Lampihong", status: "Selesai", deskripsi: "Pembuatan stimulus soal berbasis literasi sains.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "", foto_drive: "", video_link: "" },
-      { id_kegiatan: "ACT-04", bulan: "Oktober", tanggal: "2026-10-24", nama_kegiatan: "Desiminasi Pembelajaran STEM Kontekstual Lahan Basah", tempat: "SMPN 2 Batumandi", status: "Rencana", deskripsi: "Pembelajaran berbasis proyek STEM kontekstual Balangan.", surat_undangan: "", materi: "", presensi_pdf: "", foto_drive: "", video_link: "" }
+    // Data 8 Kecamatan & 26 Sekolah SMP Se-Balangan
+    const dataKecamatanBalangan = [
+      {
+        nama: "Kecamatan Awayan",
+        sekolah: [
+          "SMP Negeri 1 Awayan",
+          "SMP Negeri 4 Awayan"
+        ]
+      },
+      {
+        nama: "Kecamatan Batumandi",
+        sekolah: [
+          "SMP Negeri 1 Batumandi",
+          "SMP Negeri 2 Batumandi",
+          "SMP Negeri 3 Batumandi",
+          "SMP Negeri 4 Batumandi"
+        ]
+      },
+      {
+        nama: "Kecamatan Halong",
+        sekolah: [
+          "SMP Negeri 1 Halong",
+          "SMP Negeri 2 Halong",
+          "SMP Negeri 3 Halong",
+          "SMP Negeri 4 Halong",
+          "SMP Negeri 5 Halong",
+          "SMP Negeri 6 Halong",
+          "SMP Satu Atap Libaru Sungkai"
+        ]
+      },
+      {
+        nama: "Kecamatan Juai",
+        sekolah: [
+          "SMP Negeri 1 Juai",
+          "SMP Negeri 2 Juai"
+        ]
+      },
+      {
+        nama: "Kecamatan Lampihong",
+        sekolah: [
+          "SMP Negeri 1 Lampihong",
+          "SMP Negeri 2 Lampihong"
+        ]
+      },
+      {
+        nama: "Kecamatan Paringin",
+        sekolah: [
+          "SMP Negeri 1 Paringin",
+          "SMP Negeri 3 Paringin",
+          "SMP Negeri 5 Paringin",
+          "SMPIT Darul Fikri",
+          "SMP Al-Qur'an Ikhwanul Muslimin"
+        ]
+      },
+      {
+        nama: "Kecamatan Paringin Selatan",
+        sekolah: [
+          "SMP Negeri 2 Paringin",
+          "SMP Negeri 4 Paringin"
+        ]
+      },
+      {
+        nama: "Kecamatan Tebing Tinggi",
+        sekolah: [
+          "SMP Negeri 2 Awayan",
+          "SMP Negeri 3 Awayan"
+        ]
+      }
     ];
 
-    const defaultNextMeetingData = {
-      namaSekolah: "SMP Negeri 2 Batumandi",
-      alamat: "Jl. A. Yani KM. 8, Desa Mantimin, Kecamatan Batumandi, Kabupaten Balangan, Kalimantan Selatan 71663.",
-      tanggalDisplay: "Sabtu, 24 Oktober 2026",
-      waktuDisplay: "08.30 WITA - Selesai",
-      targetDateTime: "2026-10-24T08:30:00",
-      mapEmbedUrl: "https://maps.google.com/maps?q=SMP+Negeri+2+Batumandi+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed",
-      mapLink: "https://maps.google.com/?q=SMP+Negeri+2+Batumandi+Balangan"
-    };
+    const defaultKegiatanData = [
+      { id_kegiatan: "ACT-01", bulan: "Februari", tanggal: "2026-02-10", nama_kegiatan: "Pembahasan rencana kegiatan tahunan MGMP IPA Kab.Balangan", tempat: "SMP Negeri 5 Paringin", status: "Selesai", deskripsi: "Rapat koordinasi awal tahun pemetaan program kerja dan silabus.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "https://drive.google.com", foto_drive: "https://drive.google.com", video_link: "" },
+      { id_kegiatan: "ACT-02", bulan: "Oktober", tanggal: "2026-10-15", nama_kegiatan: "Praktik baik Pembuatan MPI", tempat: "SMP Negeri 3 Batumandi", status: "Rencana", deskripsi: "Pelatihan Media Pembelajaran Interaktif (MPI) untuk memperkuat literasi dan numerasi sains di SMP.", surat_undangan: "https://drive.google.com", materi: "", presensi_pdf: "", foto_drive: "", video_link: "" }
+    ];
 
     let appState = {
       currentPage: 'public',
@@ -1451,7 +1527,7 @@
       kegiatanList: [],
       absensiList: [],
       usersList: [],
-      nextMeeting: defaultNextMeetingData,
+      nextMeeting: null,
       customLogoBalangan: null,
       customLogoMGMP: null
     };
@@ -1460,42 +1536,29 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       initData();
+      populateSekolahDropdown();
       checkSavedSession();
       applySavedLogos();
       renderPublicKegiatan("Semua");
-      renderNextMeetingInfo();
-      renderHostTeachers();
+      updateNextMeetingFromKegiatan();
       renderTabelRekapTahunan("");
-      startCountdownTimer();
     });
 
     function initData() {
       if (!localStorage.getItem("mgmp_users_v2")) {
         localStorage.setItem("mgmp_users_v2", JSON.stringify(officialUsersList));
       }
-      // Upgrade ke v3 agar field presensi_pdf langsung aktif
       if (!localStorage.getItem("mgmp_kegiatan_v3")) {
         localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(defaultKegiatanData));
       }
-      const initialCumulativeSessions = [{"id_absen": "ACT-01-01", "nip": "19700617 199802 2 007", "nama": "Juni Angkowati, S.Pd., M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-02", "nip": "19751212 200604 2 022", "nama": "Admawati, SP", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-03", "nip": "19770622 200604 2 012", "nama": "Hj. Sri Norbaiti, M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-04", "nip": "19820731 200904 2 003", "nama": "Norhasanah S., S.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-05", "nip": "19841107 200904 2 007", "nama": "Siti Khadijah, S.Pd", "sekolah": "SMPN 2 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-06", "nip": "19820313 202421 2 002", "nama": "Ririn Adiyati, S.Pi", "sekolah": "SMPN 3 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-07", "nip": "19830430 200904 1 002", "nama": "M. Edi Prayetno, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-08", "nip": "19800819 200904 2 004", "nama": "Fitriaheriany, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-09", "nip": "19670414 200701 2 014", "nama": "Hj. Noraniah, S.Pd", "sekolah": "SMPN 5 PARINGIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-10", "nip": "19701003 200604 2 010", "nama": "Rabiatul Adawiyah, S.Pd", "sekolah": "SMPN 1 LAMPIHONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-11", "nip": "19800601 200904 2 001", "nama": "Saidah, S.Pd", "sekolah": "SMPN 2 LAMPIHONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-12", "nip": "19840803 200904 2 003", "nama": "Norhamidah, S.Pd., M.Pd", "sekolah": "SMPN 1 BATUMANDI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-13", "nip": "19670303 200604 1 012", "nama": "Irdiansyah, S.Pd", "sekolah": "SMPN 2 BATUMANDI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-14", "nip": "19780807 200801 1 020", "nama": "Andi Pahrifi, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-15", "nip": "19940715 202321 2 014", "nama": "Dini Yarti Iriani, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-16", "nip": "19830606 200904 2 011", "nama": "Maria Ulfah, S.Pd", "sekolah": "SMPN 4 BATUMANDI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-17", "nip": "19730930 200501 2 004", "nama": "Khadijah Kariem, S.P", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-18", "nip": "19770804 200604 2 021", "nama": "Noor Pujiah, S.Pd", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-19", "nip": "19830109 200904 2 003", "nama": "Mawarni, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-20", "nip": "-", "nama": "Fitria Nor Rezka, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-21", "nip": "19690415 200604 1 012", "nama": "H. Mahyudi, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-22", "nip": "19700201 199412 1 004", "nama": "Dahriansyah, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-23", "nip": "19670808 200604 1 017", "nama": "H. Arbani, S.Pd", "sekolah": "SMPN 2 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-24", "nip": "-", "nama": "Ema Mega Hartini, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-25", "nip": "19940612 201903 1 002", "nama": "Rahmat, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-01-20", "status": "Sakit", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-26", "nip": "-", "nama": "Yuni Auliana, S.Pd", "sekolah": "SMPN 4 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-27", "nip": "19690317 200701 1 020", "nama": "Nawi, A.Md", "sekolah": "SMPN 5 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-28", "nip": "19940321 202012 2 013", "nama": "Eka Puspita Silalahi, S.Pd", "sekolah": "SMPN 6 HALONG", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-29", "nip": "19900602 202421 2 002", "nama": "Rosyda Rahmatina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-30", "nip": "19980826 202521 2 020", "nama": "Risma Agustina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-31", "nip": "19730804 200501 2 006", "nama": "Isnawati, SP", "sekolah": "SMPN 2 AWAYAN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-32", "nip": "19851001 200904 1 001", "nama": "Muhammad Firdaus, S.Pd., M.Pd", "sekolah": "SMPN 3 AWAYAN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-33", "nip": "19960922 202521 2 010", "nama": "Nia Sri Purwaningsih, S.Pd", "sekolah": "SMPN 4 AWAYAN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-34", "nip": "19891217 202012 1 006", "nama": "Syahdianor Refani, S.Pd", "sekolah": "SMP SATAP LIBARU SUNGKAI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-35", "nip": "-", "nama": "Rusdianor, S.Pd", "sekolah": "SMPIT DARUL FIKRI", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-01-36", "nip": "-", "nama": "Sri Rahmawati, S.Pd", "sekolah": "SMP AL-QUR'AN IKHWANUL MUSLIMIN", "tanggal": "2026-01-20", "status": "Hadir", "keterangan": "Rapat Kerja Silabus"}, {"id_absen": "ACT-02-01", "nip": "19700617 199802 2 007", "nama": "Juni Angkowati, S.Pd., M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-02", "nip": "19751212 200604 2 022", "nama": "Admawati, SP", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-03", "nip": "19770622 200604 2 012", "nama": "Hj. Sri Norbaiti, M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-04", "nip": "19820731 200904 2 003", "nama": "Norhasanah S., S.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-05", "nip": "19841107 200904 2 007", "nama": "Siti Khadijah, S.Pd", "sekolah": "SMPN 2 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-06", "nip": "19820313 202421 2 002", "nama": "Ririn Adiyati, S.Pi", "sekolah": "SMPN 3 PARINGIN", "tanggal": "2026-02-18", "status": "Izin", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-07", "nip": "19830430 200904 1 002", "nama": "M. Edi Prayetno, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-08", "nip": "19800819 200904 2 004", "nama": "Fitriaheriany, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-09", "nip": "19670414 200701 2 014", "nama": "Hj. Noraniah, S.Pd", "sekolah": "SMPN 5 PARINGIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-10", "nip": "19701003 200604 2 010", "nama": "Rabiatul Adawiyah, S.Pd", "sekolah": "SMPN 1 LAMPIHONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-11", "nip": "19800601 200904 2 001", "nama": "Saidah, S.Pd", "sekolah": "SMPN 2 LAMPIHONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-12", "nip": "19840803 200904 2 003", "nama": "Norhamidah, S.Pd., M.Pd", "sekolah": "SMPN 1 BATUMANDI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-13", "nip": "19670303 200604 1 012", "nama": "Irdiansyah, S.Pd", "sekolah": "SMPN 2 BATUMANDI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-14", "nip": "19780807 200801 1 020", "nama": "Andi Pahrifi, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-15", "nip": "19940715 202321 2 014", "nama": "Dini Yarti Iriani, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-16", "nip": "19830606 200904 2 011", "nama": "Maria Ulfah, S.Pd", "sekolah": "SMPN 4 BATUMANDI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-17", "nip": "19730930 200501 2 004", "nama": "Khadijah Kariem, S.P", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-18", "nip": "19770804 200604 2 021", "nama": "Noor Pujiah, S.Pd", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-19", "nip": "19830109 200904 2 003", "nama": "Mawarni, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-20", "nip": "-", "nama": "Fitria Nor Rezka, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-21", "nip": "19690415 200604 1 012", "nama": "H. Mahyudi, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-22", "nip": "19700201 199412 1 004", "nama": "Dahriansyah, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-23", "nip": "19670808 200604 1 017", "nama": "H. Arbani, S.Pd", "sekolah": "SMPN 2 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-24", "nip": "-", "nama": "Ema Mega Hartini, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-25", "nip": "19940612 201903 1 002", "nama": "Rahmat, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-26", "nip": "-", "nama": "Yuni Auliana, S.Pd", "sekolah": "SMPN 4 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-27", "nip": "19690317 200701 1 020", "nama": "Nawi, A.Md", "sekolah": "SMPN 5 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-28", "nip": "19940321 202012 2 013", "nama": "Eka Puspita Silalahi, S.Pd", "sekolah": "SMPN 6 HALONG", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-29", "nip": "19900602 202421 2 002", "nama": "Rosyda Rahmatina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-30", "nip": "19980826 202521 2 020", "nama": "Risma Agustina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-31", "nip": "19730804 200501 2 006", "nama": "Isnawati, SP", "sekolah": "SMPN 2 AWAYAN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-32", "nip": "19851001 200904 1 001", "nama": "Muhammad Firdaus, S.Pd., M.Pd", "sekolah": "SMPN 3 AWAYAN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-33", "nip": "19960922 202521 2 010", "nama": "Nia Sri Purwaningsih, S.Pd", "sekolah": "SMPN 4 AWAYAN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-34", "nip": "19891217 202012 1 006", "nama": "Syahdianor Refani, S.Pd", "sekolah": "SMP SATAP LIBARU SUNGKAI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-35", "nip": "-", "nama": "Rusdianor, S.Pd", "sekolah": "SMPIT DARUL FIKRI", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-02-36", "nip": "-", "nama": "Sri Rahmawati, S.Pd", "sekolah": "SMP AL-QUR'AN IKHWANUL MUSLIMIN", "tanggal": "2026-02-18", "status": "Hadir", "keterangan": "Workshop Praktikum"}, {"id_absen": "ACT-03-01", "nip": "19700617 199802 2 007", "nama": "Juni Angkowati, S.Pd., M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-02", "nip": "19751212 200604 2 022", "nama": "Admawati, SP", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-03", "nip": "19770622 200604 2 012", "nama": "Hj. Sri Norbaiti, M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-04", "nip": "19820731 200904 2 003", "nama": "Norhasanah S., S.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-05", "nip": "19841107 200904 2 007", "nama": "Siti Khadijah, S.Pd", "sekolah": "SMPN 2 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-06", "nip": "19820313 202421 2 002", "nama": "Ririn Adiyati, S.Pi", "sekolah": "SMPN 3 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-07", "nip": "19830430 200904 1 002", "nama": "M. Edi Prayetno, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-08", "nip": "19800819 200904 2 004", "nama": "Fitriaheriany, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-09", "nip": "19670414 200701 2 014", "nama": "Hj. Noraniah, S.Pd", "sekolah": "SMPN 5 PARINGIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-10", "nip": "19701003 200604 2 010", "nama": "Rabiatul Adawiyah, S.Pd", "sekolah": "SMPN 1 LAMPIHONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-11", "nip": "19800601 200904 2 001", "nama": "Saidah, S.Pd", "sekolah": "SMPN 2 LAMPIHONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-12", "nip": "19840803 200904 2 003", "nama": "Norhamidah, S.Pd., M.Pd", "sekolah": "SMPN 1 BATUMANDI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-13", "nip": "19670303 200604 1 012", "nama": "Irdiansyah, S.Pd", "sekolah": "SMPN 2 BATUMANDI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-14", "nip": "19780807 200801 1 020", "nama": "Andi Pahrifi, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-15", "nip": "19940715 202321 2 014", "nama": "Dini Yarti Iriani, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-03-24", "status": "Izin", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-16", "nip": "19830606 200904 2 011", "nama": "Maria Ulfah, S.Pd", "sekolah": "SMPN 4 BATUMANDI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-17", "nip": "19730930 200501 2 004", "nama": "Khadijah Kariem, S.P", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-18", "nip": "19770804 200604 2 021", "nama": "Noor Pujiah, S.Pd", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-19", "nip": "19830109 200904 2 003", "nama": "Mawarni, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-20", "nip": "-", "nama": "Fitria Nor Rezka, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-21", "nip": "19690415 200604 1 012", "nama": "H. Mahyudi, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-22", "nip": "19700201 199412 1 004", "nama": "Dahriansyah, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-23", "nip": "19670808 200604 1 017", "nama": "H. Arbani, S.Pd", "sekolah": "SMPN 2 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-24", "nip": "-", "nama": "Ema Mega Hartini, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-25", "nip": "19940612 201903 1 002", "nama": "Rahmat, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-26", "nip": "-", "nama": "Yuni Auliana, S.Pd", "sekolah": "SMPN 4 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-27", "nip": "19690317 200701 1 020", "nama": "Nawi, A.Md", "sekolah": "SMPN 5 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-28", "nip": "19940321 202012 2 013", "nama": "Eka Puspita Silalahi, S.Pd", "sekolah": "SMPN 6 HALONG", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-29", "nip": "19900602 202421 2 002", "nama": "Rosyda Rahmatina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-30", "nip": "19980826 202521 2 020", "nama": "Risma Agustina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-31", "nip": "19730804 200501 2 006", "nama": "Isnawati, SP", "sekolah": "SMPN 2 AWAYAN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-32", "nip": "19851001 200904 1 001", "nama": "Muhammad Firdaus, S.Pd., M.Pd", "sekolah": "SMPN 3 AWAYAN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-33", "nip": "19960922 202521 2 010", "nama": "Nia Sri Purwaningsih, S.Pd", "sekolah": "SMPN 4 AWAYAN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-34", "nip": "19891217 202012 1 006", "nama": "Syahdianor Refani, S.Pd", "sekolah": "SMP SATAP LIBARU SUNGKAI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-35", "nip": "-", "nama": "Rusdianor, S.Pd", "sekolah": "SMPIT DARUL FIKRI", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}, {"id_absen": "ACT-03-36", "nip": "-", "nama": "Sri Rahmawati, S.Pd", "sekolah": "SMP AL-QUR'AN IKHWANUL MUSLIMIN", "tanggal": "2026-03-24", "status": "Hadir", "keterangan": "Penyusunan Bank Soal"}];
+      const initialCumulativeSessions = [{"id_absen": "ACT-01-01", "nip": "19700617 199802 2 007", "nama": "Juni Angkowati, S.Pd., M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-02", "nip": "19751212 200604 2 022", "nama": "Admawati, SP", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-03", "nip": "19770622 200604 2 012", "nama": "Hj. Sri Norbaiti, M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-04", "nip": "19820731 200904 2 003", "nama": "Norhasanah S., S.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-05", "nip": "19841107 200904 2 007", "nama": "Siti Khadijah, S.Pd", "sekolah": "SMPN 2 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-06", "nip": "19820313 202421 2 002", "nama": "Ririn Adiyati, S.Pi", "sekolah": "SMPN 3 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-07", "nip": "19830430 200904 1 002", "nama": "M. Edi Prayetno, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-08", "nip": "19800819 200904 2 004", "nama": "Fitriaheriany, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-09", "nip": "19670414 200701 2 014", "nama": "Hj. Noraniah, S.Pd", "sekolah": "SMPN 5 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-10", "nip": "19701003 200604 2 010", "nama": "Rabiatul Adawiyah, S.Pd", "sekolah": "SMPN 1 LAMPIHONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-11", "nip": "19800601 200904 2 001", "nama": "Saidah, S.Pd", "sekolah": "SMPN 2 LAMPIHONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-12", "nip": "19840803 200904 2 003", "nama": "Norhamidah, S.Pd., M.Pd", "sekolah": "SMPN 1 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-13", "nip": "19670303 200604 1 012", "nama": "Irdiansyah, S.Pd", "sekolah": "SMPN 2 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-14", "nip": "19780807 200801 1 020", "nama": "Andi Pahrifi, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-15", "nip": "19940715 202321 2 014", "nama": "Dini Yarti Iriani, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-16", "nip": "19830606 200904 2 011", "nama": "Maria Ulfah, S.Pd", "sekolah": "SMPN 4 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-17", "nip": "19730930 200501 2 004", "nama": "Khadijah Kariem, S.P", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-18", "nip": "19770804 200604 2 021", "nama": "Noor Pujiah, S.Pd", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-19", "nip": "19830109 200904 2 003", "nama": "Mawarni, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-20", "nip": "-", "nama": "Fitria Nor Rezka, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-21", "nip": "19690415 200604 1 012", "nama": "H. Mahyudi, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-22", "nip": "19700201 199412 1 004", "nama": "Dahriansyah, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-23", "nip": "19670808 200604 1 017", "nama": "H. Arbani, S.Pd", "sekolah": "SMPN 2 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-24", "nip": "-", "nama": "Ema Mega Hartini, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-25", "nip": "19940612 201903 1 002", "nama": "Rahmat, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-26", "nip": "-", "nama": "Yuni Auliana, S.Pd", "sekolah": "SMPN 4 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-27", "nip": "19690317 200701 1 020", "nama": "Nawi, A.Md", "sekolah": "SMPN 5 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-28", "nip": "19940321 202012 2 013", "nama": "Eka Puspita Silalahi, S.Pd", "sekolah": "SMPN 6 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-29", "nip": "19900602 202421 2 002", "nama": "Rosyda Rahmatina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-30", "nip": "19980826 202521 2 020", "nama": "Risma Agustina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-31", "nip": "19730804 200501 2 006", "nama": "Isnawati, SP", "sekolah": "SMPN 2 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-32", "nip": "19851001 200904 1 001", "nama": "Muhammad Firdaus, S.Pd., M.Pd", "sekolah": "SMPN 3 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-33", "nip": "19960922 202521 2 010", "nama": "Nia Sri Purwaningsih, S.Pd", "sekolah": "SMPN 4 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-34", "nip": "19891217 202012 1 006", "nama": "Syahdianor Refani, S.Pd", "sekolah": "SMP SATAP LIBARU SUNGKAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-35", "nip": "-", "nama": "Rusdianor, S.Pd", "sekolah": "SMPIT DARUL FIKRI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-36", "nip": "-", "nama": "Sri Rahmawati, S.Pd", "sekolah": "SMP AL-QUR'AN IKHWANUL MUSLIMIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}];
       if (!localStorage.getItem("mgmp_absensi_v3")) {
         localStorage.setItem("mgmp_absensi_v3", JSON.stringify(initialCumulativeSessions));
       }
 
       appState.usersList = JSON.parse(localStorage.getItem("mgmp_users_v2")) || officialUsersList;
       appState.kegiatanList = JSON.parse(localStorage.getItem("mgmp_kegiatan_v3")) || defaultKegiatanData;
-      
-      // Pastikan setiap data kegiatan lama yang belum punya properti presensi_pdf otomatis terisi contoh tautan
-      appState.kegiatanList = appState.kegiatanList.map((k, idx) => {
-        if (k.presensi_pdf === undefined) {
-          k.presensi_pdf = (idx < 2) ? "https://drive.google.com" : "";
-        }
-        return k;
-      });
-      localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
-
       appState.absensiList = JSON.parse(localStorage.getItem("mgmp_absensi_v3")) || [];
-      appState.nextMeeting = JSON.parse(localStorage.getItem("mgmp_next_meeting")) || defaultNextMeetingData;
       appState.customLogoBalangan = localStorage.getItem("mgmp_logo_balangan") || null;
       appState.customLogoMGMP = localStorage.getItem("mgmp_logo_mgmp") || null;
 
@@ -1503,7 +1566,183 @@
       if (badgeGuru) badgeGuru.textContent = (appState.usersList.length - 1) + " Guru";
     }
 
-    // ================= FALLBACK SVG =================
+    // ================= POPULATE TEMPLATE DROPDOWN SEKOLAH =================
+    function populateSekolahDropdown() {
+      const select = document.getElementById("kegTempat");
+      if (!select) return;
+
+      let html = '<option value="">-- Pilih Sekolah Tuan Rumah --</option>';
+      dataKecamatanBalangan.forEach(kec => {
+        html += `<optgroup label="📍 ${kec.nama}">`;
+        kec.sekolah.forEach(sch => {
+          html += `<option value="${sch}">${sch}</option>`;
+        });
+        html += `</optgroup>`;
+      });
+      html += `<optgroup label="🏢 Tempat Lainnya">`;
+      html += `<option value="Sekretariat MGMP IPA (SMPN 1 Paringin)">Sekretariat MGMP IPA (SMPN 1 Paringin)</option>`;
+      html += `<option value="Aula Dinas Pendidikan Kab. Balangan">Aula Dinas Pendidikan Kab. Balangan</option>`;
+      html += `</optgroup>`;
+
+      select.innerHTML = html;
+    }
+
+    // Normalisasi Nama Sekolah untuk Pencocokan Guru & Maps
+    function standardizeSchoolName(name) {
+      if (!name) return "";
+      let s = name.trim();
+      // Mengubah singkatan SMPN ke format lengkap
+      s = s.replace(/^SMPN\s*(\d+)/i, 'SMP Negeri $1');
+      return s;
+    }
+
+    // Format Tanggal Indonesia yang Luwes
+    function formatTanggalIndo(dateStr) {
+      if (!dateStr) return "-";
+      try {
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+          const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          return d.toLocaleDateString('id-ID', options);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      return dateStr;
+    }
+
+    // ================= SINKRONISASI OTOMATIS TUAN RUMAH DARI RENCANA KEGIATAN =================
+    function updateNextMeetingFromKegiatan() {
+      // Cari kegiatan terdekat yang berstatus "Rencana" atau "Sedang Berjalan", diurutkan berdasarkan tanggal
+      let plannedList = appState.kegiatanList.filter(k => k.status === 'Rencana' || k.status === 'Sedang Berjalan');
+      
+      // Jika tidak ada yang rencana, ambil kegiatan terdekat apapun
+      let activeKeg = plannedList.length > 0 ? plannedList[0] : (appState.kegiatanList[0] || null);
+
+      if (activeKeg) {
+        const standardSchool = standardizeSchoolName(activeKeg.tempat);
+        const mapQuery = encodeURIComponent(standardSchool + " Kabupaten Balangan Kalimantan Selatan");
+
+        // Cari kecamatan sekolah
+        let kecName = "Kabupaten Balangan";
+        for (let kec of dataKecamatanBalangan) {
+          if (kec.sekolah.some(s => s.toLowerCase() === standardSchool.toLowerCase())) {
+            kecName = kec.nama + ", Kabupaten Balangan";
+            break;
+          }
+        }
+
+        appState.nextMeeting = {
+          namaSekolah: standardSchool || activeKeg.tempat,
+          alamat: `${kecName}, Kalimantan Selatan.`,
+          tanggalDisplay: formatTanggalIndo(activeKeg.tanggal),
+          waktuDisplay: "08.30 WITA - Selesai",
+          targetDateTime: `${activeKeg.tanggal}T08:30:00`,
+          mapEmbedUrl: `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`,
+          mapLink: `https://maps.google.com/?q=${mapQuery}`
+        };
+      } else {
+        // Default jika kosong
+        appState.nextMeeting = {
+          namaSekolah: "SMP Negeri 1 Paringin (Sekretariat)",
+          alamat: "Jl. A. Yani Komp. Pendidikan Batu Piring, Paringin Selatan, Kabupaten Balangan 71618.",
+          tanggalDisplay: "Sabtu, 24 Oktober 2026",
+          waktuDisplay: "08.30 WITA - Selesai",
+          targetDateTime: "2026-10-24T08:30:00",
+          mapEmbedUrl: "https://maps.google.com/maps?q=SMP+Negeri+1+Paringin+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed",
+          mapLink: "https://maps.google.com/?q=SMP+Negeri+1+Paringin+Balangan"
+        };
+      }
+
+      renderNextMeetingInfo();
+      renderHostTeachers();
+      startCountdownTimer();
+    }
+
+    function renderNextMeetingInfo() {
+      const nm = appState.nextMeeting;
+      if (!nm) return;
+      document.getElementById("nextHostTitle").textContent = nm.namaSekolah;
+      document.getElementById("nextHostAddress").textContent = nm.alamat;
+      document.getElementById("nextMeetingDateDisplay").textContent = nm.tanggalDisplay;
+      document.getElementById("nextMeetingTimeDisplay").textContent = nm.waktuDisplay;
+      document.getElementById("nextMeetingMapIframe").src = nm.mapEmbedUrl;
+      document.getElementById("nextMapDirectionLink").href = nm.mapLink;
+      document.getElementById("nextMapBadgeLabel").textContent = "Tuan Rumah: " + nm.namaSekolah;
+    }
+
+    function renderHostTeachers() {
+      const container = document.getElementById("hostTeachersContainer");
+      const badge = document.getElementById("hostTeachersCountBadge");
+      if (!container) return;
+
+      const currentSchool = (appState.nextMeeting ? appState.nextMeeting.namaSekolah : '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const teachers = appState.usersList.filter(u => {
+        if (u.role === 'admin') return false;
+        const userSchool = (u.sekolah || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        // Cocokkan apakah sekolah sama (misal smpn3batumandi == smpnegeri3batumandi)
+        const simplifiedUser = userSchool.replace('negeri', 'n');
+        const simplifiedHost = currentSchool.replace('negeri', 'n');
+        return simplifiedUser.includes(simplifiedHost) || simplifiedHost.includes(simplifiedUser) || userSchool.includes(currentSchool) || currentSchool.includes(userSchool);
+      });
+
+      if (badge) badge.textContent = teachers.length + " Guru";
+
+      if (teachers.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-2 text-xs text-slate-400 italic">Belum ada profil guru anggota MGMP dari sekolah ini.</div>`;
+        return;
+      }
+
+      container.innerHTML = teachers.map(t => `
+        <div class="flex items-center space-x-3 p-2.5 bg-white rounded-xl border border-emerald-200/80 shadow-sm">
+          ${t.foto ? `<img src="${t.foto}" class="w-10 h-10 rounded-full object-cover border border-emerald-400">` : `<div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">${t.nama.charAt(0)}</div>`}
+          <div class="min-w-0 flex-1">
+            <h5 class="text-xs font-bold text-slate-900 truncate" title="${t.nama}">${t.nama}</h5>
+            <p class="text-[10px] text-slate-500 font-mono">NIP. ${t.nip}</p>
+            <span class="text-[9px] text-emerald-800 font-semibold">${t.pangkat}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // ================= HITUNG MUNDUR REAL-TIME =================
+    function startCountdownTimer() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      function tick() {
+        if (!appState.nextMeeting) return;
+        const target = new Date(appState.nextMeeting.targetDateTime).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+
+        const elD = document.getElementById("countDays");
+        const elH = document.getElementById("countHours");
+        const elM = document.getElementById("countMinutes");
+        const elS = document.getElementById("countSeconds");
+
+        if (diff <= 0) {
+          if (elD) elD.textContent = "00";
+          if (elH) elH.textContent = "00";
+          if (elM) elM.textContent = "00";
+          if (elS) elS.textContent = "00";
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (elD) elD.textContent = String(d).padStart(2, "0");
+        if (elH) elH.textContent = String(h).padStart(2, "0");
+        if (elM) elM.textContent = String(m).padStart(2, "0");
+        if (elS) elS.textContent = String(s).padStart(2, "0");
+      }
+      tick();
+      countdownInterval = setInterval(tick, 1000);
+    }
+
+    // ================= FALLBACK SVG LOGO =================
     function renderFallbackLogoBalangan(img) {
       if (!img || !img.parentElement) return;
       img.parentElement.innerHTML = `
@@ -1537,84 +1776,6 @@
           <text x="50" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="8" fill="#0f172a" text-anchor="middle">MGMP IPA</text>
         </svg>
       `;
-    }
-
-    // ================= TUAN RUMAH & GURU OTOMATIS =================
-    function renderNextMeetingInfo() {
-      const nm = appState.nextMeeting || defaultNextMeetingData;
-      document.getElementById("nextHostTitle").textContent = nm.namaSekolah;
-      document.getElementById("nextHostAddress").textContent = nm.alamat;
-      document.getElementById("nextMeetingDateDisplay").textContent = nm.tanggalDisplay;
-      document.getElementById("nextMeetingTimeDisplay").textContent = nm.waktuDisplay;
-      document.getElementById("nextMeetingMapIframe").src = nm.mapEmbedUrl;
-      document.getElementById("nextMapDirectionLink").href = nm.mapLink;
-      document.getElementById("nextMapBadgeLabel").textContent = "Tuan Rumah: " + nm.namaSekolah;
-    }
-
-    function renderHostTeachers() {
-      const container = document.getElementById("hostTeachersContainer");
-      const badge = document.getElementById("hostTeachersCountBadge");
-      if (!container) return;
-
-      const hostSchoolName = (appState.nextMeeting.namaSekolah || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-      const teachers = appState.usersList.filter(u => {
-        if (u.role === 'admin') return false;
-        const userSchool = (u.sekolah || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        return userSchool.includes(hostSchoolName) || hostSchoolName.includes(userSchool);
-      });
-
-      if (badge) badge.textContent = teachers.length + " Guru";
-
-      if (teachers.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-2 text-xs text-slate-400 italic">Belum ada profil terdaftar dari sekolah ini.</div>`;
-        return;
-      }
-
-      container.innerHTML = teachers.map(t => `
-        <div class="flex items-center space-x-3 p-2.5 bg-white rounded-xl border border-emerald-200/80 shadow-sm">
-          ${t.foto ? `<img src="${t.foto}" class="w-10 h-10 rounded-full object-cover border border-emerald-400">` : `<div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">${t.nama.charAt(0)}</div>`}
-          <div class="min-w-0 flex-1">
-            <h5 class="text-xs font-bold text-slate-900 truncate" title="${t.nama}">${t.nama}</h5>
-            <p class="text-[10px] text-slate-500 font-mono">NIP. ${t.nip}</p>
-            <span class="text-[9px] text-emerald-800 font-semibold">${t.pangkat}</span>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    // ================= HITUNG MUNDUR REAL-TIME =================
-    function startCountdownTimer() {
-      if (countdownInterval) clearInterval(countdownInterval);
-      function tick() {
-        const target = new Date(appState.nextMeeting.targetDateTime).getTime();
-        const now = new Date().getTime();
-        const diff = target - now;
-
-        const elD = document.getElementById("countDays");
-        const elH = document.getElementById("countHours");
-        const elM = document.getElementById("countMinutes");
-        const elS = document.getElementById("countSeconds");
-
-        if (diff <= 0) {
-          if (elD) elD.textContent = "00";
-          if (elH) elH.textContent = "00";
-          if (elM) elM.textContent = "00";
-          if (elS) elS.textContent = "00";
-          return;
-        }
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-        if (elD) elD.textContent = String(d).padStart(2, "0");
-        if (elH) elH.textContent = String(h).padStart(2, "0");
-        if (elM) elM.textContent = String(m).padStart(2, "0");
-        if (elS) elS.textContent = String(s).padStart(2, "0");
-      }
-      tick();
-      countdownInterval = setInterval(tick, 1000);
     }
 
     // ================= LOGIN & AUTH =================
@@ -1735,6 +1896,16 @@
                 <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Scan Presensi
               </button>
             ` : ''}
+            ${k.foto_drive ? `
+              <a href="${k.foto_drive}" target="_blank" rel="noopener noreferrer" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Dokumentasi Foto
+              </a>
+            ` : ''}
+            ${k.video_link ? `
+              <a href="${k.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video Kegiatan
+              </a>
+            ` : ''}
           </div>
         </div>
       `).join("");
@@ -1766,7 +1937,6 @@
       renderTabelRekapTahunan("");
       showToast("Kehadiran berhasil dicatat di lokal!");
 
-      // Sinkronisasi otomatis ke Google Apps Script / Google Sheets
       if (SCRIPT_URL) {
         showToast("Menyimpan ke Google Sheets...", "success");
         try {
@@ -1799,25 +1969,26 @@
     }
 
     function renderAdminView() {
-      // Pastikan tab kegiatan yang aktif pertama kali
       switchAdminTab('tabAdminKegiatan');
       // Tabel Kegiatan
       document.getElementById("tableBodyKegiatanAdmin").innerHTML = appState.kegiatanList.map(k => `
         <tr class="hover:bg-slate-50 transition">
           <td class="p-4"><span class="font-bold text-slate-900">${k.bulan}</span><div class="text-[11px] text-slate-400">${k.tanggal}</div></td>
           <td class="p-4 font-bold text-slate-900">${k.nama_kegiatan}</td>
-          <td class="p-4 text-slate-600">${k.tempat}</td>
+          <td class="p-4 text-slate-600 font-semibold">${k.tempat}</td>
           <td class="p-4">
             <div class="flex items-center space-x-2.5 text-sm">
               ${k.surat_undangan ? `<a href="${k.surat_undangan}" target="_blank" class="text-red-600 hover:text-red-700" title="Undangan PDF"><i class="fa-solid fa-file-pdf"></i></a>` : '<span class="text-slate-300">-</span>'}
-              ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
+              ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi PPT/PDF"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
               ${k.presensi_pdf ? `<a href="${k.presensi_pdf}" target="_blank" class="text-emerald-600 hover:text-emerald-700" title="Scan Presensi PDF"><i class="fa-solid fa-file-signature"></i></a>` : ''}
+              ${k.foto_drive ? `<a href="${k.foto_drive}" target="_blank" class="text-purple-600 hover:text-purple-700" title="Dokumentasi Google Drive"><i class="fa-solid fa-images"></i></a>` : ''}
+              ${k.video_link ? `<a href="${k.video_link}" target="_blank" class="text-rose-600 hover:text-rose-700" title="Video Kegiatan"><i class="fa-brands fa-youtube"></i></a>` : ''}
             </div>
           </td>
-          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-balangan-800">${k.status}</span></td>
-          <td class="p-4 text-right">
-            <button onclick="editKegiatan('${k.id_kegiatan}')" class="p-1.5 text-sains-700"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button onclick="confirmDeleteKegiatan('${k.id_kegiatan}')" class="p-1.5 text-red-600"><i class="fa-solid fa-trash"></i></button>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${k.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${k.status}</span></td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editKegiatan('${k.id_kegiatan}')" class="p-1.5 text-sains-700 hover:text-sains-900" title="Edit Kegiatan"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="confirmDeleteKegiatan('${k.id_kegiatan}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus Kegiatan"><i class="fa-solid fa-trash"></i></button>
           </td>
         </tr>
       `).join("");
@@ -1903,6 +2074,16 @@
                 <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Unduh Presensi
               </button>
             ` : '<span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[11px] font-semibold text-slate-400 bg-slate-50 border border-slate-100"><i class="fa-solid fa-clock-rotate-left mr-1 text-slate-300"></i> Presensi Segera</span>'}
+            ${item.foto_drive ? `
+              <a href="${item.foto_drive}" target="_blank" rel="noopener noreferrer" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+              </a>
+            ` : ''}
+            ${item.video_link ? `
+              <a href="${item.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video
+              </a>
+            ` : ''}
           </div>
         </div>
       `).join("");
@@ -1910,21 +2091,42 @@
 
     function openModalKegiatan(data = null) {
       document.getElementById("formKegiatan").reset();
+      populateSekolahDropdown();
+
       if (data) {
         document.getElementById("modalKegiatanTitle").textContent = "Edit Kegiatan";
         document.getElementById("kegId").value = data.id_kegiatan;
         document.getElementById("kegBulan").value = data.bulan;
         document.getElementById("kegTanggal").value = data.tanggal;
         document.getElementById("kegNama").value = data.nama_kegiatan;
-        document.getElementById("kegTempat").value = data.tempat;
-        document.getElementById("kegStatus").value = data.status;
+        
+        // Pilih sekolah di dropdown (cocokkan string)
+        const selectTempat = document.getElementById("kegTempat");
+        const std = standardizeSchoolName(data.tempat);
+        let found = false;
+        for (let opt of selectTempat.options) {
+          if (opt.value === data.tempat || opt.value === std || opt.value.toLowerCase() === (data.tempat||'').toLowerCase()) {
+            opt.selected = true;
+            found = true;
+            break;
+          }
+        }
+        if (!found && data.tempat) {
+          // Tambahkan opsi jika tidak terdaftar
+          const newOpt = new Option(data.tempat, data.tempat, true, true);
+          selectTempat.add(newOpt);
+        }
+
+        document.getElementById("kegStatus").value = data.status || "Rencana";
         document.getElementById("kegSurat").value = data.surat_undangan || "";
         document.getElementById("kegMateri").value = data.materi || "";
         document.getElementById("kegPresensiPdf").value = data.presensi_pdf || "";
         document.getElementById("kegFoto").value = data.foto_drive || "";
+        document.getElementById("kegVideo").value = data.video_link || "";
       } else {
         document.getElementById("modalKegiatanTitle").textContent = "Tambah Kegiatan";
         document.getElementById("kegId").value = "ACT-" + Date.now().toString().slice(-4);
+        document.getElementById("kegStatus").value = "Rencana";
       }
       openModal("modalKegiatan");
     }
@@ -1947,7 +2149,8 @@
         surat_undangan: document.getElementById("kegSurat").value,
         materi: document.getElementById("kegMateri").value,
         presensi_pdf: document.getElementById("kegPresensiPdf").value,
-        foto_drive: document.getElementById("kegFoto").value
+        foto_drive: document.getElementById("kegFoto").value,
+        video_link: document.getElementById("kegVideo").value
       };
 
       const idx = appState.kegiatanList.findIndex(x => x.id_kegiatan === payload.id_kegiatan);
@@ -1958,9 +2161,11 @@
       closeModal("modalKegiatan");
       renderAdminView();
       renderPublicKegiatan("Semua");
-      showToast("Kegiatan disimpan!");
+      
+      // Sinkronisasi otomatis ke Tuan Rumah Beranda
+      updateNextMeetingFromKegiatan();
+      showToast("Kegiatan disimpan & Beranda diperbarui!");
 
-      // Sinkronisasi otomatis ke Google Sheets
       if (SCRIPT_URL) {
         try {
           await fetch(SCRIPT_URL, {
@@ -1994,34 +2199,28 @@
       const namaKeg = kegTarget ? `"${kegTarget.nama_kegiatan}" (Bulan ${kegTarget.bulan})` : "agenda ini";
 
       if (confirm(`Apakah Anda yakin ingin menghapus ${namaKeg}? Semua rekap kehadiran dan presensi pada bulan/agenda ini akan OTOMATIS terhapus juga dari sistem.`)) {
-        // 1. Simpan kriteria penghapusan absensi terkait
         const targetId = id;
         const targetTanggal = kegTarget ? kegTarget.tanggal : "";
         const targetBulan = kegTarget ? (kegTarget.bulan || "").toLowerCase() : "";
 
-        // 2. Hapus kegiatan dari list kegiatan
         appState.kegiatanList = appState.kegiatanList.filter(x => x.id_kegiatan !== id);
         localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
 
-        // 3. Otomatis bersihkan seluruh rekap absensi yang terikat ke agenda/bulan ini
         const prevCount = appState.absensiList.length;
         appState.absensiList = appState.absensiList.filter(a => {
-          // Cek jika ID absen diawali ID kegiatan (misal ACT-01-xx)
           if (a.id_absen && a.id_absen.startsWith(targetId)) return false;
           if (a.kegiatan_id && a.kegiatan_id === targetId) return false;
-          // Cek jika tanggal sama persis dengan tanggal kegiatan yang dihapus
           if (targetTanggal && a.tanggal === targetTanggal) return false;
-          // Cek jika keterangan mengandung nama bulan kegiatan yang dihapus
           if (targetBulan && (a.keterangan || "").toLowerCase().includes(targetBulan)) return false;
           return true;
         });
         const deletedAbsenCount = prevCount - appState.absensiList.length;
         localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
 
-        // 4. Perbarui seluruh tampilan secara real-time
         renderAdminView();
         renderPublicKegiatan("Semua");
         renderTabelRekapTahunan("");
+        updateNextMeetingFromKegiatan();
         showToast(`Kegiatan dan ${deletedAbsenCount} data kehadiran terkait berhasil dihapus!`);
       }
     }
@@ -2121,7 +2320,6 @@
     }
 
     function promptResetAbsensiSesi() {
-      // Ambil daftar tanggal unik yang ada di absensi
       const dates = [...new Set(appState.absensiList.map(a => a.tanggal).filter(Boolean))];
       if (dates.length === 0) return showToast("Tidak ada data presensi yang tersimpan!", "error");
 
@@ -2166,19 +2364,16 @@
       }
     }
 
-    // Unduh Format CSV Resmi (Semicolon ; agar otomatis terpisah per kolom di Excel)
     function downloadFormatAbsensiCSV() {
       const selectedBulan = document.getElementById("uploadAbsenBulanSelect") ? document.getElementById("uploadAbsenBulanSelect").value : "Oktober";
-      const selectedTanggal = document.getElementById("uploadAbsenTanggalInput") ? document.getElementById("uploadAbsenTanggalInput").value : "2026-10-24";
+      const selectedTanggal = document.getElementById("uploadAbsenTanggalInput") ? document.getElementById("uploadAbsenTanggalInput").value : "2026-10-15";
       
-      // Menggunakan UTF-8 BOM dan header khusus Excel sep=;
       let csv = "\ufeffsep=;\n";
       csv += "ABSENSI KEHADIRAN MGMP IPA SMP KABUPATEN BALANGAN;;;;;\n";
       csv += `Bulan;${selectedBulan};;Tanggal;${selectedTanggal};\n`;
       csv += "\n";
       csv += "nip;nama;sekolah;status;keterangan\n";
 
-      // Filter 36 anggota resmi (selain admin)
       const members = appState.usersList.filter(u => u.role !== 'admin');
       members.forEach(m => {
         const nip = (m.nip || "-").trim();
@@ -2209,7 +2404,6 @@
       showToast("Rekap Absensi diekspor!");
     }
 
-    // Parser CSV Cerdas: Otomatis deteksi pemisah (; atau ,), abaikan baris judul, dan terapkan Bulan & Tanggal pilihan
     async function handleBulkUploadAbsensi() {
       const input = document.getElementById("fileCsvAbsensi");
       if (!input.files[0]) return showToast("Pilih file CSV absensi terlebih dahulu!", "error");
@@ -2230,14 +2424,9 @@
 
         for (let i = 0; i < lines.length; i++) {
           const rawLine = lines[i];
-
-          // Skip baris konfigurasi sep=
           if (rawLine.toLowerCase().startsWith("sep=")) continue;
 
-          // Deteksi pemisah baris (titik koma ';' atau koma ',')
           const delimiter = rawLine.includes(";") ? ";" : ",";
-
-          // Parsing CSV baris dengan memperhitungkan kutip
           const cols = [];
           let current = "";
           let inQuotes = false;
@@ -2253,7 +2442,6 @@
           }
           cols.push(current.trim().replace(/^["']|["']$/g, ''));
 
-          // Cek jika baris berisi metadata Bulan/Tanggal di template
           if (cols[0] && cols[0].toLowerCase().includes("bulan") && cols[1]) {
             detectedBulan = cols[1];
           }
@@ -2262,16 +2450,12 @@
             if (dateMatch) detectedDate = dateMatch[0];
           }
 
-          // Lewati baris judul / header kolom
           const firstCol = (cols[0] || "").toLowerCase();
           if (firstCol.includes("absensi") || firstCol === "no" || firstCol === "nip") continue;
 
-          // Periksa apakah baris ini berisi data guru (memiliki minimal NIP, Nama, Sekolah)
-          // Format standar: [No], NIP, Nama, Sekolah, Status, Keterangan OR NIP, Nama, Sekolah, Tanggal, Status, Keterangan
           let nip = "", nama = "", sekolah = "", status = "Hadir", ket = `Pertemuan ${detectedBulan}`;
           
           if (cols.length >= 5) {
-            // Jika kolom pertama adalah nomor urut angka murni (1, 2, 3...)
             if (/^\d{1,3}$/.test(cols[0]) && cols.length >= 6) {
               nip = cols[1];
               nama = cols[2];
@@ -2310,7 +2494,6 @@
           return showToast("Tidak ada data presensi valid ditemukan dalam file!", "error");
         }
 
-        // Masukkan data ke absensiList
         appState.absensiList = [...newRecords, ...appState.absensiList];
         localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
         renderAdminView();
@@ -2318,11 +2501,10 @@
         showToast(`Berhasil mengimpor ${importedCount} presensi (${detectedBulan}, ${detectedDate})!`);
         input.value = "";
 
-        // Sinkronisasi otomatis massal ke Google Sheets jika SCRIPT_URL tersedia
         if (SCRIPT_URL) {
           try {
             showToast("Menyimpan rekap ke Google Sheets...", "success");
-            for (let r of newRecords.slice(0, 10)) { // sync sampel/batch
+            for (let r of newRecords.slice(0, 10)) {
               await fetch(SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
@@ -2417,7 +2599,8 @@
           closeModal("backupModal");
           renderAdminView();
           renderPublicKegiatan("Semua");
-          renderHostTeachers();
+          updateNextMeetingFromKegiatan();
+          renderTabelRekapTahunan("");
           showToast("Data berhasil dipulihkan!");
         } catch(err) {
           showToast("Format JSON tidak valid!", "error");
@@ -2474,90 +2657,17 @@
     }
 
     // ================= HELPERS =================
-    function toggleSekretariatMini() {
-      document.getElementById("sekretariatMiniCard").classList.toggle("hidden");
-    }
-
     function copyAlamatPertemuan() {
-      navigator.clipboard.writeText(appState.nextMeeting.alamat);
-      showToast("Alamat tuan rumah disalin!");
+      if (appState.nextMeeting) {
+        navigator.clipboard.writeText(appState.nextMeeting.namaSekolah + ", " + appState.nextMeeting.alamat);
+        showToast("Alamat tuan rumah disalin!");
+      }
     }
 
     function copyAlamatSekretariat() {
       navigator.clipboard.writeText("SMP Negeri 1 Paringin, Jl. A. Yani Komp. Pendidikan Batu Piring, Paringin Selatan 71618");
       showToast("Alamat sekretariat disalin!");
     }
-
-
-    // ================= DATA 8 KECAMATAN & SEBARAN SEKOLAH BALANGAN (ALFABETIS) =================
-    const dataKecamatanBalangan = [
-      {
-        nama: "Kecamatan Awayan",
-        sekolah: [
-          "SMP Negeri 1 Awayan",
-          "SMP Negeri 4 Awayan"
-        ]
-      },
-      {
-        nama: "Kecamatan Batumandi",
-        sekolah: [
-          "SMP Negeri 1 Batumandi",
-          "SMP Negeri 2 Batumandi",
-          "SMP Negeri 3 Batumandi",
-          "SMP Negeri 4 Batumandi"
-        ]
-      },
-      {
-        nama: "Kecamatan Halong",
-        sekolah: [
-          "SMP Negeri 1 Halong",
-          "SMP Negeri 2 Halong",
-          "SMP Negeri 3 Halong",
-          "SMP Negeri 4 Halong",
-          "SMP Negeri 5 Halong",
-          "SMP Negeri 6 Halong",
-          "SMP Satu Atap Libaru Sungkai"
-        ]
-      },
-      {
-        nama: "Kecamatan Juai",
-        sekolah: [
-          "SMP Negeri 1 Juai",
-          "SMP Negeri 2 Juai"
-        ]
-      },
-      {
-        nama: "Kecamatan Lampihong",
-        sekolah: [
-          "SMP Negeri 1 Lampihong",
-          "SMP Negeri 2 Lampihong"
-        ]
-      },
-      {
-        nama: "Kecamatan Paringin",
-        sekolah: [
-          "SMP Negeri 1 Paringin",
-          "SMP Negeri 3 Paringin",
-          "SMP Negeri 5 Paringin",
-          "SMPIT Darul Fikri",
-          "SMP Al-Qur'an Ikhwanul Muslimin"
-        ]
-      },
-      {
-        nama: "Kecamatan Paringin Selatan",
-        sekolah: [
-          "SMP Negeri 2 Paringin",
-          "SMP Negeri 4 Paringin"
-        ]
-      },
-      {
-        nama: "Kecamatan Tebing Tinggi",
-        sekolah: [
-          "SMP Negeri 2 Awayan",
-          "SMP Negeri 3 Awayan"
-        ]
-      }
-    ];
 
     function openModalKecamatan() {
       const container = document.getElementById("listKecamatanContainer");
@@ -2607,7 +2717,6 @@
       const badge = document.getElementById("filteredGuruCountBadge");
       if (!container) return;
 
-      // Filter hanya guru anggota (exclude admin jika mau fokus ke 36 guru resmi)
       const list = appState.usersList.filter(u => {
         if (u.role === 'admin') return false;
         if (!q) return true;
@@ -2651,14 +2760,12 @@
       `).join("");
     }
 
-    // Helper Konversi & Download Langsung File (Direct Download)
     function downloadFileDirect(urlOrData, suggestedName = "berkas_mgmp.pdf") {
       if (!urlOrData || urlOrData === "#") {
         showToast("Tautan berkas belum tersedia!", "error");
         return;
       }
 
-      // Jika file berupa Data URI (Base64 dari upload komputer)
       if (urlOrData.startsWith("data:")) {
         const a = document.createElement("a");
         a.href = urlOrData;
@@ -2670,14 +2777,12 @@
         return;
       }
 
-      // Jika file berasal dari Google Drive, konversi otomatis ke Direct Download Link
       let downloadUrl = urlOrData;
       const driveMatch = urlOrData.match(/\/d\/([a-zA-Z0-9_-]+)/) || urlOrData.match(/id=([a-zA-Z0-9_-]+)/);
       if (driveMatch && driveMatch[1]) {
         downloadUrl = `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
       }
 
-      // Buka unduhan langsung di window/tab atau trigger download
       const a = document.createElement("a");
       a.href = downloadUrl;
       a.target = "_blank";
@@ -2686,15 +2791,13 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      showToast("Mengunduh " + suggestedName + "...");
+      showToast("Membuka tautan unduhan...");
     }
 
-    // Helper Membaca Berkas dari Komputer Laptop Langsung
     function handleFileToField(event, targetInputId, labelId) {
       const file = event.target.files[0];
       if (!file) return;
 
-      // Cek ukuran berkas (maksimal 15 MB)
       if (file.size > 15 * 1024 * 1024) {
         showToast("Ukuran berkas terlalu besar (maksimal 15 MB)!", "error");
         event.target.value = "";
@@ -2717,13 +2820,12 @@
       reader.readAsDataURL(file);
     }
 
-
-
     // ================= REKAPITULASI KEHADIRAN 1 TAHUN BERJALAN =================
     function openModalMonitoringKehadiran() {
       renderTabelRekapTahunan("");
       openModal("modalMonitoringKehadiran");
     }
+
     function getCleanGuruName(name) {
       return (name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
     }
@@ -2732,7 +2834,6 @@
       const members = appState.usersList.filter(u => u.role !== 'admin');
       const absensi = appState.absensiList || [];
 
-      // Hitung total agenda unik yang telah terlaksana / memiliki presensi
       const uniqueDates = [...new Set(absensi.map(a => a.tanggal).filter(Boolean))];
       const totalAgendaTerlaksana = Math.max(uniqueDates.length, appState.kegiatanList.filter(k => k.status === 'Selesai').length, 1);
 
@@ -2743,7 +2844,6 @@
         const gNameClean = getCleanGuruName(guru.nama);
         const gNipClean = (guru.nip || '').replace(/[^0-9]/g, '');
 
-        // Cari seluruh catatan absensi guru ini di riwayat dari awal tahun sampai sekarang
         const userRecords = absensi.filter(a => {
           const aNipClean = (a.nip || '').replace(/[^0-9]/g, '');
           const aNameClean = getCleanGuruName(a.nama);
@@ -2760,7 +2860,7 @@
           if (st.includes('hadir')) hadir++;
           else if (st.includes('izin')) izin++;
           else if (st.includes('sakit')) sakit++;
-          else hadir++; // default hadir
+          else hadir++;
         });
 
         const totalPertemuan = hadir + izin + sakit;
@@ -2803,7 +2903,6 @@
 
       const { membersSummary, totalAgendaTerlaksana, grandTotalHadir, avgPersen } = calculateCumulativeAbsensi();
 
-      // Update metrik atas
       const elMetrikAgenda = document.getElementById("metrikTotalKegiatanSelesai");
       const elMetrikKumulatif = document.getElementById("metrikTotalKehadiranKumulatif");
       const elMetrikAvg = document.getElementById("metrikRataRataKehadiran");
@@ -2831,7 +2930,6 @@
       }
 
       tbody.innerHTML = filtered.map((m, idx) => {
-        // Tentukan warna badge persen
         let badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
         let barColor = "bg-emerald-500";
         if (m.persentase < 75) {
@@ -2915,7 +3013,6 @@
       link.click();
       showToast("Rekap akumulasi 1 tahun berhasil diunduh!");
     }
-
 
     function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
     function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
