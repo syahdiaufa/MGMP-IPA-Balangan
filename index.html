@@ -912,11 +912,11 @@
 
   <!-- ================= MODALS ================= -->
 
-  <!-- ================= MODAL GALERI FOTO SLIDESHOW OTOMATIS ================= -->
+    <!-- ================= MODAL GALERI FOTO & DRIVE FOLDER ASLI ================= -->
   <div id="modalGaleriFoto" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-    <div class="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-4xl w-full p-5 sm:p-7 shadow-2xl relative my-6 flex flex-col max-h-[92vh]">
+    <div class="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl relative my-6 flex flex-col max-h-[94vh]">
       <!-- Header Galeri -->
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 flex-shrink-0">
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 flex-shrink-0">
         <div class="flex items-center space-x-3">
           <div class="w-11 h-11 rounded-2xl bg-purple-600/30 text-purple-400 border border-purple-500/40 flex items-center justify-center text-xl flex-shrink-0">
             <i class="fa-solid fa-photo-film"></i>
@@ -934,57 +934,75 @@
         </button>
       </div>
 
-      <!-- Area Tampilan Gambar Utama (Slide Bergerak Otomatis) -->
-      <div class="relative my-4 flex-1 min-h-[280px] sm:min-h-[380px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center select-none group">
-        <!-- Gambar Utama -->
-        <img id="galeriMainImage" src="" alt="Dokumentasi Kegiatan" class="w-full h-[280px] sm:h-[380px] object-cover transition-all duration-700 ease-in-out opacity-100">
-        
-        <!-- Overlay Caption / Keterangan Gambar -->
-        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-4 flex items-end justify-between">
-          <div class="pr-4">
-            <p id="galeriCaption" class="text-xs sm:text-sm font-bold text-white drop-shadow">Dokumentasi kegiatan MGMP IPA</p>
-            <p id="galeriLokasi" class="text-[11px] text-emerald-400 font-medium"><i class="fa-solid fa-location-dot mr-1"></i> Tempat</p>
-          </div>
-          <div class="flex items-center space-x-2 flex-shrink-0">
-            <span id="galeriCounterBadge" class="text-[11px] font-mono font-bold bg-slate-800/90 text-purple-300 border border-purple-500/30 px-2.5 py-1 rounded-xl">1 / 5</span>
-          </div>
+      <!-- Tab Pilihan Tampilan: Folder Google Drive Asli vs Slideshow Bergerak -->
+      <div class="flex items-center justify-between pt-3 pb-2 flex-shrink-0">
+        <div class="inline-flex p-1 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-bold">
+          <button onclick="switchModeGaleri('drive')" id="btnTabModeDrive" class="px-3.5 py-1.5 rounded-xl bg-purple-600 text-white shadow transition flex items-center">
+            <i class="fa-brands fa-google-drive mr-1.5 text-amber-300"></i> Folder Foto Asli (Drive)
+          </button>
+          <button onclick="switchModeGaleri('slideshow')" id="btnTabModeSlideshow" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center">
+            <i class="fa-solid fa-play mr-1.5 text-purple-400"></i> Slideshow Sinematik
+          </button>
         </div>
-
-        <!-- Tombol Panah Navigasi Kiri & Kanan -->
-        <button onclick="prevSlideFoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg opacity-80 hover:opacity-100 border border-white/10">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button onclick="nextSlideFoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg opacity-80 hover:opacity-100 border border-white/10">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-
-        <!-- Indikator Auto-Play Status -->
-        <button onclick="toggleAutoPlayGaleri()" id="btnAutoPlayToggle" class="absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="dotAutoPlay"></span>
-          <span id="textAutoPlay">Auto-Play Aktif</span>
-        </button>
+        <p id="galeriLokasi" class="text-xs text-emerald-400 font-medium hidden sm:block"><i class="fa-solid fa-location-dot mr-1"></i> Tempat</p>
       </div>
 
-      <!-- Deretan Thumbnail Foto (Bisa Diklik Langsung) -->
-      <div class="flex-shrink-0 space-y-2">
-        <div class="flex items-center justify-between text-xs text-slate-400 font-medium px-1">
-          <span>Pratinjau Thumbnail (Klik untuk berpindah)</span>
-          <span class="text-[11px] text-purple-400 flex items-center"><i class="fa-solid fa-play mr-1"></i> Berganti otomatis setiap 3 detik</span>
+      <!-- TAMPILAN 1: FRAME FOLDER GOOGLE DRIVE ASLI (MENAMPILKAN THUMBNAIL FOTO ASLI DRIVE) -->
+      <div id="viewGaleriDrive" class="my-2 flex-1 min-h-[350px] sm:min-h-[440px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 relative">
+        <iframe 
+          id="iframeDriveEmbed"
+          src="" 
+          class="w-full h-full min-h-[350px] sm:min-h-[440px] border-0"
+          allow="autoplay"
+          loading="lazy">
+        </iframe>
+        <div id="driveLoadingNotice" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center space-y-2 pointer-events-none transition duration-500">
+          <i class="fa-solid fa-circle-notch fa-spin text-purple-500 text-2xl"></i>
+          <span class="text-xs text-slate-400 font-semibold">Memuat dokumen & foto dari Google Drive...</span>
         </div>
-        <div id="galeriThumbnailsContainer" class="flex space-x-2.5 overflow-x-auto pb-1.5 pt-0.5">
-          <!-- Render thumbnail otomatis via JS -->
+      </div>
+
+      <!-- TAMPILAN 2: SLIDESHOW FOTO (BERGERAK SENDIRI OTOMATIS) -->
+      <div id="viewGaleriSlideshow" class="my-2 flex-1 min-h-[300px] sm:min-h-[380px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hidden select-none relative group">
+        <!-- Gambar Utama -->
+        <div class="relative w-full h-[250px] sm:h-[320px] flex items-center justify-center overflow-hidden">
+          <img id="galeriMainImage" src="" alt="Dokumentasi Kegiatan" class="w-full h-full object-cover transition-all duration-700 ease-in-out opacity-100">
+          
+          <!-- Caption -->
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-3.5 flex items-end justify-between">
+            <div class="pr-4">
+              <p id="galeriCaption" class="text-xs sm:text-sm font-bold text-white drop-shadow">Dokumentasi kegiatan</p>
+            </div>
+            <span id="galeriCounterBadge" class="text-[11px] font-mono font-bold bg-slate-800/90 text-purple-300 border border-purple-500/30 px-2.5 py-1 rounded-xl">1 / 5</span>
+          </div>
+
+          <!-- Navigasi Panah -->
+          <button onclick="prevSlideFoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg border border-white/10">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button onclick="nextSlideFoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/70 hover:bg-purple-600 text-white flex items-center justify-center transition shadow-lg border border-white/10">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <!-- Toggle Auto-Play -->
+          <button onclick="toggleAutoPlayGaleri()" id="btnAutoPlayToggle" class="absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="dotAutoPlay"></span>
+            <span id="textAutoPlay">Auto-Play Aktif</span>
+          </button>
+        </div>
+
+        <!-- Thumbnails Baris Bawah -->
+        <div class="p-2.5 bg-slate-950 border-t border-slate-800/80">
+          <div id="galeriThumbnailsContainer" class="flex space-x-2.5 overflow-x-auto py-1"></div>
         </div>
       </div>
 
       <!-- Footer Tombol -->
-      <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
+      <div class="pt-3.5 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
         <div class="flex items-center space-x-2">
           <a id="btnBukaFolderDrive" href="#" target="_blank" rel="noopener noreferrer" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition flex items-center shadow-md">
-            <i class="fa-brands fa-google-drive mr-2 text-sm"></i> Buka Folder Lengkap di Google Drive
+            <i class="fa-brands fa-google-drive mr-2 text-sm text-amber-300"></i> Buka Langsung di Google Drive
           </a>
-          <button onclick="toggleFullscreenGaleri()" class="text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition hidden sm:flex items-center">
-            <i class="fa-solid fa-expand mr-1.5"></i> Perbesar
-          </button>
         </div>
         <button onclick="tutupGaleriFoto()" class="text-xs font-bold px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
           Tutup Galeri
@@ -992,7 +1010,6 @@
       </div>
     </div>
   </div>
-
 
   <!-- ================= MODAL MONITORING & EVALUASI KEHADIRAN 1 TAHUN ================= -->
   <div id="modalMonitoringKehadiran" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
@@ -3097,16 +3114,16 @@
     }
 
 
-    // ================= FITUR GALERI SLIDESHOW FOTO OTOMATIS =================
+        // ================= FITUR GALERI GOOGLE DRIVE & SLIDESHOW OTOMATIS =================
     let galeriState = {
       currentIndex: 0,
       images: [],
       timer: null,
       isAutoPlay: true,
-      currentKeg: null
+      currentKeg: null,
+      activeMode: 'drive'
     };
 
-    // Koleksi Foto Default Dokumentasi IPA Berkualitas Tinggi
     const koleksiFotoKegiatanMGMP = [
       {
         url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
@@ -3130,13 +3147,21 @@
       }
     ];
 
+    function extractDriveFolderId(url) {
+      if (!url) return null;
+      const m1 = url.match(/folders\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return m1[1];
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return m2[1];
+      return null;
+    }
+
     function bukaGaleriFoto(idKegiatan) {
       const keg = appState.kegiatanList.find(x => x.id_kegiatan === idKegiatan);
       if (!keg) return;
 
       galeriState.currentKeg = keg;
       galeriState.currentIndex = 0;
-      galeriState.isAutoPlay = true;
 
       // Header modal
       document.getElementById("galeriBadgeBulan").textContent = keg.bulan;
@@ -3149,13 +3174,30 @@
         btnDrive.href = keg.foto_drive || "https://drive.google.com";
       }
 
-      // Siapkan daftar foto (gunakan koleksi dengan caption kegiatan)
-      galeriState.images = koleksiFotoKegiatanMGMP.map((item, idx) => ({
+      // Periksa apakah kegiatan memiliki link Google Drive Folder
+      const folderId = extractDriveFolderId(keg.foto_drive);
+      const iframe = document.getElementById("iframeDriveEmbed");
+      const loadingNotice = document.getElementById("driveLoadingNotice");
+
+      if (folderId && iframe) {
+        // Tampilkan frame embed Google Drive langsung
+        iframe.src = `https://drive.google.com/embeddedfolderview?id=${folderId}#grid`;
+        if (loadingNotice) {
+          loadingNotice.style.display = "flex";
+          iframe.onload = () => { loadingNotice.style.display = "none"; };
+        }
+        switchModeGaleri('drive');
+      } else {
+        // Jika tidak ada folder ID, buka mode slideshow langsung
+        switchModeGaleri('slideshow');
+      }
+
+      // Siapkan daftar foto slideshow
+      galeriState.images = koleksiFotoKegiatanMGMP.map(item => ({
         url: item.url,
         caption: `${item.caption} - ${keg.tempat}`
       }));
 
-      // Render thumbnail di bawah
       const thumbContainer = document.getElementById("galeriThumbnailsContainer");
       if (thumbContainer) {
         thumbContainer.innerHTML = galeriState.images.map((img, i) => `
@@ -3166,9 +3208,29 @@
       }
 
       tampilkanSlide(0);
-      mulaiAutoPlayGaleri();
-
       openModal("modalGaleriFoto");
+    }
+
+    function switchModeGaleri(mode) {
+      galeriState.activeMode = mode;
+      const viewDrive = document.getElementById("viewGaleriDrive");
+      const viewSlideshow = document.getElementById("viewGaleriSlideshow");
+      const btnDrive = document.getElementById("btnTabModeDrive");
+      const btnSlideshow = document.getElementById("btnTabModeSlideshow");
+
+      if (mode === 'drive') {
+        if (viewDrive) viewDrive.classList.remove("hidden");
+        if (viewSlideshow) viewSlideshow.classList.add("hidden");
+        if (btnDrive) btnDrive.className = "px-3.5 py-1.5 rounded-xl bg-purple-600 text-white shadow transition flex items-center";
+        if (btnSlideshow) btnSlideshow.className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center";
+        hentikanAutoPlayGaleri();
+      } else {
+        if (viewDrive) viewDrive.classList.add("hidden");
+        if (viewSlideshow) viewSlideshow.classList.remove("hidden");
+        if (btnDrive) btnDrive.className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center";
+        if (btnSlideshow) btnSlideshow.className = "px-3.5 py-1.5 rounded-xl bg-purple-600 text-white shadow transition flex items-center";
+        mulaiAutoPlayGaleri();
+      }
     }
 
     function tampilkanSlide(idx) {
@@ -3184,7 +3246,6 @@
       const counter = document.getElementById("galeriCounterBadge");
 
       if (mainImg) {
-        // Efek transisi halus (fade)
         mainImg.classList.add("opacity-40", "scale-95");
         setTimeout(() => {
           mainImg.src = img.url;
@@ -3195,7 +3256,6 @@
       if (caption) caption.textContent = img.caption;
       if (counter) counter.textContent = `${idx + 1} / ${galeriState.images.length}`;
 
-      // Update sorotan thumbnail aktif
       for (let i = 0; i < galeriState.images.length; i++) {
         const thumb = document.getElementById(`thumbItem_${i}`);
         if (thumb) {
@@ -3225,7 +3285,6 @@
       hentikanAutoPlayGaleri();
       galeriState.isAutoPlay = true;
       updateStatusAutoPlayUI(true);
-      // Berganti sendiri setiap 3.2 detik
       galeriState.timer = setInterval(() => {
         nextSlideFoto();
       }, 3200);
@@ -3266,18 +3325,9 @@
 
     function tutupGaleriFoto() {
       hentikanAutoPlayGaleri();
+      const iframe = document.getElementById("iframeDriveEmbed");
+      if (iframe) iframe.src = ""; // hentikan proses muat
       closeModal("modalGaleriFoto");
-    }
-
-    function toggleFullscreenGaleri() {
-      const elem = document.getElementById("galeriMainImage");
-      if (elem) {
-        if (!document.fullscreenElement) {
-          elem.requestFullscreen().catch(err => console.log(err));
-        } else {
-          document.exitFullscreen();
-        }
-      }
     }
 
     function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
