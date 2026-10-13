@@ -1831,4 +1831,2624 @@
     <!-- MODAL PROFIL GURU -->
   <div id="profileModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-100">
-      <button onclick="closeModal('profileModal')" class="absolute top-4 right-4 text-
+      <button onclick="closeModal('profileModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <h3 class="text-base font-black text-slate-900 mb-3">Pembaruan Profil Guru</h3>
+      <form onsubmit="handleUpdateProfile(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Foto Profil (Pilih Foto Baru)</label>
+          <input type="file" id="profFotoInput" accept="image/*" class="block w-full text-[11px] text-slate-500 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-balangan-100 file:text-balangan-800">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Nama Lengkap & Gelar</label>
+          <input type="text" id="profNama" required class="w-full border rounded-xl p-2.5 bg-slate-50">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Asal Satuan Pendidikan (SMP)</label>
+          <input type="text" id="profSekolah" required class="w-full border rounded-xl p-2.5 bg-slate-50">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Ganti Password (Opsional)</label>
+          <input type="password" id="profPassword" placeholder="••••••••" class="w-full border rounded-xl p-2.5 bg-slate-50">
+        </div>
+        <button type="submit" class="w-full bg-balangan-700 text-white font-extrabold py-2.5 rounded-xl mt-2 shadow">
+          Simpan Profil
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL DETAIL SEKRETARIAT TETAP ================= -->
+  <div id="modalDetailSekretariat" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-xl shadow-md">
+            <i class="fa-solid fa-building-flag"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-md">SEKRETARIAT TETAP</span>
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 mt-0.5">SMP Negeri 1 Paringin</h3>
+          </div>
+        </div>
+        <button onclick="closeModal('modalDetailSekretariat')" class="text-slate-400 hover:text-slate-700 w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div class="py-5 space-y-4">
+        <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100 flex items-start space-x-3">
+          <i class="fa-solid fa-location-dot text-emerald-600 text-base mt-0.5"></i>
+          <div>
+            <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Alamat Lengkap Sekretariat:</h5>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+              Jl. A. Yani Komp. Pendidikan Batu Piring, Kecamatan Paringin Selatan, Kabupaten Balangan, Kalimantan Selatan 71618.
+            </p>
+          </div>
+        </div>
+
+        <!-- Peta Interaktif -->
+        <div class="h-64 w-full rounded-2xl overflow-hidden border border-slate-200 shadow-inner relative bg-slate-100">
+          <iframe 
+            title="Peta Lokasi Sekretariat SMPN 1 Paringin"
+            src="https://maps.google.com/maps?q=SMP+Negeri+1+Paringin+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            class="w-full h-full border-0 absolute inset-0"
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2.5 justify-end">
+        <button onclick="copyAlamatSekretariat()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center">
+          <i class="fa-regular fa-copy mr-1.5 text-slate-500"></i> Salin Alamat
+        </button>
+        <a 
+          href="https://maps.google.com/?cid=2908148626238575940" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center"
+        >
+          <i class="fa-solid fa-diamond-turn-right mr-1.5 text-amber-300"></i> Buka di Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIKA LENGKAP ================= -->
+  <script>
+    // URL Google Apps Script Web App (Tersambung ke Google Sheets & Drive)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTaMyWfenfaPI8l-yBuoWtwj3Cijw0GM_fkdX5hUux44QQaL2a46hVBhA1tTeTe156Dg/exec";
+
+    // Data 36 Anggota Resmi MGMP Balangan + Admin Utama
+    const officialUsersList = [
+      { id: 0, username: 'Admin', nama: 'Administrator MGMP IPA', nip: '-', pangkat: 'Pengurus Inti', sekolah: 'SMPN 1 PARINGIN', role: 'admin', password: 'MGMPipa12345', foto: '' },
+      { id: 1, username: 'juni', nama: 'Juni Angkowati, S.Pd., M.Pd', nip: '19700617 199802 2 007', pangkat: 'Pembina Muda / IVc', sekolah: 'SMPN 1 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 2, username: 'admawati', nama: 'Admawati, SP', nip: '19751212 200604 2 022', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 1 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 3, username: 'sri', nama: 'Hj. Sri Norbaiti, M.Pd', nip: '19770622 200604 2 012', pangkat: 'Pembina / IVa', sekolah: 'SMPN 1 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 4, username: 'norhasanah', nama: 'Norhasanah S., S.Pd', nip: '19820731 200904 2 003', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 1 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 5, username: 'siti', nama: 'Siti Khadijah, S.Pd', nip: '19841107 200904 2 007', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 2 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 6, username: 'ririn', nama: 'Ririn Adiyati, S.Pi', nip: '19820313 202421 2 002', pangkat: 'Golongan IX', sekolah: 'SMPN 3 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 7, username: 'edi', nama: 'M. Edi Prayetno, S.Pd', nip: '19830430 200904 1 002', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMPN 4 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 8, username: 'fitriaheriany', nama: 'Fitriaheriany, S.Pd', nip: '19800819 200904 2 004', pangkat: 'Penata / IIIc', sekolah: 'SMPN 4 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 9, username: 'noraniah', nama: 'Hj. Noraniah, S.Pd', nip: '19670414 200701 2 014', pangkat: 'Penata / IIIc', sekolah: 'SMPN 5 PARINGIN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 10, username: 'rabiatul', nama: 'Rabiatul Adawiyah, S.Pd', nip: '19701003 200604 2 010', pangkat: 'Pembina / IVa', sekolah: 'SMPN 1 LAMPIHONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 11, username: 'saidah', nama: 'Saidah, S.Pd', nip: '19800601 200904 2 001', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 2 LAMPIHONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 12, username: 'norhamidah', nama: 'Norhamidah, S.Pd., M.Pd', nip: '19840803 200904 2 003', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 1 BATUMANDI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 13, username: 'irdiansyah', nama: 'Irdiansyah, S.Pd', nip: '19670303 200604 1 012', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMPN 2 BATUMANDI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 14, username: 'andi', nama: 'Andi Pahrifi, S.Pd', nip: '19780807 200801 1 020', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMPN 3 BATUMANDI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 15, username: 'dini', nama: 'Dini Yarti Iriani, S.Pd', nip: '19940715 202321 2 014', pangkat: 'Golongan IX', sekolah: 'SMPN 3 BATUMANDI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 16, username: 'maria', nama: 'Maria Ulfah, S.Pd', nip: '19830606 200904 2 011', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 4 BATUMANDI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 17, username: 'khadijah', nama: 'Khadijah Kariem, S.P', nip: '19730930 200501 2 004', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 1 JUAI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 18, username: 'noor', nama: 'Noor Pujiah, S.Pd', nip: '19770804 200604 2 021', pangkat: 'Penata / IIIc', sekolah: 'SMPN 1 JUAI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 19, username: 'mawarni', nama: 'Mawarni, S.Pd', nip: '19830109 200904 2 003', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 2 JUAI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 20, username: 'fitria', nama: 'Fitria Nor Rezka, S.Pd', nip: '-', pangkat: '-', sekolah: 'SMPN 2 JUAI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 21, username: 'mahyudi', nama: 'H. Mahyudi, S.Pd', nip: '19690415 200604 1 012', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 1 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 22, username: 'dahriansyah', nama: 'Dahriansyah, S.Pd', nip: '19700201 199412 1 004', pangkat: 'Pembina / IVa', sekolah: 'SMPN 1 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 23, username: 'arbani', nama: 'H. Arbani, S.Pd', nip: '19670808 200604 1 017', pangkat: 'Penata / IIIc', sekolah: 'SMPN 2 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 24, username: 'ema', nama: 'Ema Mega Hartini, S.Pd', nip: '-', pangkat: '-', sekolah: 'SMPN 3 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 25, username: 'rahmat', nama: 'Rahmat, S.Pd', nip: '19940612 201903 1 002', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMPN 3 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 26, username: 'yuni', nama: 'Yuni Auliana, S.Pd', nip: '-', pangkat: '-', sekolah: 'SMPN 4 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 27, username: 'nawi', nama: 'Nawi, A.Md', nip: '19690317 200701 1 020', pangkat: 'Penata Muda / IIIa', sekolah: 'SMPN 5 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 28, username: 'eka', nama: 'Eka Puspita Silalahi, S.Pd', nip: '19940321 202012 2 013', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMPN 6 HALONG', role: 'anggota', password: '123456789', foto: '' },
+      { id: 29, username: 'rosyda', nama: 'Rosyda Rahmatina, S.Pd', nip: '19900602 202421 2 002', pangkat: 'Golongan IX', sekolah: 'SMPN 1 AWAYAN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 30, username: 'risma', nama: 'Risma Agustina, S.Pd', nip: '19980826 202521 2 020', pangkat: 'Golongan IX', sekolah: 'SMPN 1 AWAYAN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 31, username: 'isnawati', nama: 'Isnawati, SP', nip: '19730804 200501 2 006', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 2 AWAYAN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 32, username: 'firdaus', nama: 'Muhammad Firdaus, S.Pd., M.Pd', nip: '19851001 200904 1 001', pangkat: 'Penata Tk.1 / IIId', sekolah: 'SMPN 3 AWAYAN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 33, username: 'nia', nama: 'Nia Sri Purwaningsih, S.Pd', nip: '19960922 202521 2 010', pangkat: 'Golongan IX', sekolah: 'SMPN 4 AWAYAN', role: 'anggota', password: '123456789', foto: '' },
+      { id: 34, username: 'syahdianor', nama: 'Syahdianor Refani, S.Pd', nip: '19891217 202012 1 006', pangkat: 'Penata Muda Tk.1 / IIIb', sekolah: 'SMP SATAP LIBARU SUNGKAI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 35, username: 'rusdianor', nama: 'Rusdianor, S.Pd', nip: '-', pangkat: '-', sekolah: 'SMPIT DARUL FIKRI', role: 'anggota', password: '123456789', foto: '' },
+      { id: 36, username: 'rahmawati', nama: 'Sri Rahmawati, S.Pd', nip: '-', pangkat: '-', sekolah: "SMP AL-QUR'AN IKHWANUL MUSLIMIN", role: 'anggota', password: '123456789', foto: '' }
+    ];
+
+    // Data 8 Kecamatan & 26 Sekolah SMP Se-Balangan
+    const dataKecamatanBalangan = [
+      {
+        nama: "Kecamatan Awayan",
+        sekolah: [
+          "SMP Negeri 1 Awayan",
+          "SMP Negeri 4 Awayan"
+        ]
+      },
+      {
+        nama: "Kecamatan Batumandi",
+        sekolah: [
+          "SMP Negeri 1 Batumandi",
+          "SMP Negeri 2 Batumandi",
+          "SMP Negeri 3 Batumandi",
+          "SMP Negeri 4 Batumandi"
+        ]
+      },
+      {
+        nama: "Kecamatan Halong",
+        sekolah: [
+          "SMP Negeri 1 Halong",
+          "SMP Negeri 2 Halong",
+          "SMP Negeri 3 Halong",
+          "SMP Negeri 4 Halong",
+          "SMP Negeri 5 Halong",
+          "SMP Negeri 6 Halong",
+          "SMP Satu Atap Libaru Sungkai"
+        ]
+      },
+      {
+        nama: "Kecamatan Juai",
+        sekolah: [
+          "SMP Negeri 1 Juai",
+          "SMP Negeri 2 Juai"
+        ]
+      },
+      {
+        nama: "Kecamatan Lampihong",
+        sekolah: [
+          "SMP Negeri 1 Lampihong",
+          "SMP Negeri 2 Lampihong"
+        ]
+      },
+      {
+        nama: "Kecamatan Paringin",
+        sekolah: [
+          "SMP Negeri 1 Paringin",
+          "SMP Negeri 3 Paringin",
+          "SMP Negeri 5 Paringin",
+          "SMPIT Darul Fikri",
+          "SMP Al-Qur'an Ikhwanul Muslimin"
+        ]
+      },
+      {
+        nama: "Kecamatan Paringin Selatan",
+        sekolah: [
+          "SMP Negeri 2 Paringin",
+          "SMP Negeri 4 Paringin"
+        ]
+      },
+      {
+        nama: "Kecamatan Tebing Tinggi",
+        sekolah: [
+          "SMP Negeri 2 Awayan",
+          "SMP Negeri 3 Awayan"
+        ]
+      }
+    ];
+
+    
+    const defaultBahanAjarData = [
+      {
+        id_materi: "MAT-01",
+        judul: "Modul Ajar Kurikulum Merdeka - Hakikat Ilmu Sains dan Metode Ilmiah",
+        kategori: "Modul Ajar",
+        kelas: "Kelas VII",
+        tipe_file: "PDF",
+        deskripsi: "Perangkat modul ajar lengkap mencakup TP, ATP, pemahaman bermakna, asesmen diagnostik, dan asesmen sumatif lingkup materi sains.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-02-15"
+      },
+      {
+        id_materi: "MAT-02",
+        judul: "Media Pembelajaran Interaktif (MPI) - Sistem Tata Surya & Fenomena Gerhana",
+        kategori: "Media Interaktif",
+        kelas: "Kelas VII",
+        tipe_file: "PPT / PPTX",
+        deskripsi: "Media tayang animasi interaktif tata surya untuk memperkuat visualisasi astronomi dan literasi numerasi IPA SMP.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-03-10"
+      },
+      {
+        id_materi: "MAT-03",
+        judul: "Petunjuk Praktikum Sains & LKPD Eksperimen Larutan Asam-Basa Bahan Alami",
+        kategori: "LKPD & Praktikum",
+        kelas: "Kelas VIII",
+        tipe_file: "PDF",
+        deskripsi: "Lembar Kerja Peserta Didik (LKPD) eksperimen kimia bahan alam menggunakan indikator flora lokal Balangan (kunyit, bunga sepatu).",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-03-25"
+      },
+      {
+        id_materi: "MAT-04",
+        judul: "Materi Desiminasi Workshop: Pembelajaran Berbasis STEM di Satuan Pendidikan",
+        kategori: "Materi Pelatihan",
+        kelas: "Umum / Semua Guru",
+        tipe_file: "PPT / PPTX",
+        deskripsi: "Materi paparan narasumber implementasi STEM sederhana, integrasi sains dengan kearifan lokal, dan penguatan numerasi.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-04-12"
+      }
+    ];
+
+    const defaultKegiatanData = [
+      { id_kegiatan: "ACT-01", bulan: "Februari", tanggal: "2026-02-10", nama_kegiatan: "Pembahasan rencana kegiatan tahunan MGMP IPA Kab.Balangan", tempat: "SMP Negeri 5 Paringin", status: "Selesai", deskripsi: "Rapat koordinasi awal tahun pemetaan program kerja dan silabus.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "https://drive.google.com", foto_drive: "https://drive.google.com", video_link: "" },
+      { id_kegiatan: "ACT-02", bulan: "Oktober", tanggal: "2026-10-15", nama_kegiatan: "Praktik baik Pembuatan MPI", tempat: "SMP Negeri 3 Batumandi", status: "Rencana", deskripsi: "Pelatihan Media Pembelajaran Interaktif (MPI) untuk memperkuat literasi dan numerasi sains di SMP.", surat_undangan: "https://drive.google.com", materi: "", presensi_pdf: "", foto_drive: "", video_link: "" }
+    ];
+
+    let appState = {
+      currentPage: 'public',
+      currentUser: null,
+      kegiatanList: [],
+      absensiList: [],
+      usersList: [],
+      nextMeeting: null,
+      customLogoBalangan: null,
+      customLogoMGMP: null
+    };
+
+    let countdownInterval = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initData();
+      populateSekolahDropdown();
+      checkSavedSession();
+      applySavedLogos();
+      renderPublicKegiatan("Semua");
+      updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
+      renderTabelRekapTahunan("");
+    });
+
+    function initData() {
+      if (!localStorage.getItem("mgmp_users_v2")) {
+        localStorage.setItem("mgmp_users_v2", JSON.stringify(officialUsersList));
+      }
+      if (!localStorage.getItem("mgmp_kegiatan_lain_v1")) {
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(defaultKegiatanLainData));
+      }
+      if (!localStorage.getItem("mgmp_bahan_ajar_v1")) {
+        localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(defaultBahanAjarData));
+      }
+      if (!localStorage.getItem("mgmp_kegiatan_v3")) {
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(defaultKegiatanData));
+      }
+      const initialCumulativeSessions = [{"id_absen": "ACT-01-01", "nip": "19700617 199802 2 007", "nama": "Juni Angkowati, S.Pd., M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-02", "nip": "19751212 200604 2 022", "nama": "Admawati, SP", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-03", "nip": "19770622 200604 2 012", "nama": "Hj. Sri Norbaiti, M.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-04", "nip": "19820731 200904 2 003", "nama": "Norhasanah S., S.Pd", "sekolah": "SMPN 1 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-05", "nip": "19841107 200904 2 007", "nama": "Siti Khadijah, S.Pd", "sekolah": "SMPN 2 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-06", "nip": "19820313 202421 2 002", "nama": "Ririn Adiyati, S.Pi", "sekolah": "SMPN 3 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-07", "nip": "19830430 200904 1 002", "nama": "M. Edi Prayetno, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-08", "nip": "19800819 200904 2 004", "nama": "Fitriaheriany, S.Pd", "sekolah": "SMPN 4 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-09", "nip": "19670414 200701 2 014", "nama": "Hj. Noraniah, S.Pd", "sekolah": "SMPN 5 PARINGIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-10", "nip": "19701003 200604 2 010", "nama": "Rabiatul Adawiyah, S.Pd", "sekolah": "SMPN 1 LAMPIHONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-11", "nip": "19800601 200904 2 001", "nama": "Saidah, S.Pd", "sekolah": "SMPN 2 LAMPIHONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-12", "nip": "19840803 200904 2 003", "nama": "Norhamidah, S.Pd., M.Pd", "sekolah": "SMPN 1 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-13", "nip": "19670303 200604 1 012", "nama": "Irdiansyah, S.Pd", "sekolah": "SMPN 2 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-14", "nip": "19780807 200801 1 020", "nama": "Andi Pahrifi, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-15", "nip": "19940715 202321 2 014", "nama": "Dini Yarti Iriani, S.Pd", "sekolah": "SMPN 3 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-16", "nip": "19830606 200904 2 011", "nama": "Maria Ulfah, S.Pd", "sekolah": "SMPN 4 BATUMANDI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-17", "nip": "19730930 200501 2 004", "nama": "Khadijah Kariem, S.P", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-18", "nip": "19770804 200604 2 021", "nama": "Noor Pujiah, S.Pd", "sekolah": "SMPN 1 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-19", "nip": "19830109 200904 2 003", "nama": "Mawarni, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-20", "nip": "-", "nama": "Fitria Nor Rezka, S.Pd", "sekolah": "SMPN 2 JUAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-21", "nip": "19690415 200604 1 012", "nama": "H. Mahyudi, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-22", "nip": "19700201 199412 1 004", "nama": "Dahriansyah, S.Pd", "sekolah": "SMPN 1 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-23", "nip": "19670808 200604 1 017", "nama": "H. Arbani, S.Pd", "sekolah": "SMPN 2 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-24", "nip": "-", "nama": "Ema Mega Hartini, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-25", "nip": "19940612 201903 1 002", "nama": "Rahmat, S.Pd", "sekolah": "SMPN 3 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-26", "nip": "-", "nama": "Yuni Auliana, S.Pd", "sekolah": "SMPN 4 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-27", "nip": "19690317 200701 1 020", "nama": "Nawi, A.Md", "sekolah": "SMPN 5 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-28", "nip": "19940321 202012 2 013", "nama": "Eka Puspita Silalahi, S.Pd", "sekolah": "SMPN 6 HALONG", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-29", "nip": "19900602 202421 2 002", "nama": "Rosyda Rahmatina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-30", "nip": "19980826 202521 2 020", "nama": "Risma Agustina, S.Pd", "sekolah": "SMPN 1 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-31", "nip": "19730804 200501 2 006", "nama": "Isnawati, SP", "sekolah": "SMPN 2 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-32", "nip": "19851001 200904 1 001", "nama": "Muhammad Firdaus, S.Pd., M.Pd", "sekolah": "SMPN 3 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-33", "nip": "19960922 202521 2 010", "nama": "Nia Sri Purwaningsih, S.Pd", "sekolah": "SMPN 4 AWAYAN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-34", "nip": "19891217 202012 1 006", "nama": "Syahdianor Refani, S.Pd", "sekolah": "SMP SATAP LIBARU SUNGKAI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-35", "nip": "-", "nama": "Rusdianor, S.Pd", "sekolah": "SMPIT DARUL FIKRI", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}, {"id_absen": "ACT-01-36", "nip": "-", "nama": "Sri Rahmawati, S.Pd", "sekolah": "SMP AL-QUR'AN IKHWANUL MUSLIMIN", "tanggal": "2026-02-10", "status": "Hadir", "keterangan": "Rapat Tahunan"}];
+      if (!localStorage.getItem("mgmp_absensi_v3")) {
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(initialCumulativeSessions));
+      }
+
+      appState.usersList = JSON.parse(localStorage.getItem("mgmp_users_v2")) || officialUsersList;
+      appState.kegiatanList = JSON.parse(localStorage.getItem("mgmp_kegiatan_v3")) || defaultKegiatanData;
+      appState.absensiList = JSON.parse(localStorage.getItem("mgmp_absensi_v3")) || [];
+      appState.bahanAjarList = JSON.parse(localStorage.getItem("mgmp_bahan_ajar_v1")) || defaultBahanAjarData;
+      appState.kegiatanLainList = JSON.parse(localStorage.getItem("mgmp_kegiatan_lain_v1")) || defaultKegiatanLainData;
+      appState.customLogoBalangan = localStorage.getItem("mgmp_logo_balangan") || null;
+      appState.customLogoMGMP = localStorage.getItem("mgmp_logo_mgmp") || null;
+
+      const badgeGuru = document.getElementById("statGuruCount");
+      if (badgeGuru) badgeGuru.textContent = (appState.usersList.length - 1) + " Guru";
+    }
+
+    // ================= POPULATE TEMPLATE DROPDOWN SEKOLAH =================
+    function populateSekolahDropdown() {
+      const select = document.getElementById("kegTempat");
+      if (!select) return;
+
+      let html = '<option value="">-- Pilih Sekolah Tuan Rumah --</option>';
+      dataKecamatanBalangan.forEach(kec => {
+        html += `<optgroup label="📍 ${kec.nama}">`;
+        kec.sekolah.forEach(sch => {
+          html += `<option value="${sch}">${sch}</option>`;
+        });
+        html += `</optgroup>`;
+      });
+      html += `<optgroup label="🏢 Tempat Lainnya">`;
+      html += `<option value="Sekretariat MGMP IPA (SMPN 1 Paringin)">Sekretariat MGMP IPA (SMPN 1 Paringin)</option>`;
+      html += `<option value="Aula Dinas Pendidikan Kab. Balangan">Aula Dinas Pendidikan Kab. Balangan</option>`;
+      html += `</optgroup>`;
+
+      select.innerHTML = html;
+    }
+
+    // Normalisasi Nama Sekolah untuk Pencocokan Guru & Maps
+    function standardizeSchoolName(name) {
+      if (!name) return "";
+      let s = name.trim();
+      // Mengubah singkatan SMPN ke format lengkap
+      s = s.replace(/^SMPN\s*(\d+)/i, 'SMP Negeri $1');
+      return s;
+    }
+
+    // Format Tanggal Indonesia yang Luwes
+    function formatTanggalIndo(dateStr) {
+      if (!dateStr) return "-";
+      try {
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+          const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          return d.toLocaleDateString('id-ID', options);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      return dateStr;
+    }
+
+    // ================= SINKRONISASI OTOMATIS TUAN RUMAH & HITUNG MUNDUR =================
+    function updateNextMeetingFromKegiatan() {
+      // 1. Cari kegiatan yang berstatus "Rencana" atau "Sedang Berjalan", urutkan tanggal terdekat
+      let plannedList = appState.kegiatanList.filter(k => k.status === 'Rencana' || k.status === 'Sedang Berjalan');
+      plannedList.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
+      let hasUpcoming = plannedList.length > 0;
+      let activeKeg = null;
+      let isLatestFinished = false;
+
+      if (hasUpcoming) {
+        // Ada rencana kegiatan mendatang
+        activeKeg = plannedList[0];
+        isLatestFinished = false;
+      } else {
+        // TIDAK ADA rencana kegiatan: Ambil kegiatan TERAKHIR / TERBARU yang terlaksana
+        let sortedAll = [...appState.kegiatanList].filter(k => k.tanggal).sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+        activeKeg = sortedAll[0] || null;
+        isLatestFinished = true;
+      }
+
+      if (activeKeg) {
+        const standardSchool = standardizeSchoolName(activeKeg.tempat);
+        const mapQuery = encodeURIComponent(standardSchool + " Kabupaten Balangan Kalimantan Selatan");
+
+        // Cari kecamatan sekolah
+        let kecName = "Kabupaten Balangan";
+        for (let kec of dataKecamatanBalangan) {
+          if (kec.sekolah.some(s => s.toLowerCase() === standardSchool.toLowerCase())) {
+            kecName = kec.nama + ", Kabupaten Balangan";
+            break;
+          }
+        }
+
+        appState.nextMeeting = {
+          namaSekolah: standardSchool || activeKeg.tempat,
+          alamat: `${kecName}, Kalimantan Selatan.`,
+          tanggalDisplay: formatTanggalIndo(activeKeg.tanggal),
+          waktuDisplay: "08.30 WITA - Selesai",
+          targetDateTime: `${activeKeg.tanggal}T08:30:00`,
+          mapEmbedUrl: `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`,
+          mapLink: `https://maps.google.com/?q=${mapQuery}`,
+          isRencana: !isLatestFinished,
+          namaKegiatan: activeKeg.nama_kegiatan
+        };
+      } else {
+        appState.nextMeeting = {
+          namaSekolah: "SMP Negeri 1 Paringin (Sekretariat)",
+          alamat: "Jl. A. Yani Komp. Pendidikan Batu Piring, Paringin Selatan, Kabupaten Balangan 71618.",
+          tanggalDisplay: "-",
+          waktuDisplay: "08.30 WITA - Selesai",
+          targetDateTime: "",
+          mapEmbedUrl: "https://maps.google.com/maps?q=SMP+Negeri+1+Paringin+Kabupaten+Balangan&t=&z=15&ie=UTF8&iwloc=&output=embed",
+          mapLink: "https://maps.google.com/?q=SMP+Negeri+1+Paringin+Balangan",
+          isRencana: false,
+          namaKegiatan: ""
+        };
+      }
+
+      renderNextMeetingInfo();
+      renderHostTeachers();
+    }
+
+    function renderNextMeetingInfo() {
+      const nm = appState.nextMeeting;
+      if (!nm) return;
+
+      const boxCountdown = document.getElementById("boxHitungMundurPertemuan");
+      const badgeHost = document.getElementById("nextHostBadge");
+      const labelTgl = document.getElementById("labelTanggalRencana");
+      const headerBadgeText = document.getElementById("badgeHeaderPertemuanText");
+      const subHeader = document.getElementById("subHeaderPertemuanText");
+      const badgeStatus = document.getElementById("badgeStatusPertemuan");
+      const dotHeader = document.getElementById("dotHeaderPertemuan");
+
+      if (nm.isRencana) {
+        // TAMPILKAN HITUNG MUNDUR jika ada rencana kegiatan
+        if (boxCountdown) boxCountdown.classList.remove("hidden");
+        if (badgeHost) badgeHost.textContent = "Sekolah Tuan Rumah Pelaksana";
+        if (labelTgl) labelTgl.textContent = "Tanggal Rencana";
+        if (headerBadgeText) headerBadgeText.textContent = "Agenda Pertemuan Tatap Muka Terdekat";
+        if (subHeader) subHeader.textContent = "Informasi sekolah tuan rumah, lokasi peta, dan hitung mundur pelaksanaan kegiatan";
+        if (badgeStatus) badgeStatus.innerHTML = '<i class="fa-solid fa-bell mr-1.5 text-amber-600 animate-bounce"></i> Pertemuan Wajib Anggota';
+        if (dotHeader) dotHeader.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping";
+        startCountdownTimer();
+      } else {
+        // HILANGKAN HITUNG MUNDUR jika tidak ada kegiatan rencana
+        if (boxCountdown) boxCountdown.classList.add("hidden");
+        if (badgeHost) badgeHost.textContent = "Sekolah Tuan Rumah Kegiatan Terakhir";
+        if (labelTgl) labelTgl.textContent = "Tanggal Pelaksanaan Terakhir";
+        if (headerBadgeText) headerBadgeText.textContent = "Tuan Rumah Terakhir Terlaksana";
+        if (subHeader) subHeader.textContent = "Informasi sekolah tuan rumah dan dokumentasi pada kegiatan yang baru selesai terlaksana";
+        if (badgeStatus) badgeStatus.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i> Kegiatan Terakhir Terlaksana';
+        if (dotHeader) dotHeader.className = "w-2.5 h-2.5 rounded-full bg-slate-400";
+        if (countdownInterval) clearInterval(countdownInterval);
+      }
+
+      document.getElementById("nextHostTitle").textContent = nm.namaSekolah;
+      document.getElementById("nextHostAddress").textContent = nm.alamat;
+      document.getElementById("nextMeetingDateDisplay").textContent = nm.tanggalDisplay;
+      document.getElementById("nextMeetingTimeDisplay").textContent = nm.waktuDisplay;
+      document.getElementById("nextMeetingMapIframe").src = nm.mapEmbedUrl;
+      document.getElementById("nextMapDirectionLink").href = nm.mapLink;
+      document.getElementById("nextMapBadgeLabel").textContent = "Tuan Rumah: " + nm.namaSekolah;
+    }
+
+    function renderHostTeachers() {
+      const container = document.getElementById("hostTeachersContainer");
+      const badge = document.getElementById("hostTeachersCountBadge");
+      if (!container) return;
+
+      const currentSchool = (appState.nextMeeting ? appState.nextMeeting.namaSekolah : '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const teachers = appState.usersList.filter(u => {
+        if (u.role === 'admin') return false;
+        const userSchool = (u.sekolah || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        // Cocokkan apakah sekolah sama (misal smpn3batumandi == smpnegeri3batumandi)
+        const simplifiedUser = userSchool.replace('negeri', 'n');
+        const simplifiedHost = currentSchool.replace('negeri', 'n');
+        return simplifiedUser.includes(simplifiedHost) || simplifiedHost.includes(simplifiedUser) || userSchool.includes(currentSchool) || currentSchool.includes(userSchool);
+      });
+
+      if (badge) badge.textContent = teachers.length + " Guru";
+
+      if (teachers.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-2 text-xs text-slate-400 italic">Belum ada profil guru anggota MGMP dari sekolah ini.</div>`;
+        return;
+      }
+
+      container.innerHTML = teachers.map(t => `
+        <div class="flex items-center space-x-3 p-2.5 bg-white rounded-xl border border-emerald-200/80 shadow-sm">
+          ${t.foto ? `<img src="${t.foto}" class="w-10 h-10 rounded-full object-cover border border-emerald-400">` : `<div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">${t.nama.charAt(0)}</div>`}
+          <div class="min-w-0 flex-1">
+            <h5 class="text-xs font-bold text-slate-900 truncate" title="${t.nama}">${t.nama}</h5>
+            <p class="text-[10px] text-slate-500 font-mono">NIP. ${t.nip}</p>
+            <span class="text-[9px] text-emerald-800 font-semibold">${t.pangkat}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // ================= HITUNG MUNDUR REAL-TIME =================
+    function startCountdownTimer() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      function tick() {
+        if (!appState.nextMeeting) return;
+        const target = new Date(appState.nextMeeting.targetDateTime).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+
+        const elD = document.getElementById("countDays");
+        const elH = document.getElementById("countHours");
+        const elM = document.getElementById("countMinutes");
+        const elS = document.getElementById("countSeconds");
+
+        if (diff <= 0) {
+          if (elD) elD.textContent = "00";
+          if (elH) elH.textContent = "00";
+          if (elM) elM.textContent = "00";
+          if (elS) elS.textContent = "00";
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (elD) elD.textContent = String(d).padStart(2, "0");
+        if (elH) elH.textContent = String(h).padStart(2, "0");
+        if (elM) elM.textContent = String(m).padStart(2, "0");
+        if (elS) elS.textContent = String(s).padStart(2, "0");
+      }
+      tick();
+      countdownInterval = setInterval(tick, 1000);
+    }
+
+    // ================= FALLBACK SVG LOGO =================
+    function renderFallbackLogoBalangan(img) {
+      if (!img || !img.parentElement) return;
+      img.parentElement.innerHTML = `
+        <svg viewBox="0 0 100 130" class="h-full w-full drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="4" width="90" height="24" rx="4" fill="#facc15" stroke="#15803d" stroke-width="2.5"/>
+          <text x="50" y="21" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="13" fill="#14532d" text-anchor="middle" letter-spacing="1">BALANGAN</text>
+          <path d="M 5 30 L 95 30 L 95 75 C 95 105 50 126 50 126 C 50 126 5 105 5 75 Z" fill="#15803d" stroke="#facc15" stroke-width="3"/>
+          <circle cx="50" cy="48" r="4.5" fill="#facc15"/>
+          <path d="M 47 48 L 53 48 L 52 82 L 48 82 Z" fill="#facc15"/>
+          <rect x="36" y="80" width="28" height="9" rx="1.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+          <path d="M 18 108 L 82 108 L 76 117 L 24 117 Z" fill="#ffffff" stroke="#1e293b" stroke-width="1"/>
+          <text x="50" y="115.5" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="7.5" fill="#dc2626" text-anchor="middle" letter-spacing="1.5">SANGGAM</text>
+        </svg>
+      `;
+    }
+
+    function renderFallbackLogoMGMP(img, isCircular = false) {
+      if (!img || !img.parentElement) return;
+      img.parentElement.innerHTML = `
+        <svg viewBox="0 0 100 100" class="h-full w-full drop-shadow-sm ${isCircular ? 'rounded-full' : ''}" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="47" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+          <circle cx="50" cy="22" r="5" fill="#e11d48"/>
+          <circle cx="74" cy="35" r="5" fill="#ea580c"/>
+          <circle cx="74" cy="65" r="5" fill="#9333ea"/>
+          <circle cx="50" cy="78" r="5" fill="#0284c7"/>
+          <circle cx="26" cy="65" r="5" fill="#16a34a"/>
+          <circle cx="26" cy="35" r="5" fill="#eab308"/>
+          <circle cx="50" cy="50" r="17" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+          <path d="M 44 43 L 56 43 L 56 55 C 56 60 50 64 50 64 C 50 64 44 60 44 55 Z" fill="#047857"/>
+          <circle cx="50" cy="49" r="3.5" fill="#facc15"/>
+          <text x="50" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="8" fill="#0f172a" text-anchor="middle">MGMP IPA</text>
+        </svg>
+      `;
+    }
+
+    // ================= LOGIN & AUTH =================
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const userVal = document.getElementById("loginUsername").value.trim().toLowerCase();
+      const passVal = document.getElementById("loginPassword").value.trim();
+
+      const found = appState.usersList.find(u => u.username.toLowerCase() === userVal && u.password === passVal);
+      if (found) {
+        setSession(found);
+      } else {
+        showToast("Username atau kata sandi tidak cocok!", "error");
+      }
+    }
+
+    function setSession(user) {
+      appState.currentUser = user;
+      localStorage.setItem("mgmp_session_user", JSON.stringify(user));
+      closeModal("loginModal");
+      updateNavUI();
+      goToUserPortal();
+      showToast("Selamat datang, " + user.nama);
+    }
+
+    function checkSavedSession() {
+      const stored = localStorage.getItem("mgmp_session_user");
+      if (stored) {
+        appState.currentUser = JSON.parse(stored);
+        updateNavUI();
+      }
+    }
+
+    function handleLogout() {
+      appState.currentUser = null;
+      localStorage.removeItem("mgmp_session_user");
+      updateNavUI();
+      navigateTo("public");
+      showToast("Anda telah keluar.");
+    }
+
+    function updateNavUI() {
+      const guest = document.getElementById("navGuest");
+      const user = document.getElementById("navUser");
+      const name = document.getElementById("navUserName");
+      const role = document.getElementById("navRoleBadge");
+      const btn = document.getElementById("btnPortal");
+
+      if (appState.currentUser) {
+        guest.classList.add("hidden");
+        user.classList.remove("hidden");
+        name.textContent = appState.currentUser.nama.split(",")[0].split(" ")[0];
+        role.textContent = appState.currentUser.role;
+        btn.textContent = appState.currentUser.role === "admin" ? "Panel Admin" : "Portal Guru";
+      } else {
+        guest.classList.remove("hidden");
+        user.classList.add("hidden");
+      }
+    }
+
+    function goToUserPortal() {
+      if (!appState.currentUser) return;
+      if (appState.currentUser.role === 'admin') navigateTo('admin');
+      else navigateTo('member');
+    }
+
+    function navigateTo(page) {
+      appState.currentPage = page;
+      document.getElementById("pagePublic").classList.add("hidden");
+      document.getElementById("pageMember").classList.add("hidden");
+      document.getElementById("pageAdmin").classList.add("hidden");
+
+      if (page === "public") document.getElementById("pagePublic").classList.remove("hidden");
+      else if (page === "member") { document.getElementById("pageMember").classList.remove("hidden"); renderMemberView(); }
+      else if (page === "admin") { document.getElementById("pageAdmin").classList.remove("hidden"); renderAdminView(); }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ================= RENDER MEMBER & ADMIN =================
+    function renderMemberView() {
+      if (!appState.currentUser) return;
+      document.getElementById("memberWelcomeName").textContent = appState.currentUser.nama;
+      document.getElementById("memberNipDisplay").textContent = "NIP: " + appState.currentUser.nip;
+      document.getElementById("memberSchoolInfo").textContent = appState.currentUser.sekolah;
+      
+      const av = document.getElementById("memberAvatar");
+      if (appState.currentUser.foto) {
+        av.innerHTML = `<img src="${appState.currentUser.foto}" class="w-full h-full object-cover">`;
+      } else {
+        av.textContent = appState.currentUser.nama.charAt(0);
+      }
+
+      const opts = appState.kegiatanList.map(k => `<option value="${k.id_kegiatan}">[${k.bulan}] ${k.nama_kegiatan}</option>`).join("");
+      document.getElementById("memberAbsenKegiatanSelect").innerHTML = opts;
+      document.getElementById("tugasKegiatanSelect").innerHTML = opts;
+      renderBahanAjarMember();
+
+      document.getElementById("memberKegiatanGrid").innerHTML = appState.kegiatanList.map(k => `
+        <div class="border border-slate-200 rounded-3xl p-5 bg-white space-y-3 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center">
+            <span class="text-[10px] font-black text-balangan-800 bg-balangan-100 px-2.5 py-0.5 rounded-full">${k.bulan}</span>
+            <span class="text-xs text-slate-400 font-semibold">${k.tanggal}</span>
+          </div>
+          <h4 class="font-bold text-slate-900 text-sm">${k.nama_kegiatan}</h4>
+          <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i> ${k.tempat}</p>
+          <div class="pt-3 border-t flex flex-wrap gap-2 text-xs">
+            ${k.surat_undangan ? `
+              <button onclick="downloadFileDirect('${k.surat_undangan.replace(/'/g, "\\'")}', 'Undangan_${k.bulan}.pdf')" class="bg-balangan-50 border border-balangan-200 px-3 py-1.5 rounded-xl text-balangan-800 font-bold hover:bg-balangan-100 transition flex items-center">
+                <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-red-500"></i> Undangan
+              </button>
+            ` : '<span class="text-slate-400 italic text-[11px]">Belum ada undangan</span>'}
+            ${k.materi ? `
+              <button onclick="downloadFileDirect('${k.materi.replace(/'/g, "\\'")}', 'Materi_${k.bulan}.pdf')" class="bg-sains-50 border border-sains-200 px-3 py-1.5 rounded-xl text-sains-800 font-bold hover:bg-sains-100 transition flex items-center">
+                <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-amber-500"></i> Materi
+              </button>
+            ` : ''}
+            ${k.presensi_pdf ? `
+              <button onclick="downloadFileDirect('${k.presensi_pdf.replace(/'/g, "\\'")}', 'Presensi_${k.bulan}.pdf')" class="bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl text-emerald-900 font-bold hover:bg-emerald-100 transition flex items-center">
+                <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Scan Presensi
+              </button>
+            ` : ''}
+            ${k.foto_drive ? `
+              <button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+              </button>
+            ` : ''}
+            ${k.video_link ? `
+              <a href="${k.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video Kegiatan
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function switchMemberTab(tId) {
+      ['tabKegiatanSaya', 'tabMateriSaya', 'tabAbsensiSaya', 'tabTugasSaya'].forEach(t => {
+        document.getElementById(t).classList.toggle("hidden", t !== tId);
+      });
+    }
+
+    async function handleMemberSelfAbsen(e) {
+      e.preventDefault();
+      const kegSelect = document.getElementById("memberAbsenKegiatanSelect");
+      const kegiatanId = kegSelect ? kegSelect.value : "ACT-01";
+      const status = document.querySelector('input[name="memberStatusAbsen"]:checked').value;
+      const rec = {
+        id_absen: "ABS-" + Date.now().toString().slice(-4),
+        kegiatan_id: kegiatanId,
+        nip: appState.currentUser.nip,
+        nama: appState.currentUser.nama,
+        sekolah: appState.currentUser.sekolah,
+        tanggal: new Date().toISOString().split("T")[0],
+        status: status,
+        keterangan: document.getElementById("memberAbsenKet").value || "Mandiri"
+      };
+      appState.absensiList.unshift(rec);
+      localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+      renderTabelRekapTahunan("");
+      showToast("Kehadiran berhasil dicatat di lokal!");
+
+      if (SCRIPT_URL) {
+        showToast("Menyimpan ke Google Sheets...", "success");
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "simpanAbsen",
+              kegiatan_id: rec.kegiatan_id,
+              nip: rec.nip,
+              nama: rec.nama,
+              sekolah: rec.sekolah,
+              status: rec.status,
+              keterangan: rec.keterangan
+            })
+          });
+          showToast("Presensi tersimpan permanen di Google Sheets!", "success");
+        } catch (err) {
+          console.error("Gagal sync ke Google Sheets:", err);
+        }
+      }
+    }
+
+    function handleMemberUploadTugas(e) {
+      e.preventDefault();
+      showToast("Tugas berhasil dikirimkan!", "success");
+      document.getElementById("tugasJudul").value = "";
+      document.getElementById("tugasLink").value = "";
+    }
+
+    function renderAdminView() {
+      switchAdminTab('tabAdminKegiatan');
+      // Tabel Kegiatan
+      document.getElementById("tableBodyKegiatanAdmin").innerHTML = appState.kegiatanList.map(k => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4"><span class="font-bold text-slate-900">${k.bulan}</span><div class="text-[11px] text-slate-400">${k.tanggal}</div></td>
+          <td class="p-4 font-bold text-slate-900">${k.nama_kegiatan}</td>
+          <td class="p-4 text-slate-600 font-semibold">${k.tempat}</td>
+          <td class="p-4">
+            <div class="flex items-center space-x-2.5 text-sm">
+              ${k.surat_undangan ? `<a href="${k.surat_undangan}" target="_blank" class="text-red-600 hover:text-red-700" title="Undangan PDF"><i class="fa-solid fa-file-pdf"></i></a>` : '<span class="text-slate-300">-</span>'}
+              ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi PPT/PDF"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
+              ${k.presensi_pdf ? `<a href="${k.presensi_pdf}" target="_blank" class="text-emerald-600 hover:text-emerald-700" title="Scan Presensi PDF"><i class="fa-solid fa-file-signature"></i></a>` : ''}
+              ${k.foto_drive ? `<button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="text-purple-600 hover:text-purple-700" title="Lihat Slideshow Galeri Foto"><i class="fa-solid fa-images"></i></button>` : ''}
+              ${k.video_link ? `<a href="${k.video_link}" target="_blank" class="text-rose-600 hover:text-rose-700" title="Video Kegiatan"><i class="fa-brands fa-youtube"></i></a>` : ''}
+            </div>
+          </td>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${k.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${k.status}</span></td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editKegiatan('${k.id_kegiatan}')" class="p-1.5 text-sains-700 hover:text-sains-900" title="Edit Kegiatan"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="confirmDeleteKegiatan('${k.id_kegiatan}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus Kegiatan"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+
+      renderKegiatanLainAdmin();
+      renderBahanAjarAdmin();
+      // Tabel Absensi dengan fitur edit, hapus, dan reset
+      renderTableBodyAbsensi();
+
+      // Tabel 36 Guru
+      document.getElementById("tableBodyUsers").innerHTML = appState.usersList.map(u => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 font-mono font-bold text-emerald-800">${u.username}</td>
+          <td class="p-4 font-bold text-slate-900">${u.nama}<div class="text-[11px] text-slate-400 font-normal">NIP: ${u.nip}</div></td>
+          <td class="p-4 text-slate-600">${u.pangkat}</td>
+          <td class="p-4 text-slate-700">${u.sekolah}</td>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-emerald-100 text-balangan-800'}">${u.role}</span></td>
+          <td class="p-4 text-right">
+            <button onclick="promptResetPassword('${u.username}')" class="px-2.5 py-1 text-xs bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 font-bold rounded-lg">
+              Reset
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function switchAdminTab(tId) {
+      const tabs = [
+        { tab: 'tabAdminKegiatan', btn: 'btnAdminKegiatan' },
+        { tab: 'tabAdminKegiatanLain', btn: 'btnAdminKegiatanLain' },
+        { tab: 'tabAdminMateri', btn: 'btnAdminMateri' },
+        { tab: 'tabAdminAbsensi', btn: 'btnAdminAbsensi' },
+        { tab: 'tabAdminUsers', btn: 'btnAdminUsers' },
+        { tab: 'tabAdminLogos', btn: 'btnAdminLogos' }
+      ];
+      tabs.forEach(item => {
+        const elTab = document.getElementById(item.tab);
+        const elBtn = document.getElementById(item.btn);
+        if (elTab) elTab.classList.toggle("hidden", item.tab !== tId);
+        if (elBtn) {
+          if (item.tab === tId) {
+            elBtn.className = "tab-btn-admin pb-3 border-b-2 border-balangan-700 text-balangan-700 font-black transition";
+          } else {
+            elBtn.className = "tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 font-bold transition";
+          }
+        }
+      });
+    }
+
+    
+    
+    // ================= HELPER & VIEWER PRATINJAU DOKUMEN GOOGLE DRIVE (/preview) =================
+    function getGoogleDrivePreviewUrl(url) {
+      if (!url) return "";
+      // Cari file ID dari tautan drive
+      const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return `https://drive.google.com/file/d/${m1[1]}/preview`;
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return `https://drive.google.com/file/d/${m2[1]}/preview`;
+      // Jika tautan biasa (misal PDF direct atau web)
+      return url;
+    }
+
+    function bukaPratinjauDokumen(fileUrl, judul = "Dokumen Bahan Ajar") {
+      if (!fileUrl || fileUrl === "#") {
+        showToast("Tautan berkas belum tersedia!", "error");
+        return;
+      }
+
+      // Format URL ke Google Drive Preview embed
+      const previewUrl = getGoogleDrivePreviewUrl(fileUrl);
+      
+      document.getElementById("previewDokumenJudul").textContent = judul;
+      const extLink = document.getElementById("previewDokumenExternalLink");
+      if (extLink) extLink.href = fileUrl;
+
+      const iframe = document.getElementById("iframeDokumenPreview");
+      const loading = document.getElementById("dokumenPreviewLoading");
+
+      if (iframe) {
+        iframe.src = previewUrl;
+        if (loading) {
+          loading.style.display = "flex";
+          iframe.onload = () => { loading.style.display = "none"; };
+        }
+      }
+
+      openModal("modalPreviewDokumen");
+    }
+
+
+    // ================= CRUD BAHAN AJAR =================
+    function renderBahanAjarMember() {
+      const container = document.getElementById("gridBahanAjarMember");
+      const badgeTotal = document.getElementById("badgeTotalBahanAjarMember");
+      if (!container) return;
+
+      const q = (document.getElementById("searchBahanAjarMember")?.value || "").toLowerCase().trim();
+      const kat = document.getElementById("filterKategoriBahanAjarMember")?.value || "Semua";
+      const kls = document.getElementById("filterKelasBahanAjarMember")?.value || "Semua";
+
+      let list = appState.bahanAjarList || [];
+      if (kat !== "Semua") list = list.filter(m => m.kategori === kat);
+      if (kls !== "Semua") list = list.filter(m => m.kelas === kls);
+      if (q) list = list.filter(m => (m.judul||'').toLowerCase().includes(q) || (m.deskripsi||'').toLowerCase().includes(q));
+
+      if (badgeTotal) badgeTotal.textContent = `${list.length} Berkas Ditemukan`;
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed text-slate-400">Belum ada bahan ajar atau modul yang sesuai dengan pencarian Anda.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(m => {
+        let badgeKatColor = "bg-sky-100 text-sky-800 border-sky-200";
+        let iconFile = "fa-file-lines text-sky-600";
+        if (m.kategori === "Modul Ajar") { badgeKatColor = "bg-emerald-100 text-emerald-800 border-emerald-200"; iconFile = "fa-file-shield text-emerald-600"; }
+        if (m.kategori === "Media Interaktif") { badgeKatColor = "bg-purple-100 text-purple-800 border-purple-200"; iconFile = "fa-laptop-code text-purple-600"; }
+        if (m.kategori === "LKPD & Praktikum") { badgeKatColor = "bg-amber-100 text-amber-800 border-amber-200"; iconFile = "fa-flask-vial text-amber-600"; }
+        if (m.kategori === "Materi Pelatihan") { badgeKatColor = "bg-rose-100 text-rose-800 border-rose-200"; iconFile = "fa-chalkboard-user text-rose-600"; }
+
+        return `
+          <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-black px-2.5 py-1 rounded-full border ${badgeKatColor}">${m.kategori}</span>
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600">${m.kelas}</span>
+              </div>
+              <h4 class="font-extrabold text-slate-900 text-sm leading-snug">${m.judul}</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">${m.deskripsi || 'Perangkat materi pembelajaran resmi MGMP IPA Balangan.'}</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold text-slate-400 flex items-center">
+                <i class="fa-solid ${iconFile} mr-1.5 text-xs"></i> ${m.tipe_file || 'Berkas'}
+              </span>
+              <button onclick="bukaPratinjauDokumen('${(m.file_url||'').replace(/'/g, "\\'")}', '${(m.judul||'').replace(/'/g, "\\'")}')" class="px-4 py-2 bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 rounded-xl font-bold text-xs transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-book-open mr-1.5 text-sains-600"></i> Buka / Baca Modul
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderBahanAjarAdmin() {
+      const tbody = document.getElementById("tableBodyBahanAjarAdmin");
+      if (!tbody) return;
+
+      const list = appState.bahanAjarList || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400 italic">Belum ada bahan ajar yang ditambahkan. Silakan klik "Tambah Bahan Ajar".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(m => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4">
+            <span class="font-extrabold text-slate-900 text-xs">${m.kategori}</span>
+            <div class="text-[11px] text-slate-500">${m.kelas}</div>
+          </td>
+          <td class="p-4 font-bold text-slate-900 text-xs sm:text-sm max-w-xs">${m.judul}</td>
+          <td class="p-4 text-xs text-slate-500 max-w-xs truncate">${m.deskripsi || '-'}</td>
+          <td class="p-4">
+            <button onclick="bukaPratinjauDokumen('${(m.file_url||'').replace(/'/g, "\\'")}', '${(m.judul||'').replace(/'/g, "\\'")}')" class="px-2.5 py-1 bg-sains-50 text-sains-700 hover:bg-sains-100 rounded-lg text-xs font-bold border border-sains-200 inline-flex items-center">
+              <i class="fa-solid fa-eye mr-1 text-sains-600"></i> Pratinjau
+            </button>
+          </td>
+          <td class="p-4 text-xs text-slate-400 whitespace-nowrap">${m.tanggal || '-'}</td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editBahanAjar('${m.id_materi}')" class="p-1.5 text-sains-700 hover:text-sains-900" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteBahanAjar('${m.id_materi}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openModalBahanAjar(data = null) {
+      document.getElementById("formBahanAjar").reset();
+      const label = document.getElementById("labelMatUploadDirect");
+      if (label) label.classList.add("hidden");
+
+      if (data) {
+        document.getElementById("modalBahanAjarTitle").textContent = "Edit Bahan Ajar";
+        document.getElementById("matId").value = data.id_materi;
+        document.getElementById("matJudul").value = data.judul;
+        document.getElementById("matKategori").value = data.kategori;
+        document.getElementById("matKelas").value = data.kelas;
+        document.getElementById("matTipeFile").value = data.tipe_file || "PDF";
+        document.getElementById("matTanggal").value = data.tanggal || new Date().toISOString().split("T")[0];
+        document.getElementById("matDeskripsi").value = data.deskripsi || "";
+        document.getElementById("matFileUrl").value = data.file_url || "";
+      } else {
+        document.getElementById("modalBahanAjarTitle").textContent = "Tambah Bahan Ajar & Modul";
+        document.getElementById("matId").value = "MAT-" + Date.now().toString().slice(-4);
+        document.getElementById("matTanggal").value = new Date().toISOString().split("T")[0];
+      }
+      openModal("modalBahanAjar");
+    }
+
+    function editBahanAjar(id) {
+      const item = appState.bahanAjarList.find(x => x.id_materi === id);
+      if (item) openModalBahanAjar(item);
+    }
+
+    function handleSaveBahanAjar(e) {
+      e.preventDefault();
+      const payload = {
+        id_materi: document.getElementById("matId").value,
+        judul: document.getElementById("matJudul").value,
+        kategori: document.getElementById("matKategori").value,
+        kelas: document.getElementById("matKelas").value,
+        tipe_file: document.getElementById("matTipeFile").value,
+        tanggal: document.getElementById("matTanggal").value,
+        deskripsi: document.getElementById("matDeskripsi").value,
+        file_url: document.getElementById("matFileUrl").value || "https://drive.google.com"
+      };
+
+      const idx = appState.bahanAjarList.findIndex(x => x.id_materi === payload.id_materi);
+      if (idx > -1) appState.bahanAjarList[idx] = payload;
+      else appState.bahanAjarList.unshift(payload);
+
+      localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
+      closeModal("modalBahanAjar");
+      renderKegiatanLainAdmin();
+      renderBahanAjarAdmin();
+      renderBahanAjarMember();
+      showToast("Bahan ajar berhasil disimpan!");
+    }
+
+    function deleteBahanAjar(id) {
+      const item = appState.bahanAjarList.find(x => x.id_materi === id);
+      const name = item ? `"${item.judul}"` : "berkas ini";
+      if (confirm(`Hapus ${name} dari daftar bahan ajar?`)) {
+        appState.bahanAjarList = appState.bahanAjarList.filter(x => x.id_materi !== id);
+        localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
+        renderKegiatanLainAdmin();
+      renderBahanAjarAdmin();
+        renderBahanAjarMember();
+        showToast("Bahan ajar berhasil dihapus!");
+      }
+    }
+
+    
+    // ================= DATA & LOGIKA KEGIATAN LAIN (TEMPAT BEBAS & SLIDESHOW BERANDA) =================
+    const defaultKegiatanLainData = [
+      {
+        id_kegiatan: "EXT-01",
+        bulan: "Maret",
+        tanggal: "2026-03-28",
+        nama_kegiatan: "Workshop Peningkatan Kompetensi Guru IPA Se-Kalimantan Selatan",
+        tempat: "Hotel Rattan Inn Banjarmasin",
+        status: "Selesai",
+        deskripsi: "Pelatihan kolaboratif guru IPA tingkat provinsi dalam penguatan riset, asesmen sains, dan integrasi kurikulum.",
+        surat_undangan: "https://drive.google.com",
+        materi: "https://drive.google.com",
+        presensi_pdf: "",
+        foto_drive: "https://drive.google.com",
+        slideshow_fotos: "",
+        video_link: "",
+        cover_image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id_kegiatan: "EXT-02",
+        bulan: "Agustus",
+        tanggal: "2026-08-20",
+        nama_kegiatan: "Festival Sains & Kompetisi Inovasi Pembelajaran STEM Balangan",
+        tempat: "Gedung Sanggam Paringin",
+        status: "Selesai",
+        deskripsi: "Eksibisi karya media pembelajaran interaktif (MPI) dan demonstrasi proyek sains inovatif peserta didik SMP se-Balangan.",
+        surat_undangan: "https://drive.google.com",
+        materi: "https://drive.google.com",
+        presensi_pdf: "",
+        foto_drive: "https://drive.google.com",
+        slideshow_fotos: "",
+        video_link: "",
+        cover_image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80"
+      }
+    ];
+
+        // Helper Global: Ekstraksi ID File Google Drive
+    function extractDriveFileId(url) {
+      if (!url) return null;
+      const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return m1[1];
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return m2[1];
+      return null;
+    }
+
+    let slideLainIndex = 0;
+    let slidePhotoSubIndex = 0;
+    let slideLainTimer = null;
+
+    function renderSlideLain() {
+      const list = appState.kegiatanLainList || [];
+      const section = document.getElementById("sectionKegiatanLain");
+      if (!section) return;
+
+      if (list.length === 0) {
+        section.classList.add("hidden");
+        return;
+      }
+      section.classList.remove("hidden");
+
+      if (slideLainIndex >= list.length) slideLainIndex = 0;
+      if (slideLainIndex < 0) slideLainIndex = list.length - 1;
+
+      const item = list[slideLainIndex];
+      const counterEl = document.getElementById("counterSlideLain");
+      if (counterEl) counterEl.textContent = `${slideLainIndex + 1} / ${list.length}`;
+      
+      const elBulan = document.getElementById("bannerSlideLainBulan");
+      if (elBulan) elBulan.textContent = `${item.bulan} • ${formatTanggalIndo(item.tanggal)}`;
+
+      const elStatus = document.getElementById("bannerSlideLainStatus");
+      if (elStatus) {
+        elStatus.textContent = item.status || "Selesai";
+        elStatus.className = item.status === "Selesai" ? 
+          "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/30 text-emerald-300 border border-emerald-400/40" : 
+          "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-amber-500/30 text-amber-300 border border-amber-400/40";
+      }
+
+      const elTempat = document.getElementById("bannerSlideLainTempat");
+      if (elTempat) elTempat.innerHTML = `<i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> ${item.tempat || 'Lokasi Kegiatan'}`;
+
+      const elJudul = document.getElementById("bannerSlideLainJudul");
+      if (elJudul) elJudul.textContent = item.nama_kegiatan;
+
+      const elDeskripsi = document.getElementById("bannerSlideLainDeskripsi");
+      if (elDeskripsi) elDeskripsi.textContent = item.deskripsi || "Dokumentasi kegiatan resmi MGMP IPA.";
+
+      // Kumpulkan semua foto slideshow dari tautan Google Drive
+      let photos = [];
+      if (item.slideshow_fotos && item.slideshow_fotos.trim()) {
+        const rawLinks = item.slideshow_fotos.split(/[\n,;]+/);
+        rawLinks.forEach(link => {
+          const trimmed = link.trim();
+          if (trimmed) {
+            const fId = extractDriveFileId(trimmed);
+            photos.push(fId ? `https://drive.google.com/thumbnail?id=${fId}&sz=w1200` : trimmed);
+          }
+        });
+      }
+      if (photos.length === 0 && item.cover_image) {
+        photos.push(item.cover_image);
+      }
+      if (photos.length === 0) {
+        photos.push("https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80");
+      }
+
+      if (slidePhotoSubIndex >= photos.length) slidePhotoSubIndex = 0;
+
+      const elImg = document.getElementById("bannerSlideLainImg");
+      if (elImg) {
+        elImg.classList.add("opacity-20");
+        setTimeout(() => {
+          elImg.src = photos[slidePhotoSubIndex];
+          elImg.classList.remove("opacity-20");
+        }, 150);
+      }
+
+      // Render 4 Menu Tombol Unduh & Berkas Persis Seperti Gambar 3
+      const elBtns = document.getElementById("bannerSlideLainButtons");
+      if (elBtns) {
+        let btnHtml = "";
+        
+        // 1. Undangan (Merah)
+        if (item.surat_undangan) {
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.surat_undangan.replace(/'/g, "\\'")}', 'Undangan_${item.nama_kegiatan}.pdf')" class="bg-balangan-50 hover:bg-balangan-100 text-balangan-800 border border-balangan-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-red-500"></i> Undangan
+            </button>`;
+        }
+        
+        // 2. Materi (Oranye)
+        if (item.materi) {
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.materi.replace(/'/g, "\\'")}', 'Materi_${item.nama_kegiatan}.pdf')" class="bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-amber-500"></i> Materi
+            </button>`;
+        }
+
+        // 3. Unduh Presensi (Hijau)
+        if (item.presensi_pdf) {
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.presensi_pdf.replace(/'/g, "\\'")}', 'Presensi_${item.nama_kegiatan}.pdf')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Unduh Presensi
+            </button>`;
+        }
+
+        // 4. Galeri Foto (Ungu)
+        if (item.foto_drive || (item.slideshow_fotos && item.slideshow_fotos.trim())) {
+          btnHtml += `
+            <button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+            </button>`;
+        }
+
+        // 5. Video (Jika ada)
+        if (item.video_link) {
+          btnHtml += `
+            <a href="${item.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video
+            </a>`;
+        }
+
+        elBtns.innerHTML = btnHtml;
+      }
+    }
+
+    function nextSlideLain() {
+      slideLainIndex++;
+      slidePhotoSubIndex = 0;
+      renderSlideLain();
+    }
+
+    function prevSlideLain() {
+      slideLainIndex--;
+      slidePhotoSubIndex = 0;
+      renderSlideLain();
+    }
+
+    function startAutoSlideLain() {
+      if (slideLainTimer) clearInterval(slideLainTimer);
+      slideLainTimer = setInterval(() => {
+        const list = appState.kegiatanLainList || [];
+        if (list.length === 0) return;
+        const currentItem = list[slideLainIndex];
+        let photoCount = 1;
+        if (currentItem && currentItem.slideshow_fotos) {
+          photoCount = currentItem.slideshow_fotos.split(/[\n,;]+/).filter(Boolean).length || 1;
+        }
+
+        slidePhotoSubIndex++;
+        if (slidePhotoSubIndex >= photoCount) {
+          slidePhotoSubIndex = 0;
+          slideLainIndex = (slideLainIndex + 1) % list.length;
+        }
+        renderSlideLain();
+      }, 4000);
+    }
+
+    function renderKegiatanLainAdmin() {
+      const tbody = document.getElementById("tableBodyKegiatanLainAdmin");
+      if (!tbody) return;
+
+      const list = appState.kegiatanLainList || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400 italic">Belum ada kegiatan lain yang ditambahkan. Silakan klik "Tambah Kegiatan Lain".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(k => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4"><span class="font-bold text-slate-900">${k.bulan}</span><div class="text-[11px] text-slate-400">${k.tanggal}</div></td>
+          <td class="p-4 font-bold text-slate-900 text-xs sm:text-sm max-w-xs">${k.nama_kegiatan}</td>
+          <td class="p-4 text-purple-800 font-bold text-xs"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i> ${k.tempat}</td>
+          <td class="p-4">
+            <div class="flex items-center space-x-2 text-sm">
+              ${k.surat_undangan ? `<a href="${k.surat_undangan}" target="_blank" class="text-red-600 hover:text-red-700" title="Undangan"><i class="fa-solid fa-file-pdf"></i></a>` : '<span class="text-slate-300">-</span>'}
+              ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
+              ${k.foto_drive ? `<button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="text-purple-600 hover:text-purple-700" title="Galeri Foto"><i class="fa-solid fa-images"></i></button>` : ''}
+              ${k.video_link ? `<a href="${k.video_link}" target="_blank" class="text-rose-600 hover:text-rose-700" title="Video"><i class="fa-brands fa-youtube"></i></a>` : ''}
+            </div>
+          </td>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${k.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${k.status}</span></td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editKegiatanLain('${k.id_kegiatan}')" class="p-1.5 text-purple-700 hover:text-purple-900" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteKegiatanLain('${k.id_kegiatan}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openModalKegiatanLain(data = null) {
+      document.getElementById("formKegiatanLain").reset();
+      const modalEl = document.getElementById("modalKegiatanLain");
+      if (modalEl) modalEl.scrollTop = 0;
+
+      if (data) {
+        document.getElementById("modalKegiatanLainTitle").textContent = "Edit Kegiatan Lain";
+        document.getElementById("kegLainId").value = data.id_kegiatan;
+        document.getElementById("kegLainBulan").value = data.bulan;
+        document.getElementById("kegLainTanggal").value = data.tanggal;
+        document.getElementById("kegLainNama").value = data.nama_kegiatan;
+        document.getElementById("kegLainTempat").value = data.tempat;
+        document.getElementById("kegLainStatus").value = data.status || "Selesai";
+        document.getElementById("kegLainDeskripsi").value = data.deskripsi || "";
+        document.getElementById("kegLainSurat").value = data.surat_undangan || "";
+        document.getElementById("kegLainPresensiPdf").value = data.presensi_pdf || "";
+        document.getElementById("kegLainMateri").value = data.materi || "";
+        document.getElementById("kegLainFoto").value = data.foto_drive || "";
+        document.getElementById("kegLainSlideshowFotos").value = data.slideshow_fotos || "";
+        document.getElementById("kegLainVideo").value = data.video_link || "";
+      } else {
+        document.getElementById("modalKegiatanLainTitle").textContent = "Tambah Kegiatan Lain";
+        document.getElementById("kegLainId").value = "EXT-" + Date.now().toString().slice(-4);
+        document.getElementById("kegLainTanggal").value = new Date().toISOString().split("T")[0];
+        document.getElementById("kegLainStatus").value = "Selesai";
+      }
+      openModal("modalKegiatanLain");
+    }
+
+    function editKegiatanLain(id) {
+      const item = appState.kegiatanLainList.find(x => x.id_kegiatan === id);
+      if (item) openModalKegiatanLain(item);
+    }
+
+    function handleSaveKegiatanLain(e) {
+      e.preventDefault();
+      const namaVal = (document.getElementById("kegLainNama").value || "").trim();
+      const tempatVal = (document.getElementById("kegLainTempat").value || "").trim();
+      const tanggalVal = (document.getElementById("kegLainTanggal").value || "").trim();
+
+      if (!namaVal) {
+        showToast("Harap isi Nama Kegiatan!", "error");
+        document.getElementById("kegLainNama").focus();
+        return;
+      }
+      if (!tempatVal) {
+        showToast("Harap isi Tempat Pelaksanaan!", "error");
+        document.getElementById("kegLainTempat").focus();
+        return;
+      }
+
+      const payload = {
+        id_kegiatan: document.getElementById("kegLainId").value || ("EXT-" + Date.now().toString().slice(-4)),
+        bulan: document.getElementById("kegLainBulan").value || "Januari",
+        tanggal: tanggalVal || new Date().toISOString().split("T")[0],
+        nama_kegiatan: namaVal,
+        tempat: tempatVal,
+        status: document.getElementById("kegLainStatus").value || "Selesai",
+        deskripsi: (document.getElementById("kegLainDeskripsi").value || "").trim(),
+        surat_undangan: (document.getElementById("kegLainSurat").value || "").trim(),
+        presensi_pdf: (document.getElementById("kegLainPresensiPdf").value || "").trim(),
+        materi: (document.getElementById("kegLainMateri").value || "").trim(),
+        foto_drive: (document.getElementById("kegLainFoto").value || "").trim(),
+        slideshow_fotos: (document.getElementById("kegLainSlideshowFotos").value || "").trim(),
+        video_link: (document.getElementById("kegLainVideo").value || "").trim(),
+        cover_image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80"
+      };
+
+      const idx = appState.kegiatanLainList.findIndex(x => x.id_kegiatan === payload.id_kegiatan);
+      if (idx > -1) appState.kegiatanLainList[idx] = payload;
+      else appState.kegiatanLainList.unshift(payload);
+
+      try {
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(appState.kegiatanLainList));
+        showToast("Kegiatan lain berhasil disimpan & tampil di Beranda!");
+      } catch (err) {
+        console.warn("Storage full", err);
+      }
+
+      closeModal("modalKegiatanLain");
+      renderKegiatanLainAdmin();
+      renderSlideLain();
+    }
+
+    function deleteKegiatanLain(id) {
+      const item = appState.kegiatanLainList.find(x => x.id_kegiatan === id);
+      const name = item ? `"${item.nama_kegiatan}"` : "kegiatan ini";
+      if (confirm(`Hapus ${name} dari daftar kegiatan lain?`)) {
+        appState.kegiatanLainList = appState.kegiatanLainList.filter(x => x.id_kegiatan !== id);
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(appState.kegiatanLainList));
+        renderKegiatanLainAdmin();
+        renderSlideLain();
+        showToast("Kegiatan lain berhasil dihapus!");
+      }
+    }
+
+    // ================= CRUD KEGIATAN & CSV =================
+    function renderPublicKegiatan(filter = "Semua") {
+      const container = document.getElementById("publicKegiatanList");
+      let list = appState.kegiatanList;
+      if (filter !== "Semua") list = list.filter(k => k.bulan === filter);
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10 bg-white rounded-3xl border border-dashed text-slate-400">Tidak ada agenda pada bulan ${filter}.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(item => `
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-black px-3 py-1 bg-balangan-100 text-balangan-800 rounded-full">${item.bulan}</span>
+              <span class="text-[11px] text-slate-400 font-semibold">${item.tanggal}</span>
+            </div>
+            <h4 class="font-extrabold text-slate-900 text-base leading-snug">${item.nama_kegiatan}</h4>
+            <div class="text-xs text-slate-600 flex items-center font-medium">
+              <i class="fa-solid fa-location-dot text-amber-500 mr-2 text-sm"></i> ${item.tempat}
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">${item.deskripsi}</p>
+          </div>
+          <div class="pt-4 border-t flex flex-wrap gap-2 text-xs">
+            ${item.surat_undangan ? `
+              <button onclick="downloadFileDirect('${item.surat_undangan.replace(/'/g, "\\'")}', 'Undangan_${item.bulan}.pdf')" class="bg-balangan-50 hover:bg-balangan-100 text-balangan-800 border border-balangan-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-red-500"></i> Undangan
+              </button>
+            ` : ''}
+            ${item.materi ? `
+              <button onclick="downloadFileDirect('${item.materi.replace(/'/g, "\\'")}', 'Materi_${item.bulan}.pdf')" class="bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-amber-500"></i> Materi
+              </button>
+            ` : ''}
+            ${item.presensi_pdf ? `
+              <button onclick="downloadFileDirect('${item.presensi_pdf.replace(/'/g, "\\'")}', 'Presensi_${item.bulan}.pdf')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Unduh Presensi
+              </button>
+            ` : '<span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[11px] font-semibold text-slate-400 bg-slate-50 border border-slate-100"><i class="fa-solid fa-clock-rotate-left mr-1 text-slate-300"></i> Presensi Segera</span>'}
+            ${item.foto_drive ? `
+              <button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+              </button>
+            ` : ''}
+            ${item.video_link ? `
+              <a href="${item.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+                <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openModalKegiatan(data = null) {
+      document.getElementById("formKegiatan").reset();
+      populateSekolahDropdown();
+      
+      // Sembunyikan label upload file sebelumnya
+      ['labelUndanganUpload', 'labelPresensiUpload', 'labelMateriUpload'].forEach(lblId => {
+        const el = document.getElementById(lblId);
+        if (el) el.classList.add("hidden");
+      });
+
+      // Gulir modal langsung ke bagian paling atas
+      const modalEl = document.getElementById("modalKegiatan");
+      if (modalEl) modalEl.scrollTop = 0;
+
+      if (data) {
+        document.getElementById("modalKegiatanTitle").textContent = "Edit Kegiatan";
+        document.getElementById("kegId").value = data.id_kegiatan;
+        document.getElementById("kegBulan").value = data.bulan;
+        document.getElementById("kegTanggal").value = data.tanggal;
+        document.getElementById("kegNama").value = data.nama_kegiatan;
+        
+        // Pilih sekolah di dropdown (cocokkan string)
+        const selectTempat = document.getElementById("kegTempat");
+        const std = standardizeSchoolName(data.tempat);
+        let found = false;
+        for (let opt of selectTempat.options) {
+          if (opt.value === data.tempat || opt.value === std || opt.value.toLowerCase() === (data.tempat||'').toLowerCase()) {
+            opt.selected = true;
+            found = true;
+            break;
+          }
+        }
+        if (!found && data.tempat) {
+          // Tambahkan opsi jika tidak terdaftar
+          const newOpt = new Option(data.tempat, data.tempat, true, true);
+          selectTempat.add(newOpt);
+        }
+
+        document.getElementById("kegStatus").value = data.status || "Rencana";
+        document.getElementById("kegSurat").value = data.surat_undangan || "";
+        document.getElementById("kegMateri").value = data.materi || "";
+        document.getElementById("kegPresensiPdf").value = data.presensi_pdf || "";
+        document.getElementById("kegFoto").value = data.foto_drive || "";
+        document.getElementById("kegSlideshowFotos").value = data.slideshow_fotos || "";
+        document.getElementById("kegVideo").value = data.video_link || "";
+      } else {
+        document.getElementById("modalKegiatanTitle").textContent = "Tambah Kegiatan";
+        document.getElementById("kegId").value = "ACT-" + Date.now().toString().slice(-4);
+        document.getElementById("kegStatus").value = "Rencana";
+      }
+      openModal("modalKegiatan");
+    }
+
+    function editKegiatan(id) {
+      const k = appState.kegiatanList.find(x => x.id_kegiatan === id);
+      if (k) openModalKegiatan(k);
+    }
+
+    async function handleSaveKegiatan(e) {
+      e.preventDefault();
+
+      const namaVal = (document.getElementById("kegNama").value || "").trim();
+      const tanggalVal = (document.getElementById("kegTanggal").value || "").trim();
+      const tempatVal = (document.getElementById("kegTempat").value || "").trim();
+
+      if (!namaVal) {
+        showToast("Harap isi Nama Kegiatan terlebih dahulu!", "error");
+        document.getElementById("kegNama").focus();
+        return;
+      }
+      if (!tanggalVal) {
+        showToast("Harap tentukan Tanggal Kegiatan!", "error");
+        document.getElementById("kegTanggal").focus();
+        return;
+      }
+      if (!tempatVal) {
+        showToast("Harap pilih Sekolah Tuan Rumah!", "error");
+        document.getElementById("kegTempat").focus();
+        return;
+      }
+
+      const payload = {
+        id_kegiatan: document.getElementById("kegId").value || ("ACT-" + Date.now().toString().slice(-4)),
+        bulan: document.getElementById("kegBulan").value || "Januari",
+        tanggal: tanggalVal,
+        nama_kegiatan: namaVal,
+        tempat: tempatVal,
+        status: document.getElementById("kegStatus").value || "Rencana",
+        deskripsi: "Kegiatan rutin MGMP IPA Balangan.",
+        surat_undangan: (document.getElementById("kegSurat").value || "").trim(),
+        materi: (document.getElementById("kegMateri").value || "").trim(),
+        presensi_pdf: (document.getElementById("kegPresensiPdf").value || "").trim(),
+        foto_drive: (document.getElementById("kegFoto").value || "").trim(),
+        slideshow_fotos: (document.getElementById("kegSlideshowFotos").value || "").trim(),
+        video_link: (document.getElementById("kegVideo").value || "").trim()
+      };
+
+      const idx = appState.kegiatanList.findIndex(x => x.id_kegiatan === payload.id_kegiatan);
+      if (idx > -1) appState.kegiatanList[idx] = payload;
+      else appState.kegiatanList.push(payload);
+
+      // Penyimpanan aman dengan proteksi kuota memori browser (Anti-Macet)
+      try {
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+        showToast("Kegiatan berhasil disimpan & Beranda diperbarui!");
+      } catch (err) {
+        console.warn("Kapasitas penyimpanan lokal penuh, mengamankan metadata kegiatan...", err);
+        // Jika ada base64 file yang sangat besar dari laptop, amankan agar tidak gagal simpan
+        if (payload.presensi_pdf && payload.presensi_pdf.startsWith("data:")) payload.presensi_pdf = "";
+        if (payload.surat_undangan && payload.surat_undangan.startsWith("data:")) payload.surat_undangan = "";
+        if (payload.materi && payload.materi.startsWith("data:")) payload.materi = "";
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+        showToast("Kegiatan tersimpan! Catatan: File PDF laptop berukuran besar disarankan memakai link Google Drive agar tidak membebani memori browser.");
+      }
+
+      closeModal("modalKegiatan");
+      renderAdminView();
+      renderPublicKegiatan("Semua");
+      updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
+
+      if (SCRIPT_URL) {
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "tambahKegiatan",
+              id: payload.id_kegiatan,
+              bulan: payload.bulan,
+              nama: payload.nama_kegiatan,
+              tanggal: payload.tanggal,
+              tempat: payload.tempat,
+              deskripsi: payload.deskripsi,
+              surat: payload.surat_undangan,
+              materi: payload.materi,
+              presensi_pdf: payload.presensi_pdf,
+              dokumentasi: payload.foto_drive,
+              status: payload.status
+            })
+          });
+          showToast("Kegiatan tersimpan di Google Sheets!", "success");
+        } catch (err) {
+          console.error("Gagal simpan ke Google Sheets:", err);
+        }
+      }
+    }
+
+    function confirmDeleteKegiatan(id) {
+      const kegTarget = appState.kegiatanList.find(x => x.id_kegiatan === id);
+      const namaKeg = kegTarget ? `"${kegTarget.nama_kegiatan}" (Bulan ${kegTarget.bulan})` : "agenda ini";
+
+      if (confirm(`Apakah Anda yakin ingin menghapus ${namaKeg}? Semua rekap kehadiran dan presensi pada bulan/agenda ini akan OTOMATIS terhapus juga dari sistem.`)) {
+        const targetId = id;
+        const targetTanggal = kegTarget ? kegTarget.tanggal : "";
+        const targetBulan = kegTarget ? (kegTarget.bulan || "").toLowerCase() : "";
+
+        appState.kegiatanList = appState.kegiatanList.filter(x => x.id_kegiatan !== id);
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+
+        const prevCount = appState.absensiList.length;
+        appState.absensiList = appState.absensiList.filter(a => {
+          if (a.id_absen && a.id_absen.startsWith(targetId)) return false;
+          if (a.kegiatan_id && a.kegiatan_id === targetId) return false;
+          if (targetTanggal && a.tanggal === targetTanggal) return false;
+          if (targetBulan && (a.keterangan || "").toLowerCase().includes(targetBulan)) return false;
+          return true;
+        });
+        const deletedAbsenCount = prevCount - appState.absensiList.length;
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+
+        renderAdminView();
+        renderPublicKegiatan("Semua");
+        renderTabelRekapTahunan("");
+        updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
+        showToast(`Kegiatan dan ${deletedAbsenCount} data kehadiran terkait berhasil dihapus!`);
+      }
+    }
+
+    // ================= PENGELOLAAN & EDIT / HAPUS / RESET ABSENSI =================
+    function renderTableBodyAbsensi(filterQuery = "") {
+      const tbody = document.getElementById("tableBodyAbsensi");
+      const badgeCount = document.getElementById("badgeCountRekapAdmin");
+      if (!tbody) return;
+
+      const q = (filterQuery || "").toLowerCase().trim();
+      const list = appState.absensiList.filter(a => {
+        if (!q) return true;
+        return (a.nip || "").toLowerCase().includes(q) ||
+               (a.nama || "").toLowerCase().includes(q) ||
+               (a.sekolah || "").toLowerCase().includes(q) ||
+               (a.tanggal || "").toLowerCase().includes(q) ||
+               (a.status || "").toLowerCase().includes(q) ||
+               (a.keterangan || "").toLowerCase().includes(q);
+      });
+
+      if (badgeCount) badgeCount.textContent = list.length + " Data";
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400 italic">Belum ada riwayat kehadiran yang tercatat${q ? ` untuk pencarian "${filterQuery}"` : ''}.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(a => {
+        let badgeStatus = "bg-emerald-100 text-emerald-800 border-emerald-200";
+        if (a.status === "Izin") badgeStatus = "bg-amber-100 text-amber-800 border-amber-200";
+        if (a.status === "Sakit") badgeStatus = "bg-rose-100 text-rose-800 border-rose-200";
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 font-mono text-[11px] text-slate-500">${a.id_absen}</td>
+            <td class="p-3 font-mono text-[11px]">${a.nip}</td>
+            <td class="p-3 font-bold text-slate-900">${a.nama}</td>
+            <td class="p-3 text-slate-600">${a.sekolah}</td>
+            <td class="p-3 whitespace-nowrap">${a.tanggal}</td>
+            <td class="p-3 text-center">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${badgeStatus}">${a.status}</span>
+            </td>
+            <td class="p-3 text-slate-600">${a.keterangan || '-'}</td>
+            <td class="p-3 text-right whitespace-nowrap">
+              <button onclick="openModalEditAbsensi('${a.id_absen}')" class="p-1.5 text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50 rounded-lg transition" title="Edit Status Kehadiran">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="deleteAbsensiItem('${a.id_absen}')" class="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition ml-1" title="Hapus Data Ini">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function openModalEditAbsensi(id_absen) {
+      const item = appState.absensiList.find(x => x.id_absen === id_absen);
+      if (!item) return showToast("Data tidak ditemukan!", "error");
+
+      document.getElementById("editAbsenId").value = item.id_absen;
+      document.getElementById("editAbsenGuruName").textContent = `${item.nama} (${item.sekolah})`;
+      document.getElementById("editAbsenTanggal").value = item.tanggal;
+      document.getElementById("editAbsenStatus").value = item.status || "Hadir";
+      document.getElementById("editAbsenKet").value = item.keterangan || "";
+      openModal("modalEditAbsensi");
+    }
+
+    function handleSaveEditAbsensi(e) {
+      e.preventDefault();
+      const id = document.getElementById("editAbsenId").value;
+      const idx = appState.absensiList.findIndex(x => x.id_absen === id);
+      if (idx > -1) {
+        appState.absensiList[idx].tanggal = document.getElementById("editAbsenTanggal").value;
+        appState.absensiList[idx].status = document.getElementById("editAbsenStatus").value;
+        appState.absensiList[idx].keterangan = document.getElementById("editAbsenKet").value;
+
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+        closeModal("modalEditAbsensi");
+        renderTableBodyAbsensi();
+        renderTabelRekapTahunan("");
+        showToast("Data presensi berhasil diperbarui!");
+      }
+    }
+
+    function deleteAbsensiItem(id_absen) {
+      const item = appState.absensiList.find(x => x.id_absen === id_absen);
+      const name = item ? item.nama : "baris ini";
+      if (confirm(`Hapus data presensi untuk ${name}?`)) {
+        appState.absensiList = appState.absensiList.filter(x => x.id_absen !== id_absen);
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+        renderTableBodyAbsensi();
+        renderTabelRekapTahunan("");
+        showToast("Data presensi dihapus.");
+      }
+    }
+
+    function promptResetAbsensiSesi() {
+      const dates = [...new Set(appState.absensiList.map(a => a.tanggal).filter(Boolean))];
+      if (dates.length === 0) return showToast("Tidak ada data presensi yang tersimpan!", "error");
+
+      const promptText = `Pilih tanggal sesi yang ingin dihapus total:\n${dates.map((d, i) => `${i+1}. ${d}`).join("\n")}\n\nMasukkan nomor atau ketik tanggal (YYYY-MM-DD):`;
+      const input = prompt(promptText, dates[0]);
+      if (!input) return;
+
+      let targetDate = input.trim();
+      const num = parseInt(targetDate);
+      if (!isNaN(num) && num >= 1 && num <= dates.length) {
+        targetDate = dates[num - 1];
+      }
+
+      if (confirm(`Hapus seluruh catatan presensi untuk sesi tanggal ${targetDate}?`)) {
+        const countBefore = appState.absensiList.length;
+        appState.absensiList = appState.absensiList.filter(a => a.tanggal !== targetDate);
+        const deletedCount = countBefore - appState.absensiList.length;
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+        renderTableBodyAbsensi();
+        renderTabelRekapTahunan("");
+        showToast(`Berhasil menghapus ${deletedCount} data presensi pada tanggal ${targetDate}!`);
+      }
+    }
+
+    function confirmResetAllAbsensi() {
+      if (confirm("PERINGATAN: Apakah Anda yakin ingin mereset/mengosongkan SEMUA data presensi yang ada di database?")) {
+        if (confirm("Konfirmasi sekali lagi: Semua riwayat kehadiran akan dikosongkan.")) {
+          appState.absensiList = [];
+          localStorage.setItem("mgmp_absensi_v3", JSON.stringify([]));
+          renderTableBodyAbsensi();
+          renderTabelRekapTahunan("");
+          showToast("Seluruh riwayat presensi telah berhasil direset/dikosongkan!");
+        }
+      }
+    }
+
+    function syncUploadTanggalFromBulan(selectedBulan) {
+      const k = appState.kegiatanList.find(x => x.bulan === selectedBulan);
+      if (k && k.tanggal) {
+        const inputTanggal = document.getElementById("uploadAbsenTanggalInput");
+        if (inputTanggal) inputTanggal.value = k.tanggal;
+      }
+    }
+
+    function downloadFormatAbsensiCSV() {
+      const selectedBulan = document.getElementById("uploadAbsenBulanSelect") ? document.getElementById("uploadAbsenBulanSelect").value : "Oktober";
+      const selectedTanggal = document.getElementById("uploadAbsenTanggalInput") ? document.getElementById("uploadAbsenTanggalInput").value : "2026-10-15";
+      
+      let csv = "\ufeffsep=;\n";
+      csv += "ABSENSI KEHADIRAN MGMP IPA SMP KABUPATEN BALANGAN;;;;;\n";
+      csv += `Bulan;${selectedBulan};;Tanggal;${selectedTanggal};\n`;
+      csv += "\n";
+      csv += "nip;nama;sekolah;status;keterangan\n";
+
+      const members = appState.usersList.filter(u => u.role !== 'admin');
+      members.forEach(m => {
+        const nip = (m.nip || "-").trim();
+        const nama = (m.nama || "").trim().replace(/"/g, '""');
+        const sekolah = (m.sekolah || "").trim().replace(/"/g, '""');
+        csv += `${nip};"${nama}";"${sekolah}";Hadir;Pertemuan Rutin\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `Format_Absensi_MGMP_IPA_${selectedBulan}_${selectedTanggal}.csv`;
+      link.click();
+      showToast("Format CSV berhasil diunduh (kolom rapi terpisah)!");
+    }
+
+    function downloadRekapAbsensiCSV() {
+      let csv = "\ufeffsep=;\n";
+      csv += "id_absen;nip;nama;sekolah;tanggal;status;keterangan\n";
+      appState.absensiList.forEach(a => {
+        csv += `${a.id_absen};${a.nip};"${(a.nama||'').replace(/"/g,'""')}";"${(a.sekolah||'').replace(/"/g,'""')}";${a.tanggal};${a.status};"${(a.keterangan||'').replace(/"/g,'""')}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "rekap_absensi_mgmp_balangan.csv";
+      link.click();
+      showToast("Rekap Absensi diekspor!");
+    }
+
+    async function handleBulkUploadAbsensi() {
+      const input = document.getElementById("fileCsvAbsensi");
+      if (!input.files[0]) return showToast("Pilih file CSV absensi terlebih dahulu!", "error");
+
+      const selectBulan = document.getElementById("uploadAbsenBulanSelect") ? document.getElementById("uploadAbsenBulanSelect").value : "Oktober";
+      const inputTanggal = document.getElementById("uploadAbsenTanggalInput") ? document.getElementById("uploadAbsenTanggalInput").value : new Date().toISOString().split("T")[0];
+
+      const reader = new FileReader();
+      reader.onload = async e => {
+        const text = e.target.result;
+        const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
+        if (lines.length === 0) return showToast("File CSV kosong!", "error");
+
+        let detectedDate = inputTanggal;
+        let detectedBulan = selectBulan;
+        let importedCount = 0;
+        const newRecords = [];
+
+        for (let i = 0; i < lines.length; i++) {
+          const rawLine = lines[i];
+          if (rawLine.toLowerCase().startsWith("sep=")) continue;
+
+          const delimiter = rawLine.includes(";") ? ";" : ",";
+          const cols = [];
+          let current = "";
+          let inQuotes = false;
+          for (let ch of rawLine) {
+            if (ch === '"') {
+              inQuotes = !inQuotes;
+            } else if (ch === delimiter && !inQuotes) {
+              cols.push(current.trim().replace(/^["']|["']$/g, ''));
+              current = "";
+            } else {
+              current += ch;
+            }
+          }
+          cols.push(current.trim().replace(/^["']|["']$/g, ''));
+
+          if (cols[0] && cols[0].toLowerCase().includes("bulan") && cols[1]) {
+            detectedBulan = cols[1];
+          }
+          if (rawLine.toLowerCase().includes("tanggal")) {
+            const dateMatch = rawLine.match(/\d{4}-\d{2}-\d{2}/);
+            if (dateMatch) detectedDate = dateMatch[0];
+          }
+
+          const firstCol = (cols[0] || "").toLowerCase();
+          if (firstCol.includes("absensi") || firstCol === "no" || firstCol === "nip") continue;
+
+          let nip = "", nama = "", sekolah = "", status = "Hadir", ket = `Pertemuan ${detectedBulan}`;
+          
+          if (cols.length >= 5) {
+            if (/^\d{1,3}$/.test(cols[0]) && cols.length >= 6) {
+              nip = cols[1];
+              nama = cols[2];
+              sekolah = cols[3];
+              status = cols[4] || "Hadir";
+              ket = cols[5] || `Pertemuan ${detectedBulan}`;
+            } else {
+              nip = cols[0];
+              nama = cols[1];
+              sekolah = cols[2];
+              status = cols[3] || "Hadir";
+              ket = cols[4] || `Pertemuan ${detectedBulan}`;
+            }
+          } else if (cols.length >= 3) {
+            nip = cols[0];
+            nama = cols[1];
+            sekolah = cols[2];
+          }
+
+          if (nama && nama.length > 2) {
+            const rec = {
+              id_absen: "CSV-" + Math.floor(1000 + Math.random() * 9000),
+              nip: nip || "-",
+              nama: nama,
+              sekolah: sekolah,
+              tanggal: inputTanggal || detectedDate,
+              status: status || "Hadir",
+              keterangan: ket || `Pertemuan ${detectedBulan}`
+            };
+            newRecords.push(rec);
+            importedCount++;
+          }
+        }
+
+        if (newRecords.length === 0) {
+          return showToast("Tidak ada data presensi valid ditemukan dalam file!", "error");
+        }
+
+        appState.absensiList = [...newRecords, ...appState.absensiList];
+        localStorage.setItem("mgmp_absensi_v3", JSON.stringify(appState.absensiList));
+        renderAdminView();
+        renderTabelRekapTahunan("");
+        showToast(`Berhasil mengimpor ${importedCount} presensi (${detectedBulan}, ${detectedDate})!`);
+        input.value = "";
+
+        if (SCRIPT_URL) {
+          try {
+            showToast("Menyimpan rekap ke Google Sheets...", "success");
+            for (let r of newRecords.slice(0, 10)) {
+              await fetch(SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  action: "simpanAbsen",
+                  kegiatan_id: "ACT-MASSAL",
+                  nip: r.nip,
+                  nama: r.nama,
+                  sekolah: r.sekolah,
+                  status: r.status,
+                  keterangan: r.keterangan
+                })
+              });
+            }
+          } catch(err) {
+            console.error("Sync error:", err);
+          }
+        }
+      };
+      reader.readAsText(input.files[0], "UTF-8");
+    }
+
+    function promptResetPassword(uName) {
+      const p = prompt("Masukkan kata sandi baru untuk username " + uName + ":", "123456789");
+      if (p) {
+        const u = appState.usersList.find(x => x.username === uName);
+        if (u) {
+          u.password = p;
+          localStorage.setItem("mgmp_users_v2", JSON.stringify(appState.usersList));
+          showToast("Kata sandi berhasil direset!");
+        }
+      }
+    }
+
+    function handleUpdateProfile(e) {
+      e.preventDefault();
+      if (!appState.currentUser) return;
+      const fInput = document.getElementById("profFotoInput");
+      const finish = () => {
+        appState.currentUser.nama = document.getElementById("profNama").value;
+        appState.currentUser.sekolah = document.getElementById("profSekolah").value;
+        const pass = document.getElementById("profPassword").value;
+        if (pass) appState.currentUser.password = pass;
+
+        const idx = appState.usersList.findIndex(u => u.username === appState.currentUser.username);
+        if (idx > -1) appState.usersList[idx] = appState.currentUser;
+
+        localStorage.setItem("mgmp_users_v2", JSON.stringify(appState.usersList));
+        localStorage.setItem("mgmp_session_user", JSON.stringify(appState.currentUser));
+        closeModal("profileModal");
+        renderMemberView();
+        renderHostTeachers();
+        showToast("Profil berhasil diperbarui!");
+      };
+
+      if (fInput.files[0]) {
+        const r = new FileReader();
+        r.onload = ev => { appState.currentUser.foto = ev.target.result; finish(); };
+        r.readAsDataURL(fInput.files[0]);
+      } else {
+        finish();
+      }
+    }
+
+    // ================= BACKUP & RESTORE =================
+    function executeFullBackup() {
+      const data = {
+        app: "MGMP_IPA_BALANGAN",
+        date: new Date().toISOString(),
+        users: appState.usersList,
+        kegiatan: appState.kegiatanList,
+        absensi: appState.absensiList
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "backup_mgmp_balangan.json";
+      a.click();
+    }
+
+    function executeRestoreData() {
+      const file = document.getElementById("fileRestoreJson").files[0];
+      if (!file) return showToast("Pilih file cadangan JSON!", "error");
+      const r = new FileReader();
+      r.onload = e => {
+        try {
+          const d = JSON.parse(e.target.result);
+          if (d.users) { appState.usersList = d.users; localStorage.setItem("mgmp_users_v2", JSON.stringify(d.users)); }
+          if (d.kegiatan) { appState.kegiatanList = d.kegiatan; localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(d.kegiatan)); }
+          if (d.absensi) { appState.absensiList = d.absensi; localStorage.setItem("mgmp_absensi_v3", JSON.stringify(d.absensi)); }
+          closeModal("backupModal");
+          renderAdminView();
+          renderPublicKegiatan("Semua");
+          updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
+          renderTabelRekapTahunan("");
+          showToast("Data berhasil dipulihkan!");
+        } catch(err) {
+          showToast("Format JSON tidak valid!", "error");
+        }
+      };
+      r.readAsText(file);
+    }
+
+    // ================= LOGO CUSTOM =================
+    function applySavedLogos() {
+      if (appState.customLogoBalangan) {
+        document.getElementById("wrapperLogoBalangan").innerHTML = `<img src="${appState.customLogoBalangan}" class="h-full w-full object-contain">`;
+      }
+      if (appState.customLogoMGMP) {
+        document.getElementById("wrapperLogoMGMP").innerHTML = `<img src="${appState.customLogoMGMP}" class="h-full w-full object-contain">`;
+        document.getElementById("wrapperSambutanLogo").innerHTML = `<img src="${appState.customLogoMGMP}" class="w-full h-full object-cover">`;
+      }
+    }
+
+    function handlePreviewLogoUpload(e, type) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        if (type === 'balangan') {
+          document.getElementById("previewAdminLogoBalangan").innerHTML = `<img src="${ev.target.result}" class="h-full w-full object-contain">`;
+          window._tempBalangan = ev.target.result;
+        } else {
+          document.getElementById("previewAdminLogoMGMP").innerHTML = `<img src="${ev.target.result}" class="h-full w-full object-contain">`;
+          window._tempMGMP = ev.target.result;
+        }
+      };
+      r.readAsDataURL(file);
+    }
+
+    function applyUploadedLogo(type) {
+      if (type === 'balangan' && window._tempBalangan) {
+        localStorage.setItem("mgmp_logo_balangan", window._tempBalangan);
+        appState.customLogoBalangan = window._tempBalangan;
+        applySavedLogos();
+        showToast("Logo Balangan berhasil diganti!");
+      } else if (type === 'mgmp' && window._tempMGMP) {
+        localStorage.setItem("mgmp_logo_mgmp", window._tempMGMP);
+        appState.customLogoMGMP = window._tempMGMP;
+        applySavedLogos();
+        showToast("Logo MGMP berhasil diganti!");
+      }
+    }
+
+    function resetLogosToDefault() {
+      localStorage.removeItem("mgmp_logo_balangan");
+      localStorage.removeItem("mgmp_logo_mgmp");
+      location.reload();
+    }
+
+    // ================= HELPERS =================
+    function copyAlamatPertemuan() {
+      if (appState.nextMeeting) {
+        navigator.clipboard.writeText(appState.nextMeeting.namaSekolah + ", " + appState.nextMeeting.alamat);
+        showToast("Alamat tuan rumah disalin!");
+      }
+    }
+
+    function copyAlamatSekretariat() {
+      navigator.clipboard.writeText("SMP Negeri 1 Paringin, Jl. A. Yani Komp. Pendidikan Batu Piring, Paringin Selatan 71618");
+      showToast("Alamat sekretariat disalin!");
+    }
+
+    function openModalKecamatan() {
+      const container = document.getElementById("listKecamatanContainer");
+      if (container) {
+        container.innerHTML = dataKecamatanBalangan.map((kec, idx) => `
+          <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50/60 hover:bg-white hover:border-emerald-400 transition shadow-sm space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-7 h-7 rounded-xl bg-balangan-700 text-white font-black text-xs flex items-center justify-center">${idx + 1}</span>
+                <h4 class="font-black text-slate-900 text-sm sm:text-base">${kec.nama}</h4>
+              </div>
+              <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-balangan-800">
+                <i class="fa-solid fa-school mr-1 text-[10px]"></i> ${kec.sekolah.length} Sekolah Terdata
+              </span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 pt-1">
+              ${kec.sekolah.map(namaSekolah => `
+                <a 
+                  href="https://www.google.com/search?q=${encodeURIComponent(namaSekolah + ' Balangan')}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  title="Cari info ${namaSekolah} di Google"
+                  class="p-3 rounded-xl bg-white hover:bg-emerald-50/70 border border-slate-200/90 hover:border-emerald-500 shadow-2xs hover:shadow-md flex items-center justify-between space-x-2.5 transition group/item cursor-pointer"
+                >
+                  <div class="flex items-center space-x-2.5 min-w-0">
+                    <i class="fa-solid fa-graduation-cap text-balangan-600 text-sm flex-shrink-0 group-hover/item:scale-110 transition-transform"></i>
+                    <span class="font-extrabold text-xs text-slate-800 group-hover/item:text-emerald-900 leading-tight truncate">${namaSekolah}</span>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-300 group-hover/item:text-emerald-600 transition flex-shrink-0"></i>
+                </a>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+      }
+      openModal("modalKecamatan");
+    }
+
+    function openModalDirektoriGuru() {
+      filterDirektoriGuru("");
+      openModal("modalDirektoriGuru");
+    }
+
+    function filterDirektoriGuru(query) {
+      const q = (query || "").toLowerCase().trim();
+      const container = document.getElementById("direktoriGuruContainer");
+      const badge = document.getElementById("filteredGuruCountBadge");
+      if (!container) return;
+
+      const list = appState.usersList.filter(u => {
+        if (u.role === 'admin') return false;
+        if (!q) return true;
+        return (u.nama || '').toLowerCase().includes(q) ||
+               (u.sekolah || '').toLowerCase().includes(q) ||
+               (u.nip || '').toLowerCase().includes(q) ||
+               (u.username || '').toLowerCase().includes(q);
+      });
+
+      if (badge) badge.textContent = list.length + " Guru";
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10 bg-slate-50 rounded-2xl text-xs text-slate-400 italic">Tidak ditemukan guru dengan kata kunci "${query}".</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(g => `
+        <div class="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-sm hover:shadow-md hover:border-sains-400 transition flex items-center space-x-3.5 group">
+          <div class="w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0 border-2 border-slate-100 group-hover:border-sains-500 transition shadow-inner bg-slate-100 flex items-center justify-center">
+            ${g.foto ? `<img src="${g.foto}" alt="${g.nama}" class="w-full h-full object-cover">` : `
+              <div class="w-full h-full bg-gradient-to-tr from-sains-600 to-balangan-600 text-white font-black text-xl flex items-center justify-center">
+                ${g.nama.charAt(0)}
+              </div>
+            `}
+          </div>
+          <div class="min-w-0 flex-1">
+            <h5 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug truncate group-hover:text-sains-700 transition" title="${g.nama}">
+              ${g.nama}
+            </h5>
+            <p class="text-[11px] font-bold text-balangan-700 truncate mt-0.5" title="${g.sekolah}">
+              <i class="fa-solid fa-school text-[10px] mr-1 text-slate-400"></i> ${g.sekolah}
+            </p>
+            <div class="text-[10px] text-slate-400 font-mono mt-0.5 truncate">
+              NIP: ${g.nip || '-'}
+            </div>
+            <div class="text-[9px] font-semibold text-slate-500 truncate">
+              ${g.pangkat || 'Guru IPA'}
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function downloadFileDirect(urlOrData, suggestedName = "berkas_mgmp.pdf") {
+      if (!urlOrData || urlOrData === "#") {
+        showToast("Tautan berkas belum tersedia!", "error");
+        return;
+      }
+
+      if (urlOrData.startsWith("data:")) {
+        const a = document.createElement("a");
+        a.href = urlOrData;
+        a.download = suggestedName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("Mengunduh " + suggestedName + "...");
+        return;
+      }
+
+      let downloadUrl = urlOrData;
+      const driveMatch = urlOrData.match(/\/d\/([a-zA-Z0-9_-]+)/) || urlOrData.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`;
+      }
+
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.download = suggestedName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Membuka tautan unduhan...");
+    }
+
+    function handleFileToField(event, targetInputId, labelId) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 15 * 1024 * 1024) {
+        showToast("Ukuran berkas terlalu besar (maksimal 15 MB)!", "error");
+        event.target.value = "";
+        return;
+      }
+
+      showToast("Membaca berkas: " + file.name + "...");
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Data = e.target.result;
+        const targetInput = document.getElementById(targetInputId);
+        if (targetInput) targetInput.value = base64Data;
+        const label = document.getElementById(labelId);
+        if (label) {
+          label.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-emerald-600"></i> Berkas siap: <b>${file.name}</b> (${Math.round(file.size/1024)} KB)`;
+          label.classList.remove("hidden");
+        }
+        showToast("Berkas " + file.name + " siap disimpan!");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ================= REKAPITULASI KEHADIRAN 1 TAHUN BERJALAN =================
+    function openModalMonitoringKehadiran() {
+      renderTabelRekapTahunan("");
+      openModal("modalMonitoringKehadiran");
+    }
+
+    function getCleanGuruName(name) {
+      return (name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    }
+
+    function calculateCumulativeAbsensi() {
+      const members = appState.usersList.filter(u => u.role !== 'admin');
+      const absensi = appState.absensiList || [];
+
+      const uniqueDates = [...new Set(absensi.map(a => a.tanggal).filter(Boolean))];
+      const totalAgendaTerlaksana = Math.max(uniqueDates.length, appState.kegiatanList.filter(k => k.status === 'Selesai').length, 1);
+
+      let grandTotalHadir = 0;
+      let totalSemuaPersen = 0;
+
+      const summary = members.map((guru, index) => {
+        const gNameClean = getCleanGuruName(guru.nama);
+        const gNipClean = (guru.nip || '').replace(/[^0-9]/g, '');
+
+        const userRecords = absensi.filter(a => {
+          const aNipClean = (a.nip || '').replace(/[^0-9]/g, '');
+          const aNameClean = getCleanGuruName(a.nama);
+          if (gNipClean && aNipClean && gNipClean === aNipClean) return true;
+          return aNameClean && gNameClean && (aNameClean.includes(gNameClean) || gNameClean.includes(aNameClean));
+        });
+
+        let hadir = 0;
+        let izin = 0;
+        let sakit = 0;
+
+        userRecords.forEach(r => {
+          const st = (r.status || '').toLowerCase();
+          if (st.includes('hadir')) hadir++;
+          else if (st.includes('izin')) izin++;
+          else if (st.includes('sakit')) sakit++;
+          else hadir++;
+        });
+
+        const totalPertemuan = hadir + izin + sakit;
+        const totalEvaluasi = Math.max(totalPertemuan, totalAgendaTerlaksana);
+        const persentase = totalEvaluasi > 0 ? Math.min(100, Math.round((hadir / totalEvaluasi) * 100)) : 100;
+
+        grandTotalHadir += hadir;
+        totalSemuaPersen += persentase;
+
+        return {
+          no: index + 1,
+          id: guru.id,
+          username: guru.username,
+          nama: guru.nama,
+          nip: guru.nip,
+          pangkat: guru.pangkat,
+          sekolah: guru.sekolah,
+          foto: guru.foto,
+          hadir: hadir,
+          izin: izin,
+          sakit: sakit,
+          totalKegiatan: totalPertemuan,
+          persentase: persentase
+        };
+      });
+
+      const avgPersen = summary.length > 0 ? Math.round(totalSemuaPersen / summary.length) : 100;
+
+      return {
+        membersSummary: summary,
+        totalAgendaTerlaksana: totalAgendaTerlaksana,
+        grandTotalHadir: grandTotalHadir,
+        avgPersen: avgPersen
+      };
+    }
+
+    function renderTabelRekapTahunan(query = '') {
+      const tbody = document.getElementById("tableBodyRekapTahunan");
+      if (!tbody) return;
+
+      const { membersSummary, totalAgendaTerlaksana, grandTotalHadir, avgPersen } = calculateCumulativeAbsensi();
+
+      const elMetrikAgenda = document.getElementById("metrikTotalKegiatanSelesai");
+      const elMetrikKumulatif = document.getElementById("metrikTotalKehadiranKumulatif");
+      const elMetrikAvg = document.getElementById("metrikRataRataKehadiran");
+      const elMetrikDisiplin = document.getElementById("metrikGuruDisiplin");
+
+      if (elMetrikAgenda) elMetrikAgenda.textContent = totalAgendaTerlaksana + " Agenda";
+      if (elMetrikKumulatif) elMetrikKumulatif.textContent = grandTotalHadir + " Kali";
+      if (elMetrikAvg) elMetrikAvg.textContent = avgPersen + "%";
+      if (elMetrikDisiplin) {
+        const disiplin100 = membersSummary.filter(m => m.persentase >= 90).length;
+        elMetrikDisiplin.textContent = disiplin100 + " Guru (≥90%)";
+      }
+
+      const q = (query || '').toLowerCase().trim();
+      const filtered = membersSummary.filter(m => {
+        if (!q) return true;
+        return (m.nama || '').toLowerCase().includes(q) ||
+               (m.nip || '').toLowerCase().includes(q) ||
+               (m.sekolah || '').toLowerCase().includes(q);
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400 italic">Tidak ditemukan guru dengan kata kunci "${query}".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((m, idx) => {
+        let badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        let barColor = "bg-emerald-500";
+        if (m.persentase < 75) {
+          badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
+          barColor = "bg-amber-500";
+        }
+        if (m.persentase < 50) {
+          badgeColor = "bg-rose-100 text-rose-800 border-rose-300";
+          barColor = "bg-rose-500";
+        }
+
+        return `
+          <tr class="hover:bg-emerald-50/40 transition">
+            <td class="p-3.5 text-center font-bold text-slate-400">${idx + 1}</td>
+            <td class="p-3.5">
+              <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-200 flex items-center justify-center">
+                  ${m.foto ? `<img src="${m.foto}" class="w-full h-full object-cover">` : `<span class="font-extrabold text-xs text-emerald-700">${m.nama.charAt(0)}</span>`}
+                </div>
+                <div>
+                  <div class="font-black text-slate-900 leading-snug">${m.nama}</div>
+                  <div class="text-[10px] text-slate-400 font-mono mt-0.5">NIP. ${m.nip} • <span class="text-slate-500">${m.pangkat}</span></div>
+                </div>
+              </div>
+            </td>
+            <td class="p-3.5">
+              <span class="font-bold text-slate-800 text-xs">${m.sekolah}</span>
+            </td>
+            <td class="p-3.5 text-center">
+              <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-300 shadow-2xs">
+                ${m.hadir}x Hadir
+              </span>
+            </td>
+            <td class="p-3.5 text-center">
+              ${m.izin > 0 ? `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-200">${m.izin}x Izin</span>` : '<span class="text-slate-300 font-bold">-</span>'}
+            </td>
+            <td class="p-3.5 text-center">
+              ${m.sakit > 0 ? `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-900 border border-rose-200">${m.sakit}x Sakit</span>` : '<span class="text-slate-300 font-bold">-</span>'}
+            </td>
+            <td class="p-3.5 text-center font-black text-slate-700">
+              ${m.totalKegiatan} Agenda
+            </td>
+            <td class="p-3.5">
+              <div class="space-y-1.5 min-w-[130px]">
+                <div class="flex items-center justify-between text-[11px] font-black">
+                  <span class="text-slate-700">${m.persentase}%</span>
+                  <span class="text-[10px] px-2 py-0.2 rounded-md border ${badgeColor}">
+                    ${m.persentase >= 90 ? 'Sangat Aktif' : m.persentase >= 75 ? 'Aktif' : 'Cukup'}
+                  </span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden shadow-inner">
+                  <div class="${barColor} h-2 rounded-full transition-all duration-500" style="width: ${m.persentase}%"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function downloadRekapAkumulasiTahunanCSV() {
+      const { membersSummary, totalAgendaTerlaksana } = calculateCumulativeAbsensi();
+      let csv = "\ufeffsep=;\n";
+      csv += "REKAPITULASI AKUMULASI KEHADIRAN 1 TAHUN BERJALAN MGMP IPA BALANGAN;;;;;;;;\n";
+      csv += `Periode;Januari s.d. Oktober 2026;;Total Agenda Terlaksana;${totalAgendaTerlaksana} Agenda;;;;\n`;
+      csv += "\n";
+      csv += "No;NIP;Nama Lengkap;Pangkat / Golongan;Asal Satuan Pendidikan;Total Hadir;Total Izin;Total Sakit;Persentase Kehadiran\n";
+
+      membersSummary.forEach(m => {
+        const nip = (m.nip || "-").trim();
+        const nama = (m.nama || "").trim().replace(/"/g, '""');
+        const pangkat = (m.pangkat || "").trim().replace(/"/g, '""');
+        const sekolah = (m.sekolah || "").trim().replace(/"/g, '""');
+        csv += `${m.no};${nip};"${nama}";"${pangkat}";"${sekolah}";${m.hadir};${m.izin};${m.sakit};${m.persentase}%\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `Rekap_Akumulasi_Kehadiran_MGMP_IPA_1_Tahun_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+      showToast("Rekap akumulasi 1 tahun berhasil diunduh!");
+    }
+
+
+        // ================= FITUR GALERI GOOGLE DRIVE & SLIDESHOW OTOMATIS =================
+    let galeriState = {
+      currentIndex: 0,
+      images: [],
+      timer: null,
+      isAutoPlay: true,
+      currentKeg: null,
+      activeMode: 'drive'
+    };
+
+    const koleksiFotoKegiatanMGMP = [
+      {
+        url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
+        caption: "Suasana Diskusi & Praktik Baik Pembuatan Media Pembelajaran Interaktif"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80",
+        caption: "Praktikum Sains & Eksperimen Larutan Asam-Basa Guru IPA"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
+        caption: "Pemaparan Modul Ajar Kurikulum & Sinkronisasi Perangkat Pembelajaran"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1581093458791-9f3c3250a8b0?auto=format&fit=crop&w=1200&q=80",
+        caption: "Pemanfaatan Mikroskop Digital & Observasi Jaringan Biologi"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+        caption: "Foto Bersama Pengurus dan Guru Anggota MGMP IPA SMP Balangan"
+      }
+    ];
+
+    function extractDriveFolderId(url) {
+      if (!url) return null;
+      const m1 = url.match(/folders\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return m1[1];
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return m2[1];
+      return null;
+    }
+
+    function bukaGaleriFoto(idKegiatan) {
+      let keg = appState.kegiatanList.find(x => x.id_kegiatan === idKegiatan);
+      if (!keg && appState.kegiatanLainList) keg = appState.kegiatanLainList.find(x => x.id_kegiatan === idKegiatan);
+      if (!keg) return;
+
+      galeriState.currentKeg = keg;
+      galeriState.currentIndex = 0;
+
+      // Header modal
+      document.getElementById("galeriBadgeBulan").textContent = keg.bulan;
+      document.getElementById("galeriTanggal").textContent = formatTanggalIndo(keg.tanggal);
+      document.getElementById("galeriJudulKegiatan").textContent = keg.nama_kegiatan;
+      document.getElementById("galeriLokasi").innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> ${keg.tempat}`;
+      
+      const btnDrive = document.getElementById("btnBukaFolderDrive");
+      if (btnDrive) {
+        btnDrive.href = keg.foto_drive || "https://drive.google.com";
+      }
+
+      // Periksa apakah kegiatan memiliki link Google Drive Folder
+      const folderId = extractDriveFolderId(keg.foto_drive);
+      const iframe = document.getElementById("iframeDriveEmbed");
+      const loadingNotice = document.getElementById("driveLoadingNotice");
+
+      if (folderId && iframe) {
+        // Tampilkan frame embed Google Drive langsung
+        iframe.src = `https://drive.google.com/embeddedfolderview?id=${folderId}#grid`;
+        if (loadingNotice) {
+          loadingNotice.style.display = "flex";
+          iframe.onload = () => { loadingNotice.style.display = "none"; };
+        }
+        switchModeGaleri('slideshow');
+      } else {
+        // Jika tidak ada folder ID, buka mode slideshow langsung
+        switchModeGaleri('slideshow');
+      }
+
+      // Siapkan daftar foto slideshow (bisa pakai foto Google Drive langsung)
+      let customPhotos = [];
+      if (keg.slideshow_fotos && keg.slideshow_fotos.trim()) {
+        const rawLinks = keg.slideshow_fotos.split(/[\n,;]+/);
+        rawLinks.forEach((link, idx) => {
+          const trimmed = link.trim();
+          if (trimmed) {
+            const m = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || trimmed.match(/id=([a-zA-Z0-9_-]+)/);
+            const directUrl = m && m[1] ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1200` : trimmed;
+            customPhotos.push({
+              url: directUrl,
+              caption: `Dokumentasi Foto ${idx + 1} - ${keg.tempat}`
+            });
+          }
+        });
+      }
+
+      galeriState.images = customPhotos.length > 0 ? customPhotos : koleksiFotoKegiatanMGMP.map(item => ({
+        url: item.url,
+        caption: `${item.caption} - ${keg.tempat}`
+      }));
+
+      const thumbContainer = document.getElementById("galeriThumbnailsContainer");
+      if (thumbContainer) {
+        thumbContainer.innerHTML = galeriState.images.map((img, i) => `
+          <div onclick="pilihSlideFoto(${i})" class="w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 transition duration-300 ${i === 0 ? 'border-purple-500 scale-105 shadow-md shadow-purple-500/30' : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-500'}" id="thumbItem_${i}">
+            <img src="${img.url}" class="w-full h-full object-cover">
+          </div>
+        `).join("");
+      }
+
+      tampilkanSlide(0);
+      openModal("modalGaleriFoto");
+    }
+
+    function switchModeGaleri(mode) {
+      galeriState.activeMode = mode;
+      const viewDrive = document.getElementById("viewGaleriDrive");
+      const viewSlideshow = document.getElementById("viewGaleriSlideshow");
+      const btnDrive = document.getElementById("btnTabModeDrive");
+      const btnSlideshow = document.getElementById("btnTabModeSlideshow");
+
+      if (mode === 'drive') {
+        if (viewDrive) viewDrive.classList.remove("hidden");
+        if (viewSlideshow) viewSlideshow.classList.add("hidden");
+        if (btnDrive) btnDrive.className = "px-3.5 py-1.5 rounded-xl bg-purple-600 text-white shadow transition flex items-center";
+        if (btnSlideshow) btnSlideshow.className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center";
+        hentikanAutoPlayGaleri();
+      } else {
+        if (viewDrive) viewDrive.classList.add("hidden");
+        if (viewSlideshow) viewSlideshow.classList.remove("hidden");
+        if (btnDrive) btnDrive.className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center";
+        if (btnSlideshow) btnSlideshow.className = "px-3.5 py-1.5 rounded-xl bg-purple-600 text-white shadow transition flex items-center";
+        mulaiAutoPlayGaleri();
+      }
+    }
+
+    function tampilkanSlide(idx) {
+      if (!galeriState.images || galeriState.images.length === 0) return;
+      if (idx < 0) idx = galeriState.images.length - 1;
+      if (idx >= galeriState.images.length) idx = 0;
+
+      galeriState.currentIndex = idx;
+      const img = galeriState.images[idx];
+
+      const mainImg = document.getElementById("galeriMainImage");
+      const caption = document.getElementById("galeriCaption");
+      const counter = document.getElementById("galeriCounterBadge");
+
+      if (mainImg) {
+        mainImg.classList.add("opacity-40", "scale-95");
+        setTimeout(() => {
+          mainImg.src = img.url;
+          mainImg.classList.remove("opacity-40", "scale-95");
+        }, 150);
+      }
+
+      if (caption) caption.textContent = img.caption;
+      if (counter) counter.textContent = `${idx + 1} / ${galeriState.images.length}`;
+
+      for (let i = 0; i < galeriState.images.length; i++) {
+        const thumb = document.getElementById(`thumbItem_${i}`);
+        if (thumb) {
+          if (i === idx) {
+            thumb.className = "w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 border-purple-500 scale-105 shadow-md shadow-purple-500/30 transition duration-300";
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            thumb.className = "w-16 h-12 sm:w-20 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 cursor-pointer border-2 border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-500 transition duration-300";
+          }
+        }
+      }
+    }
+
+    function nextSlideFoto() {
+      tampilkanSlide(galeriState.currentIndex + 1);
+    }
+
+    function prevSlideFoto() {
+      tampilkanSlide(galeriState.currentIndex - 1);
+    }
+
+    function pilihSlideFoto(idx) {
+      tampilkanSlide(idx);
+    }
+
+    function mulaiAutoPlayGaleri() {
+      hentikanAutoPlayGaleri();
+      galeriState.isAutoPlay = true;
+      updateStatusAutoPlayUI(true);
+      galeriState.timer = setInterval(() => {
+        nextSlideFoto();
+      }, 3200);
+    }
+
+    function hentikanAutoPlayGaleri() {
+      if (galeriState.timer) {
+        clearInterval(galeriState.timer);
+        galeriState.timer = null;
+      }
+    }
+
+    function toggleAutoPlayGaleri() {
+      if (galeriState.isAutoPlay) {
+        hentikanAutoPlayGaleri();
+        galeriState.isAutoPlay = false;
+        updateStatusAutoPlayUI(false);
+      } else {
+        mulaiAutoPlayGaleri();
+      }
+    }
+
+    function updateStatusAutoPlayUI(isActive) {
+      const text = document.getElementById("textAutoPlay");
+      const dot = document.getElementById("dotAutoPlay");
+      const btn = document.getElementById("btnAutoPlayToggle");
+
+      if (text) text.textContent = isActive ? "Auto-Play Aktif" : "Auto-Play Jeda";
+      if (dot) {
+        dot.className = isActive ? "w-2 h-2 rounded-full bg-emerald-400 animate-pulse" : "w-2 h-2 rounded-full bg-slate-500";
+      }
+      if (btn) {
+        btn.className = isActive ? 
+          "absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition" :
+          "absolute top-3 right-3 text-[11px] font-bold bg-slate-900/80 text-slate-400 border border-slate-700 px-3 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1.5 hover:bg-slate-800 transition";
+      }
+    }
+
+    function tutupGaleriFoto() {
+      hentikanAutoPlayGaleri();
+      const iframe = document.getElementById("iframeDriveEmbed");
+      if (iframe) iframe.src = ""; // hentikan proses muat
+      closeModal("modalGaleriFoto");
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove("hidden"); }
+    function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
+
+    function showToast(msg, type = "success") {
+      const t = document.getElementById("toast");
+      t.className = `fixed bottom-6 right-6 z-50 p-4 rounded-2xl shadow-2xl text-white max-w-md ${type === "success" ? "bg-balangan-900 border border-balangan-600" : "bg-red-700"}`;
+      t.innerHTML = `<span class="text-xs font-bold">${msg}</span>`;
+      t.classList.remove("translate-y-24", "opacity-0");
+      setTimeout(() => t.classList.add("translate-y-24", "opacity-0"), 3000);
+    }
+  </script>
+</body>
+</html>
