@@ -568,21 +568,77 @@
         </div>
       </div>
 
-      <div class="border-b border-slate-200 flex space-x-6 text-sm font-bold">
+      <div class="border-b border-slate-200 flex flex-wrap gap-4 sm:gap-6 text-sm font-bold">
         <button onclick="switchMemberTab('tabKegiatanSaya')" id="btnTabKegiatanSaya" class="tab-btn pb-3 border-b-2 border-balangan-700 text-balangan-700 transition">
-          <i class="fa-solid fa-folder-open mr-2"></i> Pusat Unduhan Berkas & Materi
+          <i class="fa-solid fa-calendar-check mr-1.5"></i> Agenda & Dokumentasi
+        </button>
+        <button onclick="switchMemberTab('tabMateriSaya')" id="btnTabMateriSaya" class="tab-btn pb-3 text-slate-400 hover:text-slate-800 transition">
+          <i class="fa-solid fa-book-open-reader mr-1.5 text-sains-600"></i> Perangkat & Materi Ajar
         </button>
         <button onclick="switchMemberTab('tabAbsensiSaya')" id="btnTabAbsensiSaya" class="tab-btn pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-clipboard-check mr-2"></i> Presensi Kehadiran Mandiri
+          <i class="fa-solid fa-clipboard-check mr-1.5"></i> Presensi Mandiri
         </button>
         <button onclick="switchMemberTab('tabTugasSaya')" id="btnTabTugasSaya" class="tab-btn pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-file-arrow-up mr-2"></i> Unggah Laporan / Modul
+          <i class="fa-solid fa-file-arrow-up mr-1.5"></i> Unggah Tugas / Modul
         </button>
       </div>
 
       <!-- Tab Unduhan -->
       <div id="tabKegiatanSaya" class="space-y-4">
         <div id="memberKegiatanGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Tab 2 Member: Perangkat & Materi Ajar -->
+      <div id="tabMateriSaya" class="hidden space-y-6">
+        <div class="bg-gradient-to-r from-sains-950 via-slate-900 to-balangan-950 text-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-sains-500/20 text-sains-300 rounded-full text-xs font-bold border border-sains-500/30">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Pusat Sumber Belajar & Perangkat Ajar</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-white">Bank Materi Pembelajaran & Dokumen Kurikulum</h3>
+            <p class="text-xs sm:text-sm text-slate-300">Unduh modul ajar, materi pelatihan, media presentasi (MPI), dan panduan praktikum resmi MGMP IPA.</p>
+          </div>
+          <div class="text-xs bg-white/10 px-4 py-2.5 rounded-2xl border border-white/10 backdrop-blur font-bold flex items-center">
+            <i class="fa-solid fa-cloud-arrow-down text-amber-400 mr-2 text-base"></i>
+            <span id="badgeTotalBahanAjarMember">0 Berkas Tersedia</span>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar Bahan Ajar -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-3.5 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+          <div class="relative w-full md:w-80">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input 
+              type="text" 
+              id="searchBahanAjarMember" 
+              oninput="renderBahanAjarMember()" 
+              placeholder="Cari judul modul, topik, perangkat..." 
+              class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-sains-500 outline-none"
+            />
+          </div>
+          <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+            <select id="filterKategoriBahanAjarMember" onchange="renderBahanAjarMember()" class="text-xs font-bold border border-slate-200 rounded-xl p-2 bg-slate-50 text-slate-700 outline-none focus:ring-2 focus:ring-sains-500">
+              <option value="Semua">Semua Kategori</option>
+              <option value="Modul Ajar">Modul Ajar</option>
+              <option value="Perangkat Kurikulum">Perangkat Kurikulum</option>
+              <option value="Media Interaktif">Media Pembelajaran (MPI)</option>
+              <option value="LKPD & Praktikum">LKPD & Praktikum</option>
+              <option value="Materi Pelatihan">Materi Pelatihan / Workshop</option>
+              <option value="Lainnya">Berkas Penting Lainnya</option>
+            </select>
+            <select id="filterKelasBahanAjarMember" onchange="renderBahanAjarMember()" class="text-xs font-bold border border-slate-200 rounded-xl p-2 bg-slate-50 text-slate-700 outline-none focus:ring-2 focus:ring-sains-500">
+              <option value="Semua">Semua Kelas / Sasaran</option>
+              <option value="Kelas VII">Kelas VII</option>
+              <option value="Kelas VIII">Kelas VIII</option>
+              <option value="Kelas IX">Kelas IX</option>
+              <option value="Umum / Semua Guru">Umum / Semua Guru</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid Kartu Bahan Ajar -->
+        <div id="gridBahanAjarMember" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
       </div>
 
       <!-- Tab Presensi Mandiri -->
@@ -691,18 +747,21 @@
       </div>
 
       <!-- Tab Navigasi Admin -->
-      <div class="border-b border-slate-200 flex flex-wrap gap-4 sm:gap-8 text-sm font-bold">
+      <div class="border-b border-slate-200 flex flex-wrap gap-4 sm:gap-6 text-sm font-bold">
         <button onclick="switchAdminTab('tabAdminKegiatan')" id="btnAdminKegiatan" class="tab-btn-admin pb-3 border-b-2 border-balangan-700 text-balangan-700 transition">
-          <i class="fa-solid fa-calendar-days mr-2"></i> 1. Rencana Kegiatan Bulanan
+          <i class="fa-solid fa-calendar-days mr-1.5"></i> 1. Rencana Kegiatan
+        </button>
+        <button onclick="switchAdminTab('tabAdminMateri')" id="btnAdminMateri" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
+          <i class="fa-solid fa-book-open-reader mr-1.5 text-sains-600"></i> 2. Perangkat & Bahan Ajar
         </button>
         <button onclick="switchAdminTab('tabAdminAbsensi')" id="btnAdminAbsensi" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-file-csv mr-2"></i> 2. Kelola & Upload Absensi
+          <i class="fa-solid fa-file-csv mr-1.5"></i> 3. Kelola Absensi
         </button>
         <button onclick="switchAdminTab('tabAdminUsers')" id="btnAdminUsers" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-users-gear mr-2"></i> 3. Data Guru (36 Anggota)
+          <i class="fa-solid fa-users-gear mr-1.5"></i> 4. Data 36 Guru
         </button>
         <button onclick="switchAdminTab('tabAdminLogos')" id="btnAdminLogos" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-image mr-2 text-balangan-600"></i> 4. Upload & Atur Logo Web
+          <i class="fa-solid fa-image mr-1.5 text-balangan-600"></i> 5. Atur Logo
         </button>
       </div>
 
@@ -721,6 +780,35 @@
               </tr>
             </thead>
             <tbody id="tableBodyKegiatanAdmin" class="divide-y divide-slate-100 text-slate-600"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2 ADMIN: Kelola Perangkat & Bahan Ajar -->
+      <div id="tabAdminMateri" class="hidden space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-slate-900">Pengelolaan Bahan Ajar & Perangkat Pembelajaran</h3>
+            <p class="text-xs text-slate-500">Unggah modul ajar, materi tayang pelatihan, media pembelajaran (MPI), dan LKPD untuk anggota MGMP.</p>
+          </div>
+          <button onclick="openModalBahanAjar(null)" class="bg-sains-700 hover:bg-sains-800 text-white text-xs font-extrabold px-4 py-2.5 rounded-2xl shadow transition flex items-center flex-shrink-0">
+            <i class="fa-solid fa-plus mr-2 text-amber-300"></i> Tambah Bahan Ajar
+          </button>
+        </div>
+
+        <div class="overflow-x-auto bg-white border border-slate-200 rounded-3xl shadow-sm">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-extrabold border-b border-slate-200">
+              <tr>
+                <th class="p-4">Kategori & Sasaran</th>
+                <th class="p-4">Judul Berkas & Topik</th>
+                <th class="p-4">Deskripsi</th>
+                <th class="p-4">Tautan Berkas</th>
+                <th class="p-4">Tanggal</th>
+                <th class="p-4 text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyBahanAjarAdmin" class="divide-y divide-slate-100 text-slate-600"></tbody>
           </table>
         </div>
       </div>
@@ -1373,6 +1461,15 @@
           <label class="block font-bold text-purple-900"><i class="fa-solid fa-images mr-1 text-purple-600"></i> Tautan Folder Dokumentasi Foto (Google Drive)</label>
           <input type="url" id="kegFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-purple-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-purple-500">
         </div>
+        <!-- Tautan Foto Pilihan untuk Slideshow (Google Drive) -->
+        <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-2">
+          <label class="block font-bold text-amber-950 flex items-center justify-between">
+            <span><i class="fa-solid fa-images mr-1.5 text-amber-600"></i> Tautan Foto Pilihan untuk Slideshow Sinematik (Google Drive)</span>
+            <span class="text-[10px] text-amber-800 bg-amber-200 px-2 py-0.5 rounded-md font-semibold">Tampil di Slideshow</span>
+          </label>
+          <textarea id="kegSlideshowFotos" rows="2" placeholder="Tempel 1 atau beberapa tautan file foto Google Drive di sini (pisahkan dengan koma atau baris baru)..." class="w-full border border-amber-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-amber-500 font-mono"></textarea>
+          <p class="text-[11px] text-amber-800"><i class="fa-solid fa-circle-info mr-1 text-amber-600"></i> Tips: Klik kanan file foto di Google Drive &gt; <b>Bagikan</b> &gt; <b>Salin link</b>, lalu tempel di sini agar foto asli tersebut otomatis diputar di tab Slideshow.</p>
+        </div>
 
         <!-- Tautan Video Dokumentasi Kegiatan (YouTube / Google Drive Video) -->
         <div class="p-3.5 bg-rose-50/60 rounded-2xl border border-rose-200 space-y-2">
@@ -1411,7 +1508,100 @@
     </div>
   </div>
 
-  <!-- MODAL PROFIL GURU -->
+  <!-- MODAL TAMBAH / EDIT BAHAN AJAR -->
+  <div id="modalBahanAjar" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100">
+      <button onclick="closeModal('modalBahanAjar')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-4 pb-2 border-b border-slate-100">
+        <div class="w-10 h-10 rounded-2xl bg-sains-100 text-sains-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-book-open-reader"></i>
+        </div>
+        <div>
+          <h3 id="modalBahanAjarTitle" class="text-base sm:text-lg font-black text-slate-900">Tambah Bahan Ajar & Modul</h3>
+          <p class="text-xs text-slate-400">Bagikan modul atau perangkat pembelajaran kepada seluruh guru</p>
+        </div>
+      </div>
+
+      <form id="formBahanAjar" onsubmit="handleSaveBahanAjar(event)" class="space-y-3.5 text-xs sm:text-sm">
+        <input type="hidden" id="matId">
+        
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">Judul Bahan Ajar / Materi</label>
+          <input type="text" id="matJudul" required placeholder="Contoh: Modul Ajar Bab Ekologi dan Keanekaragaman Hayati" class="w-full border rounded-2xl p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-sains-600">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-800 mb-1">Kategori Berkas</label>
+            <select id="matKategori" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-sains-600">
+              <option value="Modul Ajar">Modul Ajar</option>
+              <option value="Perangkat Kurikulum">Perangkat Kurikulum Merdeka</option>
+              <option value="Media Interaktif">Media Pembelajaran (MPI)</option>
+              <option value="LKPD & Praktikum">LKPD & Petunjuk Praktikum</option>
+              <option value="Materi Pelatihan">Materi Pelatihan / Workshop</option>
+              <option value="Lainnya">Berkas Penting Lainnya</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-800 mb-1">Sasaran / Kelas</label>
+            <select id="matKelas" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-sains-600">
+              <option value="Kelas VII">Kelas VII</option>
+              <option value="Kelas VIII">Kelas VIII</option>
+              <option value="Kelas IX">Kelas IX</option>
+              <option value="Umum / Semua Guru" selected>Umum / Semua Guru</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-800 mb-1">Tipe / Format File</label>
+            <select id="matTipeFile" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-sains-600">
+              <option value="PDF">PDF</option>
+              <option value="PPT / PPTX">Presentasi PPT / PPTX</option>
+              <option value="DOC / DOCX">Dokumen Word (DOCX)</option>
+              <option value="Google Drive">Tautan Google Drive / Folder</option>
+              <option value="Media Web / MPI">Media Web / Aplikasi MPI</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-800 mb-1">Tanggal Berkas</label>
+            <input type="date" id="matTanggal" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-sains-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">Deskripsi Singkat / Keterangan</label>
+          <textarea id="matDeskripsi" rows="2" placeholder="Jelaskan isi pokok modul atau materi ini..." class="w-full border rounded-2xl p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-sains-600"></textarea>
+        </div>
+
+        <div class="p-3 bg-sains-50/70 rounded-2xl border border-sains-200 space-y-2">
+          <label class="block font-bold text-sains-950 flex items-center justify-between">
+            <span><i class="fa-solid fa-link mr-1 text-sains-600"></i> Tautan Berkas (Google Drive / Link Download)</span>
+            <span class="text-[10px] text-sains-800 bg-sains-200 px-2 py-0.5 rounded-md font-semibold">Tautan Utama</span>
+          </label>
+          <input type="url" id="matFileUrl" placeholder="https://drive.google.com/file/d/..." class="w-full border border-sains-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-sains-600">
+          
+          <div class="pt-1">
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Atau unggah file langsung dari laptop (.pdf, .pptx, .docx):</label>
+            <input type="file" id="matUploadFileDirect" accept=".pdf,.ppt,.pptx,.doc,.docx" onchange="handleFileToField(event, 'matFileUrl', 'labelMatUploadDirect')" class="block w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-sains-200 file:text-sains-900 cursor-pointer">
+            <span id="labelMatUploadDirect" class="text-[11px] text-emerald-600 font-semibold hidden pt-1 block"><i class="fa-solid fa-circle-check mr-1"></i> File dipilih</span>
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-2 pt-2">
+          <button type="button" onclick="closeModal('modalBahanAjar')" class="px-5 py-2.5 border rounded-2xl text-slate-600 font-bold">Batal</button>
+          <button type="submit" class="px-6 py-2.5 bg-sains-700 hover:bg-sains-800 text-white rounded-2xl font-extrabold shadow-md transition">Simpan Bahan Ajar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+    <!-- MODAL PROFIL GURU -->
   <div id="profileModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-100">
       <button onclick="closeModal('profileModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
@@ -1615,6 +1805,50 @@
       }
     ];
 
+    
+    const defaultBahanAjarData = [
+      {
+        id_materi: "MAT-01",
+        judul: "Modul Ajar Kurikulum Merdeka - Hakikat Ilmu Sains dan Metode Ilmiah",
+        kategori: "Modul Ajar",
+        kelas: "Kelas VII",
+        tipe_file: "PDF",
+        deskripsi: "Perangkat modul ajar lengkap mencakup TP, ATP, pemahaman bermakna, asesmen diagnostik, dan asesmen sumatif lingkup materi sains.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-02-15"
+      },
+      {
+        id_materi: "MAT-02",
+        judul: "Media Pembelajaran Interaktif (MPI) - Sistem Tata Surya & Fenomena Gerhana",
+        kategori: "Media Interaktif",
+        kelas: "Kelas VII",
+        tipe_file: "PPT / PPTX",
+        deskripsi: "Media tayang animasi interaktif tata surya untuk memperkuat visualisasi astronomi dan literasi numerasi IPA SMP.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-03-10"
+      },
+      {
+        id_materi: "MAT-03",
+        judul: "Petunjuk Praktikum Sains & LKPD Eksperimen Larutan Asam-Basa Bahan Alami",
+        kategori: "LKPD & Praktikum",
+        kelas: "Kelas VIII",
+        tipe_file: "PDF",
+        deskripsi: "Lembar Kerja Peserta Didik (LKPD) eksperimen kimia bahan alam menggunakan indikator flora lokal Balangan (kunyit, bunga sepatu).",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-03-25"
+      },
+      {
+        id_materi: "MAT-04",
+        judul: "Materi Desiminasi Workshop: Pembelajaran Berbasis STEM di Satuan Pendidikan",
+        kategori: "Materi Pelatihan",
+        kelas: "Umum / Semua Guru",
+        tipe_file: "PPT / PPTX",
+        deskripsi: "Materi paparan narasumber implementasi STEM sederhana, integrasi sains dengan kearifan lokal, dan penguatan numerasi.",
+        file_url: "https://drive.google.com",
+        tanggal: "2026-04-12"
+      }
+    ];
+
     const defaultKegiatanData = [
       { id_kegiatan: "ACT-01", bulan: "Februari", tanggal: "2026-02-10", nama_kegiatan: "Pembahasan rencana kegiatan tahunan MGMP IPA Kab.Balangan", tempat: "SMP Negeri 5 Paringin", status: "Selesai", deskripsi: "Rapat koordinasi awal tahun pemetaan program kerja dan silabus.", surat_undangan: "https://drive.google.com", materi: "https://drive.google.com", presensi_pdf: "https://drive.google.com", foto_drive: "https://drive.google.com", video_link: "" },
       { id_kegiatan: "ACT-02", bulan: "Oktober", tanggal: "2026-10-15", nama_kegiatan: "Praktik baik Pembuatan MPI", tempat: "SMP Negeri 3 Batumandi", status: "Rencana", deskripsi: "Pelatihan Media Pembelajaran Interaktif (MPI) untuk memperkuat literasi dan numerasi sains di SMP.", surat_undangan: "https://drive.google.com", materi: "", presensi_pdf: "", foto_drive: "", video_link: "" }
@@ -1647,6 +1881,9 @@
       if (!localStorage.getItem("mgmp_users_v2")) {
         localStorage.setItem("mgmp_users_v2", JSON.stringify(officialUsersList));
       }
+      if (!localStorage.getItem("mgmp_bahan_ajar_v1")) {
+        localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(defaultBahanAjarData));
+      }
       if (!localStorage.getItem("mgmp_kegiatan_v3")) {
         localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(defaultKegiatanData));
       }
@@ -1658,6 +1895,7 @@
       appState.usersList = JSON.parse(localStorage.getItem("mgmp_users_v2")) || officialUsersList;
       appState.kegiatanList = JSON.parse(localStorage.getItem("mgmp_kegiatan_v3")) || defaultKegiatanData;
       appState.absensiList = JSON.parse(localStorage.getItem("mgmp_absensi_v3")) || [];
+      appState.bahanAjarList = JSON.parse(localStorage.getItem("mgmp_bahan_ajar_v1")) || defaultBahanAjarData;
       appState.customLogoBalangan = localStorage.getItem("mgmp_logo_balangan") || null;
       appState.customLogoMGMP = localStorage.getItem("mgmp_logo_mgmp") || null;
 
@@ -1970,6 +2208,7 @@
       const opts = appState.kegiatanList.map(k => `<option value="${k.id_kegiatan}">[${k.bulan}] ${k.nama_kegiatan}</option>`).join("");
       document.getElementById("memberAbsenKegiatanSelect").innerHTML = opts;
       document.getElementById("tugasKegiatanSelect").innerHTML = opts;
+      renderBahanAjarMember();
 
       document.getElementById("memberKegiatanGrid").innerHTML = appState.kegiatanList.map(k => `
         <div class="border border-slate-200 rounded-3xl p-5 bg-white space-y-3 shadow-sm hover:shadow-md transition">
@@ -2011,7 +2250,7 @@
     }
 
     function switchMemberTab(tId) {
-      ['tabKegiatanSaya', 'tabAbsensiSaya', 'tabTugasSaya'].forEach(t => {
+      ['tabKegiatanSaya', 'tabMateriSaya', 'tabAbsensiSaya', 'tabTugasSaya'].forEach(t => {
         document.getElementById(t).classList.toggle("hidden", t !== tId);
       });
     }
@@ -2092,6 +2331,7 @@
         </tr>
       `).join("");
 
+      renderBahanAjarAdmin();
       // Tabel Absensi dengan fitur edit, hapus, dan reset
       renderTableBodyAbsensi();
 
@@ -2115,6 +2355,7 @@
     function switchAdminTab(tId) {
       const tabs = [
         { tab: 'tabAdminKegiatan', btn: 'btnAdminKegiatan' },
+        { tab: 'tabAdminMateri', btn: 'btnAdminMateri' },
         { tab: 'tabAdminAbsensi', btn: 'btnAdminAbsensi' },
         { tab: 'tabAdminUsers', btn: 'btnAdminUsers' },
         { tab: 'tabAdminLogos', btn: 'btnAdminLogos' }
@@ -2131,6 +2372,156 @@
           }
         }
       });
+    }
+
+    
+    // ================= CRUD BAHAN AJAR =================
+    function renderBahanAjarMember() {
+      const container = document.getElementById("gridBahanAjarMember");
+      const badgeTotal = document.getElementById("badgeTotalBahanAjarMember");
+      if (!container) return;
+
+      const q = (document.getElementById("searchBahanAjarMember")?.value || "").toLowerCase().trim();
+      const kat = document.getElementById("filterKategoriBahanAjarMember")?.value || "Semua";
+      const kls = document.getElementById("filterKelasBahanAjarMember")?.value || "Semua";
+
+      let list = appState.bahanAjarList || [];
+      if (kat !== "Semua") list = list.filter(m => m.kategori === kat);
+      if (kls !== "Semua") list = list.filter(m => m.kelas === kls);
+      if (q) list = list.filter(m => (m.judul||'').toLowerCase().includes(q) || (m.deskripsi||'').toLowerCase().includes(q));
+
+      if (badgeTotal) badgeTotal.textContent = `${list.length} Berkas Ditemukan`;
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed text-slate-400">Belum ada bahan ajar atau modul yang sesuai dengan pencarian Anda.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(m => {
+        let badgeKatColor = "bg-sky-100 text-sky-800 border-sky-200";
+        let iconFile = "fa-file-lines text-sky-600";
+        if (m.kategori === "Modul Ajar") { badgeKatColor = "bg-emerald-100 text-emerald-800 border-emerald-200"; iconFile = "fa-file-shield text-emerald-600"; }
+        if (m.kategori === "Media Interaktif") { badgeKatColor = "bg-purple-100 text-purple-800 border-purple-200"; iconFile = "fa-laptop-code text-purple-600"; }
+        if (m.kategori === "LKPD & Praktikum") { badgeKatColor = "bg-amber-100 text-amber-800 border-amber-200"; iconFile = "fa-flask-vial text-amber-600"; }
+        if (m.kategori === "Materi Pelatihan") { badgeKatColor = "bg-rose-100 text-rose-800 border-rose-200"; iconFile = "fa-chalkboard-user text-rose-600"; }
+
+        return `
+          <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-black px-2.5 py-1 rounded-full border ${badgeKatColor}">${m.kategori}</span>
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600">${m.kelas}</span>
+              </div>
+              <h4 class="font-extrabold text-slate-900 text-sm leading-snug">${m.judul}</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">${m.deskripsi || 'Perangkat materi pembelajaran resmi MGMP IPA Balangan.'}</p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold text-slate-400 flex items-center">
+                <i class="fa-solid ${iconFile} mr-1.5 text-xs"></i> ${m.tipe_file || 'Berkas'}
+              </span>
+              <a href="${m.file_url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 rounded-xl font-bold text-xs transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5 text-sains-600"></i> Buka / Unduh
+              </a>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderBahanAjarAdmin() {
+      const tbody = document.getElementById("tableBodyBahanAjarAdmin");
+      if (!tbody) return;
+
+      const list = appState.bahanAjarList || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400 italic">Belum ada bahan ajar yang ditambahkan. Silakan klik "Tambah Bahan Ajar".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(m => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4">
+            <span class="font-extrabold text-slate-900 text-xs">${m.kategori}</span>
+            <div class="text-[11px] text-slate-500">${m.kelas}</div>
+          </td>
+          <td class="p-4 font-bold text-slate-900 text-xs sm:text-sm max-w-xs">${m.judul}</td>
+          <td class="p-4 text-xs text-slate-500 max-w-xs truncate">${m.deskripsi || '-'}</td>
+          <td class="p-4">
+            <a href="${m.file_url}" target="_blank" class="px-2.5 py-1 bg-sains-50 text-sains-700 hover:bg-sains-100 rounded-lg text-xs font-bold border border-sains-200 inline-flex items-center">
+              <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Buka File
+            </a>
+          </td>
+          <td class="p-4 text-xs text-slate-400 whitespace-nowrap">${m.tanggal || '-'}</td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editBahanAjar('${m.id_materi}')" class="p-1.5 text-sains-700 hover:text-sains-900" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteBahanAjar('${m.id_materi}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openModalBahanAjar(data = null) {
+      document.getElementById("formBahanAjar").reset();
+      const label = document.getElementById("labelMatUploadDirect");
+      if (label) label.classList.add("hidden");
+
+      if (data) {
+        document.getElementById("modalBahanAjarTitle").textContent = "Edit Bahan Ajar";
+        document.getElementById("matId").value = data.id_materi;
+        document.getElementById("matJudul").value = data.judul;
+        document.getElementById("matKategori").value = data.kategori;
+        document.getElementById("matKelas").value = data.kelas;
+        document.getElementById("matTipeFile").value = data.tipe_file || "PDF";
+        document.getElementById("matTanggal").value = data.tanggal || new Date().toISOString().split("T")[0];
+        document.getElementById("matDeskripsi").value = data.deskripsi || "";
+        document.getElementById("matFileUrl").value = data.file_url || "";
+      } else {
+        document.getElementById("modalBahanAjarTitle").textContent = "Tambah Bahan Ajar & Modul";
+        document.getElementById("matId").value = "MAT-" + Date.now().toString().slice(-4);
+        document.getElementById("matTanggal").value = new Date().toISOString().split("T")[0];
+      }
+      openModal("modalBahanAjar");
+    }
+
+    function editBahanAjar(id) {
+      const item = appState.bahanAjarList.find(x => x.id_materi === id);
+      if (item) openModalBahanAjar(item);
+    }
+
+    function handleSaveBahanAjar(e) {
+      e.preventDefault();
+      const payload = {
+        id_materi: document.getElementById("matId").value,
+        judul: document.getElementById("matJudul").value,
+        kategori: document.getElementById("matKategori").value,
+        kelas: document.getElementById("matKelas").value,
+        tipe_file: document.getElementById("matTipeFile").value,
+        tanggal: document.getElementById("matTanggal").value,
+        deskripsi: document.getElementById("matDeskripsi").value,
+        file_url: document.getElementById("matFileUrl").value || "https://drive.google.com"
+      };
+
+      const idx = appState.bahanAjarList.findIndex(x => x.id_materi === payload.id_materi);
+      if (idx > -1) appState.bahanAjarList[idx] = payload;
+      else appState.bahanAjarList.unshift(payload);
+
+      localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
+      closeModal("modalBahanAjar");
+      renderBahanAjarAdmin();
+      renderBahanAjarMember();
+      showToast("Bahan ajar berhasil disimpan!");
+    }
+
+    function deleteBahanAjar(id) {
+      const item = appState.bahanAjarList.find(x => x.id_materi === id);
+      const name = item ? `"${item.judul}"` : "berkas ini";
+      if (confirm(`Hapus ${name} dari daftar bahan ajar?`)) {
+        appState.bahanAjarList = appState.bahanAjarList.filter(x => x.id_materi !== id);
+        localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
+        renderBahanAjarAdmin();
+        renderBahanAjarMember();
+        showToast("Bahan ajar berhasil dihapus!");
+      }
     }
 
     // ================= CRUD KEGIATAN & CSV =================
@@ -2221,6 +2612,7 @@
         document.getElementById("kegMateri").value = data.materi || "";
         document.getElementById("kegPresensiPdf").value = data.presensi_pdf || "";
         document.getElementById("kegFoto").value = data.foto_drive || "";
+        document.getElementById("kegSlideshowFotos").value = data.slideshow_fotos || "";
         document.getElementById("kegVideo").value = data.video_link || "";
       } else {
         document.getElementById("modalKegiatanTitle").textContent = "Tambah Kegiatan";
@@ -2249,6 +2641,7 @@
         materi: document.getElementById("kegMateri").value,
         presensi_pdf: document.getElementById("kegPresensiPdf").value,
         foto_drive: document.getElementById("kegFoto").value,
+        slideshow_fotos: document.getElementById("kegSlideshowFotos").value,
         video_link: document.getElementById("kegVideo").value
       };
 
@@ -3186,14 +3579,30 @@
           loadingNotice.style.display = "flex";
           iframe.onload = () => { loadingNotice.style.display = "none"; };
         }
-        switchModeGaleri('drive');
+        switchModeGaleri('slideshow');
       } else {
         // Jika tidak ada folder ID, buka mode slideshow langsung
         switchModeGaleri('slideshow');
       }
 
-      // Siapkan daftar foto slideshow
-      galeriState.images = koleksiFotoKegiatanMGMP.map(item => ({
+      // Siapkan daftar foto slideshow (bisa pakai foto Google Drive langsung)
+      let customPhotos = [];
+      if (keg.slideshow_fotos && keg.slideshow_fotos.trim()) {
+        const rawLinks = keg.slideshow_fotos.split(/[\n,;]+/);
+        rawLinks.forEach((link, idx) => {
+          const trimmed = link.trim();
+          if (trimmed) {
+            const m = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || trimmed.match(/id=([a-zA-Z0-9_-]+)/);
+            const directUrl = m && m[1] ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1200` : trimmed;
+            customPhotos.push({
+              url: directUrl,
+              caption: `Dokumentasi Foto ${idx + 1} - ${keg.tempat}`
+            });
+          }
+        });
+      }
+
+      galeriState.images = customPhotos.length > 0 ? customPhotos : koleksiFotoKegiatanMGMP.map(item => ({
         url: item.url,
         caption: `${item.caption} - ${keg.tempat}`
       }));
