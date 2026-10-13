@@ -369,7 +369,7 @@
 
         <!-- Banner Slider Container Modern -->
         <div class="relative overflow-hidden rounded-3xl bg-slate-950 text-white min-h-[360px] sm:min-h-[420px] shadow-xl border border-slate-800 flex items-end">
-          <img id="bannerSlideLainImg" src="" alt="Kegiatan Lain" class="absolute inset-0 w-full h-full object-cover opacity-45 transition-all duration-700 ease-in-out">
+          <img id="bannerSlideLainImg" src="" alt="Kegiatan Lain" class="absolute inset-0 w-full h-full object-cover opacity-65 transition-all duration-700 ease-in-out">
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent"></div>
           
           <div class="relative z-10 p-6 sm:p-10 space-y-3.5 max-w-3xl">
@@ -2885,7 +2885,18 @@
       }
     ];
 
+        // Helper Global: Ekstraksi ID File Google Drive
+    function extractDriveFileId(url) {
+      if (!url) return null;
+      const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return m1[1];
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return m2[1];
+      return null;
+    }
+
     let slideLainIndex = 0;
+    let slidePhotoSubIndex = 0;
     let slideLainTimer = null;
 
     function renderSlideLain() {
@@ -2911,61 +2922,130 @@
 
       const elStatus = document.getElementById("bannerSlideLainStatus");
       if (elStatus) {
-        elStatus.textContent = item.status;
+        elStatus.textContent = item.status || "Selesai";
         elStatus.className = item.status === "Selesai" ? 
           "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/30 text-emerald-300 border border-emerald-400/40" : 
           "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-amber-500/30 text-amber-300 border border-amber-400/40";
       }
 
       const elTempat = document.getElementById("bannerSlideLainTempat");
-      if (elTempat) elTempat.innerHTML = `<i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> ${item.tempat}`;
+      if (elTempat) elTempat.innerHTML = `<i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> ${item.tempat || 'Lokasi Kegiatan'}`;
 
       const elJudul = document.getElementById("bannerSlideLainJudul");
       if (elJudul) elJudul.textContent = item.nama_kegiatan;
 
       const elDeskripsi = document.getElementById("bannerSlideLainDeskripsi");
-      if (elDeskripsi) elDeskripsi.textContent = item.deskripsi || "Dokumentasi agenda kegiatan eksternal.";
+      if (elDeskripsi) elDeskripsi.textContent = item.deskripsi || "Dokumentasi kegiatan resmi MGMP IPA.";
+
+      // Kumpulkan semua foto slideshow dari tautan Google Drive
+      let photos = [];
+      if (item.slideshow_fotos && item.slideshow_fotos.trim()) {
+        const rawLinks = item.slideshow_fotos.split(/[\n,;]+/);
+        rawLinks.forEach(link => {
+          const trimmed = link.trim();
+          if (trimmed) {
+            const fId = extractDriveFileId(trimmed);
+            photos.push(fId ? `https://drive.google.com/thumbnail?id=${fId}&sz=w1200` : trimmed);
+          }
+        });
+      }
+      if (photos.length === 0 && item.cover_image) {
+        photos.push(item.cover_image);
+      }
+      if (photos.length === 0) {
+        photos.push("https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80");
+      }
+
+      if (slidePhotoSubIndex >= photos.length) slidePhotoSubIndex = 0;
 
       const elImg = document.getElementById("bannerSlideLainImg");
       if (elImg) {
-        let coverSrc = item.cover_image || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80";
-        if (item.slideshow_fotos && item.slideshow_fotos.trim()) {
-          const firstPhoto = item.slideshow_fotos.split(/[\n,;]+/)[0].trim();
-          const fId = extractDriveFileId(firstPhoto);
-          if (fId) coverSrc = `https://drive.google.com/thumbnail?id=${fId}&sz=w1200`;
-        }
         elImg.classList.add("opacity-20");
         setTimeout(() => {
-          elImg.src = coverSrc;
+          elImg.src = photos[slidePhotoSubIndex];
           elImg.classList.remove("opacity-20");
         }, 150);
       }
 
+      // Render 4 Menu Tombol Unduh & Berkas Persis Seperti Gambar 3
       const elBtns = document.getElementById("bannerSlideLainButtons");
       if (elBtns) {
         let btnHtml = "";
+        
+        // 1. Undangan (Merah)
         if (item.surat_undangan) {
-          btnHtml += `<a href="${item.surat_undangan}" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 font-bold transition flex items-center shadow-xs"><i class="fa-solid fa-file-pdf mr-1.5 text-red-400"></i> Undangan</a>`;
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.surat_undangan.replace(/'/g, "\\'")}', 'Undangan_${item.nama_kegiatan}.pdf')" class="bg-balangan-50 hover:bg-balangan-100 text-balangan-800 border border-balangan-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-red-500"></i> Undangan
+            </button>`;
         }
+        
+        // 2. Materi (Oranye)
         if (item.materi) {
-          btnHtml += `<a href="${item.materi}" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 font-bold transition flex items-center shadow-xs"><i class="fa-solid fa-file-powerpoint mr-1.5 text-amber-400"></i> Materi</a>`;
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.materi.replace(/'/g, "\\'")}', 'Materi_${item.nama_kegiatan}.pdf')" class="bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-cloud-arrow-down mr-1.5 text-amber-500"></i> Materi
+            </button>`;
         }
-        if (item.foto_drive) {
-          btnHtml += `<button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold transition flex items-center shadow-md"><i class="fa-solid fa-images mr-1.5"></i> Galeri Foto</button>`;
+
+        // 3. Unduh Presensi (Hijau)
+        if (item.presensi_pdf) {
+          btnHtml += `
+            <button onclick="downloadFileDirect('${item.presensi_pdf.replace(/'/g, "\\'")}', 'Presensi_${item.nama_kegiatan}.pdf')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-file-arrow-down mr-1.5 text-emerald-600"></i> Unduh Presensi
+            </button>`;
         }
+
+        // 4. Galeri Foto (Ungu)
+        if (item.foto_drive || (item.slideshow_fotos && item.slideshow_fotos.trim())) {
+          btnHtml += `
+            <button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-solid fa-images mr-1.5 text-purple-600"></i> Galeri Foto
+            </button>`;
+        }
+
+        // 5. Video (Jika ada)
         if (item.video_link) {
-          btnHtml += `<a href="${item.video_link}" target="_blank" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 font-bold transition flex items-center shadow-md"><i class="fa-brands fa-youtube mr-1.5"></i> Video</a>`;
+          btnHtml += `
+            <a href="${item.video_link}" target="_blank" rel="noopener noreferrer" class="bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center shadow-2xs">
+              <i class="fa-brands fa-youtube mr-1.5 text-red-600"></i> Video
+            </a>`;
         }
+
         elBtns.innerHTML = btnHtml;
       }
     }
 
-    function nextSlideLain() { slideLainIndex++; renderSlideLain(); }
-    function prevSlideLain() { slideLainIndex--; renderSlideLain(); }
+    function nextSlideLain() {
+      slideLainIndex++;
+      slidePhotoSubIndex = 0;
+      renderSlideLain();
+    }
+
+    function prevSlideLain() {
+      slideLainIndex--;
+      slidePhotoSubIndex = 0;
+      renderSlideLain();
+    }
 
     function startAutoSlideLain() {
       if (slideLainTimer) clearInterval(slideLainTimer);
-      slideLainTimer = setInterval(() => { nextSlideLain(); }, 4500);
+      slideLainTimer = setInterval(() => {
+        const list = appState.kegiatanLainList || [];
+        if (list.length === 0) return;
+        const currentItem = list[slideLainIndex];
+        let photoCount = 1;
+        if (currentItem && currentItem.slideshow_fotos) {
+          photoCount = currentItem.slideshow_fotos.split(/[\n,;]+/).filter(Boolean).length || 1;
+        }
+
+        slidePhotoSubIndex++;
+        if (slidePhotoSubIndex >= photoCount) {
+          slidePhotoSubIndex = 0;
+          slideLainIndex = (slideLainIndex + 1) % list.length;
+        }
+        renderSlideLain();
+      }, 4000);
     }
 
     function renderKegiatanLainAdmin() {
