@@ -1000,7 +1000,57 @@
 
   <!-- ================= MODALS ================= -->
 
-    <!-- ================= MODAL GALERI FOTO & DRIVE FOLDER ASLI ================= -->
+      <!-- ================= MODAL PRATINJAU DOKUMEN / PDF GOOGLE DRIVE (PERSIS GAMBAR KEDUA) ================= -->
+  <div id="modalPreviewDokumen" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden overflow-y-auto p-2 sm:p-4 flex justify-center items-start">
+    <div class="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-5xl w-full p-4 sm:p-6 shadow-2xl relative my-auto sm:my-6 flex flex-col h-[94vh]">
+      <!-- Header Dokumen Viewer -->
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 flex-shrink-0">
+        <div class="flex items-center space-x-3 min-w-0 pr-2">
+          <div class="w-10 h-10 rounded-2xl bg-red-600/30 text-red-400 border border-red-500/40 flex items-center justify-center text-xl flex-shrink-0">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <div class="min-w-0">
+            <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-red-500/20 text-red-300 border border-red-500/30 rounded-md">PRATINJAU DOKUMEN</span>
+            <h3 id="previewDokumenJudul" class="text-sm sm:text-base font-black text-white leading-tight truncate mt-0.5">Nama Dokumen / Modul</h3>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 flex-shrink-0">
+          <a id="previewDokumenExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-sains-700 hover:bg-sains-600 text-white text-xs font-bold transition flex items-center shadow">
+            <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> Buka Penuh di Drive
+          </a>
+          <button onclick="closeModal('modalPreviewDokumen')" class="text-slate-400 hover:text-white w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Iframe Google Drive Preview (/preview) Persis Tampilan Pembaca PDF Google Drive -->
+      <div class="my-3 flex-1 w-full bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 relative">
+        <iframe 
+          id="iframeDokumenPreview"
+          src="" 
+          class="w-full h-full border-0 absolute inset-0"
+          allow="autoplay"
+          loading="lazy">
+        </iframe>
+        <div id="dokumenPreviewLoading" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center space-y-2 pointer-events-none transition duration-500">
+          <i class="fa-solid fa-circle-notch fa-spin text-red-500 text-2xl"></i>
+          <span class="text-xs text-slate-400 font-semibold">Memuat halaman dokumen PDF dari Google Drive...</span>
+        </div>
+      </div>
+
+      <!-- Footer Viewer -->
+      <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 flex-shrink-0">
+        <span><i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Mode Pembaca Modul & Perangkat Pembelajaran MGMP IPA</span>
+        <button onclick="closeModal('modalPreviewDokumen')" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition">
+          Tutup Pratinjau
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= MODAL GALERI FOTO & DRIVE FOLDER ASLI ================= -->
   <div id="modalGaleriFoto" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
     <div class="bg-slate-900 border border-slate-700 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl relative my-6 flex flex-col max-h-[94vh]">
       <!-- Header Galeri -->
@@ -1380,8 +1430,8 @@
   </div>
 
   <!-- MODAL EDIT KEGIATAN -->
-  <div id="modalKegiatan" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100">
+  <div id="modalKegiatan" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden overflow-y-auto p-4 sm:p-6 flex justify-center items-start">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-4 sm:my-8 border border-slate-100">
       <button onclick="closeModal('modalKegiatan')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
@@ -1509,8 +1559,8 @@
   </div>
 
   <!-- MODAL TAMBAH / EDIT BAHAN AJAR -->
-  <div id="modalBahanAjar" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100">
+  <div id="modalBahanAjar" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden overflow-y-auto p-4 sm:p-6 flex justify-center items-start">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-4 sm:my-8 border border-slate-100">
       <button onclick="closeModal('modalBahanAjar')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
@@ -2375,6 +2425,47 @@
     }
 
     
+    
+    // ================= HELPER & VIEWER PRATINJAU DOKUMEN GOOGLE DRIVE (/preview) =================
+    function getGoogleDrivePreviewUrl(url) {
+      if (!url) return "";
+      // Cari file ID dari tautan drive
+      const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m1 && m1[1]) return `https://drive.google.com/file/d/${m1[1]}/preview`;
+      const m2 = url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return `https://drive.google.com/file/d/${m2[1]}/preview`;
+      // Jika tautan biasa (misal PDF direct atau web)
+      return url;
+    }
+
+    function bukaPratinjauDokumen(fileUrl, judul = "Dokumen Bahan Ajar") {
+      if (!fileUrl || fileUrl === "#") {
+        showToast("Tautan berkas belum tersedia!", "error");
+        return;
+      }
+
+      // Format URL ke Google Drive Preview embed
+      const previewUrl = getGoogleDrivePreviewUrl(fileUrl);
+      
+      document.getElementById("previewDokumenJudul").textContent = judul;
+      const extLink = document.getElementById("previewDokumenExternalLink");
+      if (extLink) extLink.href = fileUrl;
+
+      const iframe = document.getElementById("iframeDokumenPreview");
+      const loading = document.getElementById("dokumenPreviewLoading");
+
+      if (iframe) {
+        iframe.src = previewUrl;
+        if (loading) {
+          loading.style.display = "flex";
+          iframe.onload = () => { loading.style.display = "none"; };
+        }
+      }
+
+      openModal("modalPreviewDokumen");
+    }
+
+
     // ================= CRUD BAHAN AJAR =================
     function renderBahanAjarMember() {
       const container = document.getElementById("gridBahanAjarMember");
@@ -2419,9 +2510,9 @@
               <span class="text-[10px] font-semibold text-slate-400 flex items-center">
                 <i class="fa-solid ${iconFile} mr-1.5 text-xs"></i> ${m.tipe_file || 'Berkas'}
               </span>
-              <a href="${m.file_url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 rounded-xl font-bold text-xs transition flex items-center shadow-2xs">
-                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5 text-sains-600"></i> Buka / Unduh
-              </a>
+              <button onclick="bukaPratinjauDokumen('${(m.file_url||'').replace(/'/g, "\\'")}', '${(m.judul||'').replace(/'/g, "\\'")}')" class="px-4 py-2 bg-sains-50 hover:bg-sains-100 text-sains-800 border border-sains-200 rounded-xl font-bold text-xs transition flex items-center shadow-2xs">
+                <i class="fa-solid fa-book-open mr-1.5 text-sains-600"></i> Buka / Baca Modul
+              </button>
             </div>
           </div>
         `;
@@ -2447,9 +2538,9 @@
           <td class="p-4 font-bold text-slate-900 text-xs sm:text-sm max-w-xs">${m.judul}</td>
           <td class="p-4 text-xs text-slate-500 max-w-xs truncate">${m.deskripsi || '-'}</td>
           <td class="p-4">
-            <a href="${m.file_url}" target="_blank" class="px-2.5 py-1 bg-sains-50 text-sains-700 hover:bg-sains-100 rounded-lg text-xs font-bold border border-sains-200 inline-flex items-center">
-              <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Buka File
-            </a>
+            <button onclick="bukaPratinjauDokumen('${(m.file_url||'').replace(/'/g, "\\'")}', '${(m.judul||'').replace(/'/g, "\\'")}')" class="px-2.5 py-1 bg-sains-50 text-sains-700 hover:bg-sains-100 rounded-lg text-xs font-bold border border-sains-200 inline-flex items-center">
+              <i class="fa-solid fa-eye mr-1 text-sains-600"></i> Pratinjau
+            </button>
           </td>
           <td class="p-4 text-xs text-slate-400 whitespace-nowrap">${m.tanggal || '-'}</td>
           <td class="p-4 text-right whitespace-nowrap">
