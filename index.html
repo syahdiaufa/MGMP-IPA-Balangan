@@ -1430,14 +1430,14 @@
   </div>
 
   <!-- MODAL EDIT KEGIATAN -->
-  <div id="modalKegiatan" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden overflow-y-auto p-4 sm:p-6 flex justify-center items-start">
+  <div id="modalKegiatan" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-50 hidden overflow-y-auto p-3 sm:p-6 flex justify-center items-start pt-6 sm:pt-10">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-4 sm:my-8 border border-slate-100">
       <button onclick="closeModal('modalKegiatan')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
 
       <h3 id="modalKegiatanTitle" class="text-lg font-black text-slate-900 mb-4 pb-2 border-b">Rencana Kegiatan Bulanan</h3>
-      <form id="formKegiatan" onsubmit="handleSaveKegiatan(event)" class="space-y-4 text-xs sm:text-sm">
+      <form id="formKegiatan" novalidate onsubmit="handleSaveKegiatan(event)" class="space-y-4 text-xs sm:text-sm">
         <input type="hidden" id="kegId">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -1509,7 +1509,7 @@
         <!-- Tautan Dokumentasi Folder Google Drive (Foto) -->
         <div class="p-3.5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-2">
           <label class="block font-bold text-purple-900"><i class="fa-solid fa-images mr-1 text-purple-600"></i> Tautan Folder Dokumentasi Foto (Google Drive)</label>
-          <input type="url" id="kegFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-purple-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-purple-500">
+          <input type="text" id="kegFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-purple-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-purple-500">
         </div>
         <!-- Tautan Foto Pilihan untuk Slideshow (Google Drive) -->
         <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-2">
@@ -1524,7 +1524,7 @@
         <!-- Tautan Video Dokumentasi Kegiatan (YouTube / Google Drive Video) -->
         <div class="p-3.5 bg-rose-50/60 rounded-2xl border border-rose-200 space-y-2">
           <label class="block font-bold text-rose-900"><i class="fa-brands fa-youtube mr-1 text-red-600"></i> Tautan Video Dokumentasi Kegiatan (YouTube / Drive Video)</label>
-          <input type="url" id="kegVideo" placeholder="https://www.youtube.com/watch?v=... atau link Drive video" class="w-full border border-rose-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-rose-500">
+          <input type="text" id="kegVideo" placeholder="https://www.youtube.com/watch?v=... atau link Drive video" class="w-full border border-rose-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-rose-500">
         </div>
 
         <div class="flex justify-end space-x-2 pt-2">
@@ -2673,6 +2673,16 @@
     function openModalKegiatan(data = null) {
       document.getElementById("formKegiatan").reset();
       populateSekolahDropdown();
+      
+      // Sembunyikan label upload file sebelumnya
+      ['labelUndanganUpload', 'labelPresensiUpload', 'labelMateriUpload'].forEach(lblId => {
+        const el = document.getElementById(lblId);
+        if (el) el.classList.add("hidden");
+      });
+
+      // Gulir modal langsung ke bagian paling atas
+      const modalEl = document.getElementById("modalKegiatan");
+      if (modalEl) modalEl.scrollTop = 0;
 
       if (data) {
         document.getElementById("modalKegiatanTitle").textContent = "Edit Kegiatan";
@@ -2720,34 +2730,65 @@
 
     async function handleSaveKegiatan(e) {
       e.preventDefault();
+
+      const namaVal = (document.getElementById("kegNama").value || "").trim();
+      const tanggalVal = (document.getElementById("kegTanggal").value || "").trim();
+      const tempatVal = (document.getElementById("kegTempat").value || "").trim();
+
+      if (!namaVal) {
+        showToast("Harap isi Nama Kegiatan terlebih dahulu!", "error");
+        document.getElementById("kegNama").focus();
+        return;
+      }
+      if (!tanggalVal) {
+        showToast("Harap tentukan Tanggal Kegiatan!", "error");
+        document.getElementById("kegTanggal").focus();
+        return;
+      }
+      if (!tempatVal) {
+        showToast("Harap pilih Sekolah Tuan Rumah!", "error");
+        document.getElementById("kegTempat").focus();
+        return;
+      }
+
       const payload = {
-        id_kegiatan: document.getElementById("kegId").value,
-        bulan: document.getElementById("kegBulan").value,
-        tanggal: document.getElementById("kegTanggal").value,
-        nama_kegiatan: document.getElementById("kegNama").value,
-        tempat: document.getElementById("kegTempat").value,
-        status: document.getElementById("kegStatus").value,
-        deskripsi: "Kegiatan rutin MGMP IPA.",
-        surat_undangan: document.getElementById("kegSurat").value,
-        materi: document.getElementById("kegMateri").value,
-        presensi_pdf: document.getElementById("kegPresensiPdf").value,
-        foto_drive: document.getElementById("kegFoto").value,
-        slideshow_fotos: document.getElementById("kegSlideshowFotos").value,
-        video_link: document.getElementById("kegVideo").value
+        id_kegiatan: document.getElementById("kegId").value || ("ACT-" + Date.now().toString().slice(-4)),
+        bulan: document.getElementById("kegBulan").value || "Januari",
+        tanggal: tanggalVal,
+        nama_kegiatan: namaVal,
+        tempat: tempatVal,
+        status: document.getElementById("kegStatus").value || "Rencana",
+        deskripsi: "Kegiatan rutin MGMP IPA Balangan.",
+        surat_undangan: (document.getElementById("kegSurat").value || "").trim(),
+        materi: (document.getElementById("kegMateri").value || "").trim(),
+        presensi_pdf: (document.getElementById("kegPresensiPdf").value || "").trim(),
+        foto_drive: (document.getElementById("kegFoto").value || "").trim(),
+        slideshow_fotos: (document.getElementById("kegSlideshowFotos").value || "").trim(),
+        video_link: (document.getElementById("kegVideo").value || "").trim()
       };
 
       const idx = appState.kegiatanList.findIndex(x => x.id_kegiatan === payload.id_kegiatan);
       if (idx > -1) appState.kegiatanList[idx] = payload;
       else appState.kegiatanList.push(payload);
 
-      localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+      // Penyimpanan aman dengan proteksi kuota memori browser (Anti-Macet)
+      try {
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+        showToast("Kegiatan berhasil disimpan & Beranda diperbarui!");
+      } catch (err) {
+        console.warn("Kapasitas penyimpanan lokal penuh, mengamankan metadata kegiatan...", err);
+        // Jika ada base64 file yang sangat besar dari laptop, amankan agar tidak gagal simpan
+        if (payload.presensi_pdf && payload.presensi_pdf.startsWith("data:")) payload.presensi_pdf = "";
+        if (payload.surat_undangan && payload.surat_undangan.startsWith("data:")) payload.surat_undangan = "";
+        if (payload.materi && payload.materi.startsWith("data:")) payload.materi = "";
+        localStorage.setItem("mgmp_kegiatan_v3", JSON.stringify(appState.kegiatanList));
+        showToast("Kegiatan tersimpan! Catatan: File PDF laptop berukuran besar disarankan memakai link Google Drive agar tidak membebani memori browser.");
+      }
+
       closeModal("modalKegiatan");
       renderAdminView();
       renderPublicKegiatan("Semua");
-      
-      // Sinkronisasi otomatis ke Tuan Rumah Beranda
       updateNextMeetingFromKegiatan();
-      showToast("Kegiatan disimpan & Beranda diperbarui!");
 
       if (SCRIPT_URL) {
         try {
