@@ -345,6 +345,48 @@
         <div id="publicKegiatanList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       </div>
 
+            <!-- ================= SOROTAN KEGIATAN LAIN (SLIDESHOW MODERN) ================= -->
+      <div id="sectionKegiatanLain" class="space-y-4 pt-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <div class="inline-flex items-center space-x-1.5 text-xs font-black text-purple-700 uppercase tracking-wider mb-0.5">
+              <i class="fa-solid fa-sparkles text-amber-500"></i>
+              <span>AGENDA & KEGIATAN LAINNYA</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900">Sorotan Kegiatan & Agenda Khusus</h3>
+            <p class="text-xs text-slate-500">Kegiatan kolaboratif, workshop provinsi/nasional, desiminasi sains, dan agenda eksternal di luar pertemuan rutin.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="prevSlideLain()" class="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 flex items-center justify-center shadow-xs transition" title="Sebelumnya">
+              <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+            <span id="counterSlideLain" class="text-xs font-mono font-bold text-slate-600 px-2">1 / 1</span>
+            <button onclick="nextSlideLain()" class="w-9 h-9 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 flex items-center justify-center shadow-xs transition" title="Berikutnya">
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Banner Slider Container Modern -->
+        <div class="relative overflow-hidden rounded-3xl bg-slate-950 text-white min-h-[360px] sm:min-h-[420px] shadow-xl border border-slate-800 flex items-end">
+          <img id="bannerSlideLainImg" src="" alt="Kegiatan Lain" class="absolute inset-0 w-full h-full object-cover opacity-45 transition-all duration-700 ease-in-out">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent"></div>
+          
+          <div class="relative z-10 p-6 sm:p-10 space-y-3.5 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="bannerSlideLainBulan" class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-purple-500/30 text-purple-200 border border-purple-400/40">Bulan</span>
+              <span id="bannerSlideLainStatus" class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/30 text-emerald-300 border border-emerald-400/40">Status</span>
+              <span id="bannerSlideLainTempat" class="text-xs text-slate-300 font-medium flex items-center"><i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> Tempat</span>
+            </div>
+            <h3 id="bannerSlideLainJudul" class="text-xl sm:text-3xl font-black text-white leading-tight">Nama Kegiatan Lain</h3>
+            <p id="bannerSlideLainDeskripsi" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">Deskripsi kegiatan lain.</p>
+            
+            <div id="bannerSlideLainButtons" class="pt-2 flex flex-wrap gap-2.5 text-xs"></div>
+          </div>
+        </div>
+      </div>
+
+
       <!-- ================= PERTEMUAN SELANJUTNYA & HITUNG MUNDUR & GURU TUAN RUMAH ================= -->
       <div id="sectionPertemuanBerikutnya" class="space-y-6 pt-6">
         <div class="border-b border-slate-200 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
@@ -751,17 +793,20 @@
         <button onclick="switchAdminTab('tabAdminKegiatan')" id="btnAdminKegiatan" class="tab-btn-admin pb-3 border-b-2 border-balangan-700 text-balangan-700 transition">
           <i class="fa-solid fa-calendar-days mr-1.5"></i> 1. Rencana Kegiatan
         </button>
+        <button onclick="switchAdminTab('tabAdminKegiatanLain')" id="btnAdminKegiatanLain" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
+          <i class="fa-solid fa-layer-group mr-1.5 text-purple-600"></i> 2. Kegiatan Lain
+        </button>
         <button onclick="switchAdminTab('tabAdminMateri')" id="btnAdminMateri" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-book-open-reader mr-1.5 text-sains-600"></i> 2. Perangkat & Bahan Ajar
+          <i class="fa-solid fa-book-open-reader mr-1.5 text-sains-600"></i> 3. Perangkat & Bahan Ajar
         </button>
         <button onclick="switchAdminTab('tabAdminAbsensi')" id="btnAdminAbsensi" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-file-csv mr-1.5"></i> 3. Kelola Absensi
+          <i class="fa-solid fa-file-csv mr-1.5"></i> 4. Kelola Absensi
         </button>
         <button onclick="switchAdminTab('tabAdminUsers')" id="btnAdminUsers" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-users-gear mr-1.5"></i> 4. Data 36 Guru
+          <i class="fa-solid fa-users-gear mr-1.5"></i> 5. Data 36 Guru
         </button>
         <button onclick="switchAdminTab('tabAdminLogos')" id="btnAdminLogos" class="tab-btn-admin pb-3 text-slate-400 hover:text-slate-800 transition">
-          <i class="fa-solid fa-image mr-1.5 text-balangan-600"></i> 5. Atur Logo
+          <i class="fa-solid fa-image mr-1.5 text-balangan-600"></i> 6. Atur Logo
         </button>
       </div>
 
@@ -783,6 +828,36 @@
           </table>
         </div>
       </div>
+
+      <!-- TAB ADMIN: KELOLA KEGIATAN LAIN (TEMPAT BEBAS) -->
+      <div id="tabAdminKegiatanLain" class="hidden space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-slate-900">Pengelolaan Kegiatan Lain & Eksternal</h3>
+            <p class="text-xs text-slate-500">Kelola kegiatan selain agenda rutin MGMP (workshop provinsi/nasional, bimtek, festival sains, dll) dengan tempat bebas.</p>
+          </div>
+          <button onclick="openModalKegiatanLain(null)" class="bg-purple-700 hover:bg-purple-800 text-white text-xs font-extrabold px-4 py-2.5 rounded-2xl shadow transition flex items-center flex-shrink-0">
+            <i class="fa-solid fa-plus mr-2 text-amber-300"></i> Tambah Kegiatan Lain
+          </button>
+        </div>
+
+        <div class="overflow-x-auto bg-white border border-slate-200 rounded-3xl shadow-sm">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-extrabold border-b border-slate-200">
+              <tr>
+                <th class="p-4">Bulan / Jadwal</th>
+                <th class="p-4">Nama Kegiatan</th>
+                <th class="p-4">Tempat Pelaksanaan (Bebas)</th>
+                <th class="p-4">Berkas & Dokumentasi</th>
+                <th class="p-4">Status</th>
+                <th class="p-4 text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyKegiatanLainAdmin" class="divide-y divide-slate-100 text-slate-600"></tbody>
+          </table>
+        </div>
+      </div>
+
 
       <!-- TAB 2 ADMIN: Kelola Perangkat & Bahan Ajar -->
       <div id="tabAdminMateri" class="hidden space-y-4">
@@ -1429,7 +1504,109 @@
     </div>
   </div>
 
-  <!-- MODAL EDIT KEGIATAN -->
+  <!-- MODAL EDIT KEGIATAN LAIN (KETERANGAN TEMPAT BEBAS / TANPA TEMPLATE) -->
+  <div id="modalKegiatanLain" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-50 hidden overflow-y-auto p-3 sm:p-6 flex justify-center items-start pt-6 sm:pt-10">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-4 sm:my-8 border border-slate-100">
+      <button onclick="closeModal('modalKegiatanLain')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-4 pb-2 border-b border-slate-100">
+        <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div>
+          <h3 id="modalKegiatanLainTitle" class="text-base sm:text-lg font-black text-slate-900">Tambah Kegiatan Lain</h3>
+          <p class="text-xs text-slate-400">Kegiatan di luar agenda rutin MGMP dengan lokasi pelaksanaan bebas</p>
+        </div>
+      </div>
+
+      <form id="formKegiatanLain" novalidate onsubmit="handleSaveKegiatanLain(event)" class="space-y-4 text-xs sm:text-sm">
+        <input type="hidden" id="kegLainId">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold mb-1">Bulan</label>
+            <select id="kegLainBulan" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-purple-600">
+              <option value="Januari">Januari</option><option value="Februari">Februari</option><option value="Maret">Maret</option><option value="April">April</option><option value="Mei">Mei</option><option value="Juni">Juni</option><option value="Juli">Juli</option><option value="Agustus">Agustus</option><option value="September">September</option><option value="Oktober">Oktober</option><option value="November">November</option><option value="Desember">Desember</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold mb-1">Tanggal</label>
+            <input type="date" id="kegLainTanggal" required class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-purple-600">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold mb-1">Nama Kegiatan</label>
+          <input type="text" id="kegLainNama" required placeholder="Contoh: Workshop Peningkatan Kompetensi Guru IPA Se-Kalimantan Selatan" class="w-full border rounded-2xl p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-purple-600">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold mb-1 flex items-center justify-between">
+              <span>Tempat Pelaksanaan (Ketik Bebas)</span>
+              <span class="text-[10px] text-purple-700 font-bold bg-purple-100 px-2 py-0.5 rounded-md">Tanpa Template</span>
+            </label>
+            <!-- Input Tempat Bebas Ketik Tanpa Template -->
+            <input type="text" id="kegLainTempat" required placeholder="Contoh: Hotel Rattan Inn Banjarmasin / Daring Zoom" class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-purple-600">
+          </div>
+          <div>
+            <label class="block font-bold mb-1">Status Kegiatan</label>
+            <select id="kegLainStatus" class="w-full border rounded-2xl p-2.5 bg-slate-50 font-semibold outline-none focus:ring-2 focus:ring-purple-600">
+              <option value="Selesai">Selesai</option>
+              <option value="Sedang Berjalan">Sedang Berjalan</option>
+              <option value="Rencana">Rencana</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold mb-1">Deskripsi Singkat Kegiatan</label>
+          <textarea id="kegLainDeskripsi" rows="2" placeholder="Jelaskan gambaran singkat kegiatan..." class="w-full border rounded-2xl p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-purple-600"></textarea>
+        </div>
+
+        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <label class="block font-bold text-slate-800"><i class="fa-solid fa-file-pdf mr-1 text-red-500"></i> Surat Undangan (.PDF)</label>
+          <input type="text" id="kegLainSurat" placeholder="Tempel tautan Google Drive surat undangan..." class="w-full border rounded-xl p-2.5 text-xs bg-white">
+        </div>
+
+        <div class="p-3.5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-2">
+          <label class="block font-bold text-emerald-900"><i class="fa-solid fa-file-signature mr-1 text-emerald-600"></i> Berkas Scan Presensi / Sertifikat (.PDF)</label>
+          <input type="text" id="kegLainPresensiPdf" placeholder="Tempel tautan Google Drive presensi / sertifikat..." class="w-full border border-emerald-300 rounded-xl p-2.5 text-xs bg-white">
+        </div>
+
+        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+          <label class="block font-bold text-slate-800"><i class="fa-solid fa-file-powerpoint mr-1 text-amber-500"></i> Modul / Materi Kegiatan</label>
+          <input type="text" id="kegLainMateri" placeholder="Tempel tautan Google Drive materi kegiatan..." class="w-full border rounded-xl p-2.5 text-xs bg-white">
+        </div>
+
+        <div class="p-3.5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-2">
+          <label class="block font-bold text-purple-900"><i class="fa-solid fa-images mr-1 text-purple-600"></i> Tautan Folder Dokumentasi Foto (Google Drive)</label>
+          <input type="text" id="kegLainFoto" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-purple-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+
+        <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-2">
+          <label class="block font-bold text-amber-950 flex items-center justify-between">
+            <span><i class="fa-solid fa-images mr-1.5 text-amber-600"></i> Tautan Foto Pilihan untuk Slideshow Sinematik (Google Drive)</span>
+            <span class="text-[10px] text-amber-800 bg-amber-200 px-2 py-0.5 rounded-md font-semibold">Tampil di Slideshow</span>
+          </label>
+          <textarea id="kegLainSlideshowFotos" rows="2" placeholder="Tempel 1 atau beberapa tautan file foto Google Drive di sini (pisahkan dengan koma atau baris baru)..." class="w-full border border-amber-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-amber-500 font-mono"></textarea>
+          <p class="text-[11px] text-amber-800"><i class="fa-solid fa-circle-info mr-1 text-amber-600"></i> Tips: Klik kanan file foto di Google Drive &gt; <b>Bagikan</b> &gt; <b>Salin link</b>, lalu tempel di sini.</p>
+        </div>
+
+        <div class="p-3.5 bg-rose-50/60 rounded-2xl border border-rose-200 space-y-2">
+          <label class="block font-bold text-rose-900"><i class="fa-brands fa-youtube mr-1 text-red-600"></i> Tautan Video Dokumentasi Kegiatan (YouTube / Drive Video)</label>
+          <input type="text" id="kegLainVideo" placeholder="https://www.youtube.com/watch?v=... atau link Drive video" class="w-full border border-rose-300 rounded-xl p-2.5 text-xs bg-white outline-none focus:ring-2 focus:ring-rose-500">
+        </div>
+
+        <div class="flex justify-end space-x-2 pt-2">
+          <button type="button" onclick="closeModal('modalKegiatanLain')" class="px-5 py-2.5 border rounded-2xl text-slate-600 font-bold">Batal</button>
+          <button type="submit" class="px-6 py-2.5 bg-purple-700 hover:bg-purple-800 text-white rounded-2xl font-extrabold shadow-md transition">Simpan Kegiatan Lain</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+    <!-- MODAL EDIT KEGIATAN -->
   <div id="modalKegiatan" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-50 hidden overflow-y-auto p-3 sm:p-6 flex justify-center items-start pt-6 sm:pt-10">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-4 sm:my-8 border border-slate-100">
       <button onclick="closeModal('modalKegiatan')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center">
@@ -1924,12 +2101,17 @@
       applySavedLogos();
       renderPublicKegiatan("Semua");
       updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
       renderTabelRekapTahunan("");
     });
 
     function initData() {
       if (!localStorage.getItem("mgmp_users_v2")) {
         localStorage.setItem("mgmp_users_v2", JSON.stringify(officialUsersList));
+      }
+      if (!localStorage.getItem("mgmp_kegiatan_lain_v1")) {
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(defaultKegiatanLainData));
       }
       if (!localStorage.getItem("mgmp_bahan_ajar_v1")) {
         localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(defaultBahanAjarData));
@@ -1946,6 +2128,7 @@
       appState.kegiatanList = JSON.parse(localStorage.getItem("mgmp_kegiatan_v3")) || defaultKegiatanData;
       appState.absensiList = JSON.parse(localStorage.getItem("mgmp_absensi_v3")) || [];
       appState.bahanAjarList = JSON.parse(localStorage.getItem("mgmp_bahan_ajar_v1")) || defaultBahanAjarData;
+      appState.kegiatanLainList = JSON.parse(localStorage.getItem("mgmp_kegiatan_lain_v1")) || defaultKegiatanLainData;
       appState.customLogoBalangan = localStorage.getItem("mgmp_logo_balangan") || null;
       appState.customLogoMGMP = localStorage.getItem("mgmp_logo_mgmp") || null;
 
@@ -2427,6 +2610,7 @@
         </tr>
       `).join("");
 
+      renderKegiatanLainAdmin();
       renderBahanAjarAdmin();
       // Tabel Absensi dengan fitur edit, hapus, dan reset
       renderTableBodyAbsensi();
@@ -2451,6 +2635,7 @@
     function switchAdminTab(tId) {
       const tabs = [
         { tab: 'tabAdminKegiatan', btn: 'btnAdminKegiatan' },
+        { tab: 'tabAdminKegiatanLain', btn: 'btnAdminKegiatanLain' },
         { tab: 'tabAdminMateri', btn: 'btnAdminMateri' },
         { tab: 'tabAdminAbsensi', btn: 'btnAdminAbsensi' },
         { tab: 'tabAdminUsers', btn: 'btnAdminUsers' },
@@ -2644,6 +2829,7 @@
 
       localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
       closeModal("modalBahanAjar");
+      renderKegiatanLainAdmin();
       renderBahanAjarAdmin();
       renderBahanAjarMember();
       showToast("Bahan ajar berhasil disimpan!");
@@ -2655,9 +2841,258 @@
       if (confirm(`Hapus ${name} dari daftar bahan ajar?`)) {
         appState.bahanAjarList = appState.bahanAjarList.filter(x => x.id_materi !== id);
         localStorage.setItem("mgmp_bahan_ajar_v1", JSON.stringify(appState.bahanAjarList));
-        renderBahanAjarAdmin();
+        renderKegiatanLainAdmin();
+      renderBahanAjarAdmin();
         renderBahanAjarMember();
         showToast("Bahan ajar berhasil dihapus!");
+      }
+    }
+
+    
+    // ================= DATA & LOGIKA KEGIATAN LAIN (TEMPAT BEBAS & SLIDESHOW BERANDA) =================
+    const defaultKegiatanLainData = [
+      {
+        id_kegiatan: "EXT-01",
+        bulan: "Maret",
+        tanggal: "2026-03-28",
+        nama_kegiatan: "Workshop Peningkatan Kompetensi Guru IPA Se-Kalimantan Selatan",
+        tempat: "Hotel Rattan Inn Banjarmasin",
+        status: "Selesai",
+        deskripsi: "Pelatihan kolaboratif guru IPA tingkat provinsi dalam penguatan riset, asesmen sains, dan integrasi kurikulum.",
+        surat_undangan: "https://drive.google.com",
+        materi: "https://drive.google.com",
+        presensi_pdf: "",
+        foto_drive: "https://drive.google.com",
+        slideshow_fotos: "",
+        video_link: "",
+        cover_image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id_kegiatan: "EXT-02",
+        bulan: "Agustus",
+        tanggal: "2026-08-20",
+        nama_kegiatan: "Festival Sains & Kompetisi Inovasi Pembelajaran STEM Balangan",
+        tempat: "Gedung Sanggam Paringin",
+        status: "Selesai",
+        deskripsi: "Eksibisi karya media pembelajaran interaktif (MPI) dan demonstrasi proyek sains inovatif peserta didik SMP se-Balangan.",
+        surat_undangan: "https://drive.google.com",
+        materi: "https://drive.google.com",
+        presensi_pdf: "",
+        foto_drive: "https://drive.google.com",
+        slideshow_fotos: "",
+        video_link: "",
+        cover_image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80"
+      }
+    ];
+
+    let slideLainIndex = 0;
+    let slideLainTimer = null;
+
+    function renderSlideLain() {
+      const list = appState.kegiatanLainList || [];
+      const section = document.getElementById("sectionKegiatanLain");
+      if (!section) return;
+
+      if (list.length === 0) {
+        section.classList.add("hidden");
+        return;
+      }
+      section.classList.remove("hidden");
+
+      if (slideLainIndex >= list.length) slideLainIndex = 0;
+      if (slideLainIndex < 0) slideLainIndex = list.length - 1;
+
+      const item = list[slideLainIndex];
+      const counterEl = document.getElementById("counterSlideLain");
+      if (counterEl) counterEl.textContent = `${slideLainIndex + 1} / ${list.length}`;
+      
+      const elBulan = document.getElementById("bannerSlideLainBulan");
+      if (elBulan) elBulan.textContent = `${item.bulan} • ${formatTanggalIndo(item.tanggal)}`;
+
+      const elStatus = document.getElementById("bannerSlideLainStatus");
+      if (elStatus) {
+        elStatus.textContent = item.status;
+        elStatus.className = item.status === "Selesai" ? 
+          "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/30 text-emerald-300 border border-emerald-400/40" : 
+          "px-3 py-1 rounded-full text-[10px] font-black uppercase bg-amber-500/30 text-amber-300 border border-amber-400/40";
+      }
+
+      const elTempat = document.getElementById("bannerSlideLainTempat");
+      if (elTempat) elTempat.innerHTML = `<i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> ${item.tempat}`;
+
+      const elJudul = document.getElementById("bannerSlideLainJudul");
+      if (elJudul) elJudul.textContent = item.nama_kegiatan;
+
+      const elDeskripsi = document.getElementById("bannerSlideLainDeskripsi");
+      if (elDeskripsi) elDeskripsi.textContent = item.deskripsi || "Dokumentasi agenda kegiatan eksternal.";
+
+      const elImg = document.getElementById("bannerSlideLainImg");
+      if (elImg) {
+        let coverSrc = item.cover_image || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80";
+        if (item.slideshow_fotos && item.slideshow_fotos.trim()) {
+          const firstPhoto = item.slideshow_fotos.split(/[\n,;]+/)[0].trim();
+          const fId = extractDriveFileId(firstPhoto);
+          if (fId) coverSrc = `https://drive.google.com/thumbnail?id=${fId}&sz=w1200`;
+        }
+        elImg.classList.add("opacity-20");
+        setTimeout(() => {
+          elImg.src = coverSrc;
+          elImg.classList.remove("opacity-20");
+        }, 150);
+      }
+
+      const elBtns = document.getElementById("bannerSlideLainButtons");
+      if (elBtns) {
+        let btnHtml = "";
+        if (item.surat_undangan) {
+          btnHtml += `<a href="${item.surat_undangan}" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 font-bold transition flex items-center shadow-xs"><i class="fa-solid fa-file-pdf mr-1.5 text-red-400"></i> Undangan</a>`;
+        }
+        if (item.materi) {
+          btnHtml += `<a href="${item.materi}" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 font-bold transition flex items-center shadow-xs"><i class="fa-solid fa-file-powerpoint mr-1.5 text-amber-400"></i> Materi</a>`;
+        }
+        if (item.foto_drive) {
+          btnHtml += `<button onclick="bukaGaleriFoto('${item.id_kegiatan}')" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold transition flex items-center shadow-md"><i class="fa-solid fa-images mr-1.5"></i> Galeri Foto</button>`;
+        }
+        if (item.video_link) {
+          btnHtml += `<a href="${item.video_link}" target="_blank" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 font-bold transition flex items-center shadow-md"><i class="fa-brands fa-youtube mr-1.5"></i> Video</a>`;
+        }
+        elBtns.innerHTML = btnHtml;
+      }
+    }
+
+    function nextSlideLain() { slideLainIndex++; renderSlideLain(); }
+    function prevSlideLain() { slideLainIndex--; renderSlideLain(); }
+
+    function startAutoSlideLain() {
+      if (slideLainTimer) clearInterval(slideLainTimer);
+      slideLainTimer = setInterval(() => { nextSlideLain(); }, 4500);
+    }
+
+    function renderKegiatanLainAdmin() {
+      const tbody = document.getElementById("tableBodyKegiatanLainAdmin");
+      if (!tbody) return;
+
+      const list = appState.kegiatanLainList || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400 italic">Belum ada kegiatan lain yang ditambahkan. Silakan klik "Tambah Kegiatan Lain".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(k => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-4"><span class="font-bold text-slate-900">${k.bulan}</span><div class="text-[11px] text-slate-400">${k.tanggal}</div></td>
+          <td class="p-4 font-bold text-slate-900 text-xs sm:text-sm max-w-xs">${k.nama_kegiatan}</td>
+          <td class="p-4 text-purple-800 font-bold text-xs"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i> ${k.tempat}</td>
+          <td class="p-4">
+            <div class="flex items-center space-x-2 text-sm">
+              ${k.surat_undangan ? `<a href="${k.surat_undangan}" target="_blank" class="text-red-600 hover:text-red-700" title="Undangan"><i class="fa-solid fa-file-pdf"></i></a>` : '<span class="text-slate-300">-</span>'}
+              ${k.materi ? `<a href="${k.materi}" target="_blank" class="text-amber-500 hover:text-amber-600" title="Materi"><i class="fa-solid fa-file-powerpoint"></i></a>` : ''}
+              ${k.foto_drive ? `<button onclick="bukaGaleriFoto('${k.id_kegiatan}')" class="text-purple-600 hover:text-purple-700" title="Galeri Foto"><i class="fa-solid fa-images"></i></button>` : ''}
+              ${k.video_link ? `<a href="${k.video_link}" target="_blank" class="text-rose-600 hover:text-rose-700" title="Video"><i class="fa-brands fa-youtube"></i></a>` : ''}
+            </div>
+          </td>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${k.status === 'Selesai' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${k.status}</span></td>
+          <td class="p-4 text-right whitespace-nowrap">
+            <button onclick="editKegiatanLain('${k.id_kegiatan}')" class="p-1.5 text-purple-700 hover:text-purple-900" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteKegiatanLain('${k.id_kegiatan}')" class="p-1.5 text-red-600 hover:text-red-800 ml-1" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openModalKegiatanLain(data = null) {
+      document.getElementById("formKegiatanLain").reset();
+      const modalEl = document.getElementById("modalKegiatanLain");
+      if (modalEl) modalEl.scrollTop = 0;
+
+      if (data) {
+        document.getElementById("modalKegiatanLainTitle").textContent = "Edit Kegiatan Lain";
+        document.getElementById("kegLainId").value = data.id_kegiatan;
+        document.getElementById("kegLainBulan").value = data.bulan;
+        document.getElementById("kegLainTanggal").value = data.tanggal;
+        document.getElementById("kegLainNama").value = data.nama_kegiatan;
+        document.getElementById("kegLainTempat").value = data.tempat;
+        document.getElementById("kegLainStatus").value = data.status || "Selesai";
+        document.getElementById("kegLainDeskripsi").value = data.deskripsi || "";
+        document.getElementById("kegLainSurat").value = data.surat_undangan || "";
+        document.getElementById("kegLainPresensiPdf").value = data.presensi_pdf || "";
+        document.getElementById("kegLainMateri").value = data.materi || "";
+        document.getElementById("kegLainFoto").value = data.foto_drive || "";
+        document.getElementById("kegLainSlideshowFotos").value = data.slideshow_fotos || "";
+        document.getElementById("kegLainVideo").value = data.video_link || "";
+      } else {
+        document.getElementById("modalKegiatanLainTitle").textContent = "Tambah Kegiatan Lain";
+        document.getElementById("kegLainId").value = "EXT-" + Date.now().toString().slice(-4);
+        document.getElementById("kegLainTanggal").value = new Date().toISOString().split("T")[0];
+        document.getElementById("kegLainStatus").value = "Selesai";
+      }
+      openModal("modalKegiatanLain");
+    }
+
+    function editKegiatanLain(id) {
+      const item = appState.kegiatanLainList.find(x => x.id_kegiatan === id);
+      if (item) openModalKegiatanLain(item);
+    }
+
+    function handleSaveKegiatanLain(e) {
+      e.preventDefault();
+      const namaVal = (document.getElementById("kegLainNama").value || "").trim();
+      const tempatVal = (document.getElementById("kegLainTempat").value || "").trim();
+      const tanggalVal = (document.getElementById("kegLainTanggal").value || "").trim();
+
+      if (!namaVal) {
+        showToast("Harap isi Nama Kegiatan!", "error");
+        document.getElementById("kegLainNama").focus();
+        return;
+      }
+      if (!tempatVal) {
+        showToast("Harap isi Tempat Pelaksanaan!", "error");
+        document.getElementById("kegLainTempat").focus();
+        return;
+      }
+
+      const payload = {
+        id_kegiatan: document.getElementById("kegLainId").value || ("EXT-" + Date.now().toString().slice(-4)),
+        bulan: document.getElementById("kegLainBulan").value || "Januari",
+        tanggal: tanggalVal || new Date().toISOString().split("T")[0],
+        nama_kegiatan: namaVal,
+        tempat: tempatVal,
+        status: document.getElementById("kegLainStatus").value || "Selesai",
+        deskripsi: (document.getElementById("kegLainDeskripsi").value || "").trim(),
+        surat_undangan: (document.getElementById("kegLainSurat").value || "").trim(),
+        presensi_pdf: (document.getElementById("kegLainPresensiPdf").value || "").trim(),
+        materi: (document.getElementById("kegLainMateri").value || "").trim(),
+        foto_drive: (document.getElementById("kegLainFoto").value || "").trim(),
+        slideshow_fotos: (document.getElementById("kegLainSlideshowFotos").value || "").trim(),
+        video_link: (document.getElementById("kegLainVideo").value || "").trim(),
+        cover_image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80"
+      };
+
+      const idx = appState.kegiatanLainList.findIndex(x => x.id_kegiatan === payload.id_kegiatan);
+      if (idx > -1) appState.kegiatanLainList[idx] = payload;
+      else appState.kegiatanLainList.unshift(payload);
+
+      try {
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(appState.kegiatanLainList));
+        showToast("Kegiatan lain berhasil disimpan & tampil di Beranda!");
+      } catch (err) {
+        console.warn("Storage full", err);
+      }
+
+      closeModal("modalKegiatanLain");
+      renderKegiatanLainAdmin();
+      renderSlideLain();
+    }
+
+    function deleteKegiatanLain(id) {
+      const item = appState.kegiatanLainList.find(x => x.id_kegiatan === id);
+      const name = item ? `"${item.nama_kegiatan}"` : "kegiatan ini";
+      if (confirm(`Hapus ${name} dari daftar kegiatan lain?`)) {
+        appState.kegiatanLainList = appState.kegiatanLainList.filter(x => x.id_kegiatan !== id);
+        localStorage.setItem("mgmp_kegiatan_lain_v1", JSON.stringify(appState.kegiatanLainList));
+        renderKegiatanLainAdmin();
+        renderSlideLain();
+        showToast("Kegiatan lain berhasil dihapus!");
       }
     }
 
@@ -2835,6 +3270,8 @@
       renderAdminView();
       renderPublicKegiatan("Semua");
       updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
 
       if (SCRIPT_URL) {
         try {
@@ -2891,6 +3328,8 @@
         renderPublicKegiatan("Semua");
         renderTabelRekapTahunan("");
         updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
         showToast(`Kegiatan dan ${deletedAbsenCount} data kehadiran terkait berhasil dihapus!`);
       }
     }
@@ -3270,6 +3709,8 @@
           renderAdminView();
           renderPublicKegiatan("Semua");
           updateNextMeetingFromKegiatan();
+      renderSlideLain();
+      startAutoSlideLain();
           renderTabelRekapTahunan("");
           showToast("Data berhasil dipulihkan!");
         } catch(err) {
@@ -3728,7 +4169,8 @@
     }
 
     function bukaGaleriFoto(idKegiatan) {
-      const keg = appState.kegiatanList.find(x => x.id_kegiatan === idKegiatan);
+      let keg = appState.kegiatanList.find(x => x.id_kegiatan === idKegiatan);
+      if (!keg && appState.kegiatanLainList) keg = appState.kegiatanLainList.find(x => x.id_kegiatan === idKegiatan);
       if (!keg) return;
 
       galeriState.currentKeg = keg;
